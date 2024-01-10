@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
 
   public boolean gotNote(){
 
-    return false; //TODO: add actual code here pls <3
+    return false;
   }
 
   @Override

@@ -30,7 +30,7 @@ public class Shooter extends SubsystemBase {
    */
   public double getRPM() {
 
-    return 0;// TODO: give an actual number or something
+    return 0;
   }
 
   @Override
