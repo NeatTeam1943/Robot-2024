@@ -32,8 +32,25 @@ public class DriveTrain extends SubsystemBase {
   public void move(double moveSpeed, double rotationSpeed){
 
     m_DifferentialDrive.tankDrive(moveSpeed, rotationSpeed);
-    
+
   }
+
+  public double getFrontRightEncoder(){
+    return m_frontRight.getSelectedSensorPosition();
+  }
+
+  public double getFrontLeftEncoder(){
+    return m_frontLeft.getSelectedSensorPosition();
+  }
+
+  public double getrearRightEncoder(){
+    return m_rearRight.getSelectedSensorPosition();
+  }
+
+  public double getrearLeftEncoder(){
+    return m_rearLeft.getSelectedSensorPosition();
+  }
+
 
   @Override
   public void periodic() {
