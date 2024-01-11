@@ -4,31 +4,35 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveTrainConstants;
 
 public class DriveTrain extends SubsystemBase {
-  private TalonFX m_frontRight;
-  private TalonFX m_frontLeft;
-  private TalonFX m_rearRight;
-  private TalonFX m_rearLeft;
-  private DifferentialDrive m_differentialDrive;
+  private WPI_TalonFX m_frontRight;
+  private WPI_TalonFX m_frontLeft;
+  private WPI_TalonFX m_rearRight;
+  private WPI_TalonFX m_rearLeft;
+  private DifferentialDrive m_DifferentialDrive;
 
   public DriveTrain() {
-    m_frontLeft = new TalonFX(DriveTrainConstants.frontLeftPort);
-    m_frontRight = new TalonFX(DriveTrainConstants.frontRightPort);
-    m_rearLeft = new TalonFX(DriveTrainConstants.rearLeftPort);
-    m_rearRight = new TalonFX(DriveTrainConstants.rearRightPort);
+    m_frontLeft = new WPI_TalonFX(DriveTrainConstants.frontLeftPort);
+    m_frontRight = new WPI_TalonFX(DriveTrainConstants.frontRightPort);
+    m_rearLeft = new WPI_TalonFX(DriveTrainConstants.rearLeftPort);
+    m_rearRight = new WPI_TalonFX(DriveTrainConstants.rearRightPort);
 
+    m_rearRight.follow(m_frontRight);
+    m_rearLeft.follow(m_frontLeft);
 
-    m_differentialDrive = new DifferentialDrive(m_frontLeft, m_frontRight);
+    m_DifferentialDrive = new DifferentialDrive(m_frontLeft, m_frontRight);
   }
-
   public void move(double moveSpeed, double rotationSpeed){
 
+    m_DifferentialDrive.tankDrive(moveSpeed, rotationSpeed);
+    
   }
 
   @Override
