@@ -8,9 +8,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Odometry extends SubsystemBase {
+public class RobotOdometry extends SubsystemBase {
   /** Creates a new Odometry. */
-  public Odometry() {}
+  public RobotOdometry() {}
   
   public void setPosition2D(Pose2d position){
     
@@ -44,10 +44,16 @@ public class Odometry extends SubsystemBase {
     return 0;
   }
 
-  public double angleToAT(){
+  public double pitchToAT(){
     
     return 0;
   }
+
+  public double yawToAT(){
+
+    return 0;
+  }
+
 
   public double distanceToNote(){
 
