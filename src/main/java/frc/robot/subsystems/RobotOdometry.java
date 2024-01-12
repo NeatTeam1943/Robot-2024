@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -9,79 +5,73 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RobotOdometry extends SubsystemBase {
-  /** Creates a new Odometry. */
-  public RobotOdometry() {}
-  
-  public void setPosition2D(Pose2d position){
-    
+  public RobotOdometry() {
   }
 
-  public Pose2d getPosition2D(){
+  public void setPosition2D(Pose2d position) {
+
+  }
+
+  public Pose2d getPosition2D() {
 
     return null;
   }
 
-  public void setPosition3D(Pose3d position){
-    
+  public void setPosition3D(Pose3d position) {
+
   }
 
-  public Pose2d getPosition3D(){
+  public Pose2d getPosition3D() {
 
     return null;
   }
 
-  public void setHeading(double angle){
+  public void setHeading(double angle) {
 
   }
 
-  public double getHeading(){
+  public double getHeading() {
 
     return 0;
   }
 
-  public double distanceToAT(){
+  public double getDistanceToAT() {
 
     return 0;
   }
 
-  public double pitchToAT(){
-    
-    return 0;
-  }
-
-  public double yawToAT(){
+  public double getPitchToAT() {
 
     return 0;
   }
 
-
-  public double distanceToNote(){
-
-    return 0;
-  }
-
-  public double angleToNote(){
-    
-    return 0;
-  }
-
-  public double velocity(){
+  public double getYawToAT() {
 
     return 0;
   }
 
-  public double acceleration(){
+  public double getDistanceToNote() {
 
     return 0;
   }
 
-  public double getDistanceTOF(){// time of flight sensor
+  public double getAngleToNote() {
 
     return 0;
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public double getVelocity() {
+
+    return 0;
+  }
+
+  public double getAcceleration() {
+
+    return 0;
+  }
+
+  public double getDistanceTOF() {
+
+    return 0;
   }
 }
