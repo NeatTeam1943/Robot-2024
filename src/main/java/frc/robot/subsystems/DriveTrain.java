@@ -9,51 +9,70 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 
 public class DriveTrain extends SubsystemBase {
-  private WPI_TalonFX m_frontRight;
-  private WPI_TalonFX m_frontLeft;
-  private WPI_TalonFX m_rearRight;
-  private WPI_TalonFX m_rearLeft;
-  private DifferentialDrive m_DifferentialDrive;
+  private WPI_TalonFX m_leftFront;
+  private WPI_TalonFX m_leftRear;
+  private WPI_TalonFX m_rightFront;
+  private WPI_TalonFX m_rightRear;
+
+  private DifferentialDrive m_drive;
 
   public DriveTrain() {
-    m_frontLeft = new WPI_TalonFX(DriveTrainConstants.frontLeftPort);
-    m_frontRight = new WPI_TalonFX(DriveTrainConstants.frontRightPort);
-    m_rearLeft = new WPI_TalonFX(DriveTrainConstants.rearLeftPort);
-    m_rearRight = new WPI_TalonFX(DriveTrainConstants.rearRightPort);
+    m_leftFront = new WPI_TalonFX(DriveTrainConstants.kLeftFront);
+    m_leftRear = new WPI_TalonFX(DriveTrainConstants.kLeftRear);
+    m_rightFront = new WPI_TalonFX(DriveTrainConstants.kRightFront);
+    m_rightRear = new WPI_TalonFX(DriveTrainConstants.kRightRear);
 
-    m_rearRight.follow(m_frontRight);
-    m_rearLeft.follow(m_frontLeft);
+    m_rightRear.follow(m_rightFront);
+    m_leftRear.follow(m_leftFront);
 
-    m_DifferentialDrive = new DifferentialDrive(m_frontLeft, m_frontRight);
-  }
-  public void move(double moveSpeed, double rotationSpeed){
-
-    m_DifferentialDrive.tankDrive(moveSpeed, rotationSpeed);
-
+    m_drive = new DifferentialDrive(m_leftFront, m_rightFront);
   }
 
-  public double getFrontRightEncoder(){
-    return m_frontRight.getSelectedSensorPosition();
+  public void driveArcade(double movement, double rotation) {
+    m_drive.arcadeDrive(movement, rotation);
   }
 
-  public double getFrontLeftEncoder(){
-    return m_frontLeft.getSelectedSensorPosition();
+  public void driveArcade(CommandXboxController joystick) {
+    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getRightX());
   }
-
-  public double getrearRightEncoder(){
-    return m_rearRight.getSelectedSensorPosition();
+  public void driveTank(double left, double right) {
+    m_drive.tankDrive(left, right);
   }
-
-  public double getrearLeftEncoder(){
-    return m_rearLeft.getSelectedSensorPosition();
+  public void driveTank(CommandXboxController joystick) {
+    m_drive.tankDrive(joystick.getLeftY(), joystick.getRightY());
   }
-
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public double getLeftFrontMotorTraveledDistance() {
+    return m_leftFront.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+  }
+  public double getRightFrontMotorTraveledDistance() {
+    return m_rightFront.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+  }
+  public double getLeftRearMotorTraveledDistance() {
+    return m_leftRear.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+  }
+  public double getRightRearMotorTraveledDistance() {
+    return m_rightRear.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+  }
+  public void setLeftFrontMotorTraveledDistance(double position) {
+    m_leftFront.setSelectedSensorPosition(position);
+  }
+  public void setRightFrontMotorTraveledDistance(double position) {
+    m_rightFront.setSelectedSensorPosition(position);
+  }
+  public void setLeftRearMotorTraveledDistance(double position) {
+    m_leftRear.setSelectedSensorPosition(position);
+  }
+  public void setRightRearMotorTraveledDistance(double position) {
+    m_rightRear.setSelectedSensorPosition(position);
+  }
+  public void resetEncoders() {
+    m_leftFront.setSelectedSensorPosition(0);
+    m_rightFront.setSelectedSensorPosition(0);
+    m_leftRear.setSelectedSensorPosition(0);
+    m_rightRear.setSelectedSensorPosition(0);
   }
 }
