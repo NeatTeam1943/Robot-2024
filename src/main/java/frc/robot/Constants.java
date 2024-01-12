@@ -17,6 +17,10 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
+  public static class MeasurementConstants {
+    public static final double kInchesToMeters = 0.0254;
+  }
+
   public static class DriveTrainConstants {
     public static final int frontRightPort = 0;
     public static final int frontLeftPort = 1;
