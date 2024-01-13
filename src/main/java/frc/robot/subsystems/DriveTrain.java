@@ -82,7 +82,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left front motor in meters.
    */
   public double getLeftFrontMotorTraveledDistance() {
-    return m_leftFront.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    var m_leftFrontRotorSignal = m_leftFront.getRotorPosition();
+    m_leftFrontRotorSignal.refresh();
+
+    return m_leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /**
@@ -91,7 +94,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right front motor in meters.
    */
   public double getRightFrontMotorTraveledDistance() {
-    return m_rightFront.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    var m_rightFrontRotorSignal = m_rightFront.getRotorPosition();
+    m_rightFrontRotorSignal.refresh();
+
+    return m_rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /**
@@ -100,7 +106,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left rear motor in meters.
    */
   public double getLeftRearMotorTraveledDistance() {
-    return m_leftRear.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    var m_leftRearRotorSignal = m_leftRear.getRotorPosition();
+    m_leftRearRotorSignal.refresh();
+
+    return m_leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /**
@@ -109,7 +118,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right rear motor in meters.
    */
   public double getRightRearMotorTraveledDistance() {
-    return m_rightRear.getSelectedSensorPosition() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    var m_rightRearRotorSignal = m_rightRear.getRotorPosition();
+    m_rightRearRotorSignal.refresh();
+
+    return m_rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /**
@@ -118,7 +130,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position The position to set.
    */
   public void setLeftFrontMotorTraveledDistance(double position) {
-    m_leftFront.setSelectedSensorPosition(position);
+    m_leftFront.setPosition(position);
   }
 
   /**
@@ -127,7 +139,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position The position to set.
    */
   public void setRightFrontMotorTraveledDistance(double position) {
-    m_rightFront.setSelectedSensorPosition(position);
+    m_rightFront.setPosition(position);
   }
 
   /**
@@ -136,7 +148,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position The position to set.
    */
   public void setLeftRearMotorTraveledDistance(double position) {
-    m_leftRear.setSelectedSensorPosition(position);
+    m_leftRear.setPosition(position);
   }
 
   /**
@@ -145,16 +157,16 @@ public class DriveTrain extends SubsystemBase {
    * @param position The position to set.
    */
   public void setRightRearMotorTraveledDistance(double position) {
-    m_rightRear.setSelectedSensorPosition(position);
+    m_rightRear.setPosition(position);
   }
 
   /**
    * Resets the encoders of all motors to zero.
    */
   public void resetEncoders() {
-    m_leftFront.setSelectedSensorPosition(0);
-    m_rightFront.setSelectedSensorPosition(0);
-    m_leftRear.setSelectedSensorPosition(0);
-    m_rightRear.setSelectedSensorPosition(0);
+    m_leftFront.setPosition(0);
+    m_rightFront.setPosition(0);
+    m_leftRear.setPosition(0);
+    m_rightRear.setPosition(0);
   }
 }
