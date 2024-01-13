@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.hardware.TalonFX;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -10,10 +12,10 @@ import frc.robot.Constants.DriveTrainConstants;
  * The DriveTrain subsystem controls the robot's drive system.
  */
 public class DriveTrain extends SubsystemBase {
-  private WPI_TalonFX m_leftFront;
-  private WPI_TalonFX m_leftRear;
-  private WPI_TalonFX m_rightFront;
-  private WPI_TalonFX m_rightRear;
+  private TalonFX m_leftFront;
+  private TalonFX m_leftRear;
+  private TalonFX m_rightFront;
+  private TalonFX m_rightRear;
 
   private DifferentialDrive m_drive;
 
@@ -22,13 +24,16 @@ public class DriveTrain extends SubsystemBase {
    * follower behavior.
    */
   public DriveTrain() {
-    m_leftFront = new WPI_TalonFX(DriveTrainConstants.kLeftFront);
-    m_leftRear = new WPI_TalonFX(DriveTrainConstants.kLeftRear);
-    m_rightFront = new WPI_TalonFX(DriveTrainConstants.kRightFront);
-    m_rightRear = new WPI_TalonFX(DriveTrainConstants.kRightRear);
+    m_leftFront = new TalonFX(DriveTrainConstants.kLeftFront);
+    m_leftRear = new TalonFX(DriveTrainConstants.kLeftRear);
+    m_rightFront = new TalonFX(DriveTrainConstants.kRightFront);
+    m_rightRear = new TalonFX(DriveTrainConstants.kRightRear);
 
-    m_rightRear.follow(m_rightFront);
-    m_leftRear.follow(m_leftFront);
+    m_rightFront.setInverted(true);
+    m_leftFront.setInverted(false);
+
+    m_rightRear.setControl(new Follower(m_rightFront.getDeviceID(), false));
+    m_leftRear.setControl(new Follower(m_leftFront.getDeviceID(), false));
 
     m_drive = new DifferentialDrive(m_leftFront, m_rightFront);
   }
