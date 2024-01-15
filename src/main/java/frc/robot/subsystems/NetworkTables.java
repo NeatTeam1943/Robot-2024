@@ -7,23 +7,33 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class NetworkTables extends SubsystemBase {
-  /** Creates a new NetworkTables. */
+  /*
+   * Creates a new NetworkTables.
+   */
   public NetworkTables() {}
 
-  // Retrieves a NetworkTables table for data storage and communication
+  /*
+   * Retrieves a NetworkTables table for data storage and communication.
+   */
   public double GetTable() {
     return 0;
   }
 
-  // Sets a NetworkTables table x value for data storage and communication
+  /*
+   * Sets a NetworkTables table x value for data storage and communication.
+   */
   public void SetX(double x) {}
   
-  // Sets a NetworkTables table y value for data storage
+  /*
+   * Sets a NetworkTables table y value for data storage.
+   */
   public void SetY(double y) {}
 
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    /*
+     * This method will be called once per scheduler run.
+     */
   }
 }

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  */
 public class Intake extends SubsystemBase {
 
-  /**
+  /*
    * Constructs the DriveTrain subsystem with motor controllers and sets up
    * follower behavior.
    */

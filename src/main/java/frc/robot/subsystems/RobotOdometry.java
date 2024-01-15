@@ -68,7 +68,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the pitch of the robot from that of the AprilTag using lime lite.
+   * Gets the difference of the pitch of the robot from that of the AprilTag using LimeLite.
    */
   public double getPitchToAT() {
 
@@ -76,7 +76,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the yaw of the robot from that of the AprilTag using lime lite.
+   * Gets the difference of the yaw of the robot from that of the AprilTag using LimeLite.
    */
   public double getYawToAT() {
 
@@ -84,7 +84,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the distance of the robot from a Note using realsence.
+   * Gets the distance of the robot from a Note using RealSense.
    */
   public double getDistanceToNote() {
 
@@ -92,7 +92,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the angle of the robot from a Note using realsence.
+   * Gets the angle of the robot from a Note using RealSense.
    */
   public double getAngleToNote() {
 

@@ -14,14 +14,14 @@ public class Shooter extends SubsystemBase {
   /*
    * Sets the speed of the motors for initiating the shooting mechanism.
    */
-  public void setMotorSpeed(double speed){
+  public void setMotorSpeed(double speed) {
 
   }
 
   /*
    * Sets the pitch angle of the shooting mechanism.
    */
-  public void setAngle(double angle){
+  public void setAngle(double angle) {
 
   }
 
