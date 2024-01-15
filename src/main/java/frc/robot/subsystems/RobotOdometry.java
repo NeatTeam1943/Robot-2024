@@ -15,14 +15,14 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Sets position of robot in 2d field.
+   * Sets position of robot in a 2d field.
    */
   public void setPosition2D(Pose2d position) {
 
   }
 
   /*
-   * Gets position of robot in 2d field.
+   * Gets position of robot in a 2d field.
    */
   public Pose2d getPosition2D() {
 
@@ -30,14 +30,14 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Sets position of robot in 3d field.
+   * Sets position of robot in a 3d field.
    */
   public void setPosition3D(Pose3d position) {
 
   }
 
   /*
-   * Gets position of robot in 3d field.
+   * Gets position of robot in a 3d field.
    */
   public Pose2d getPosition3D() {
 
@@ -68,7 +68,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the pitch of the robot from that of the AprilTag using LimeLite.
+   * Gets the difference of the pitch of the robot from that of the AprilTag using LimeLight.
    */
   public double getPitchToAT() {
 
@@ -76,7 +76,7 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the yaw of the robot from that of the AprilTag using LimeLite.
+   * Gets the difference of the yaw of the robot from that of the AprilTag using LimeLight.
    */
   public double getYawToAT() {
 

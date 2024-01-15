@@ -41,8 +41,8 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Drives the robot using arcade drive control.
    *
-   * @param movement The forward/backward movement speed.
-   * @param rotation The rotational speed.
+   * @param movement - The forward/backward movement speed.
+   * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
     m_drive.arcadeDrive(movement, rotation);
@@ -51,7 +51,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Drives the robot using arcade drive control with an Xbox controller.
    *
-   * @param joystick The Xbox controller used for driving.
+   * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
     m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getRightX());
@@ -60,8 +60,8 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Drives the robot using tank drive control.
    *
-   * @param left  The speed for the left side of the robot.
-   * @param right The speed for the right side of the robot.
+   * @param left - The speed for the left side of the robot.
+   * @param right - The speed for the right side of the robot.
    */
   public void driveTank(double left, double right) {
     m_drive.tankDrive(left, right);
@@ -70,7 +70,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Drives the robot using tank drive control with an Xbox controller.
    *
-   * @param joystick The Xbox controller used for driving.
+   * @param joystick - The Xbox controller used for driving.
    */
   public void driveTank(CommandXboxController joystick) {
     m_drive.tankDrive(joystick.getLeftY(), joystick.getRightY());
@@ -127,7 +127,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Sets the position of the left front motor in sensor units.
    *
-   * @param position The position to set.
+   * @param position - The position to set.
    */
   public void setLeftFrontMotorTraveledDistance(double position) {
     m_leftFront.setPosition(position);
@@ -136,7 +136,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Sets the position of the right front motor in sensor units.
    *
-   * @param position The position to set.
+   * @param position - The position to set.
    */
   public void setRightFrontMotorTraveledDistance(double position) {
     m_rightFront.setPosition(position);
@@ -145,7 +145,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Sets the position of the left rear motor in sensor units.
    *
-   * @param position The position to set.
+   * @param position - The position to set.
    */
   public void setLeftRearMotorTraveledDistance(double position) {
     m_leftRear.setPosition(position);
@@ -154,7 +154,7 @@ public class DriveTrain extends SubsystemBase {
   /*
    * Sets the position of the right rear motor in sensor units.
    *
-   * @param position The position to set.
+   * @param position - The position to set.
    */
   public void setRightRearMotorTraveledDistance(double position) {
     m_rightRear.setPosition(position);
