@@ -15,19 +15,19 @@ public class NetworkTables extends SubsystemBase {
   /*
    * Retrieves a NetworkTables table for data storage and communication.
    */
-  public double GetTable() {
+  public double getTable() {
     return 0;
   }
 
   /*
    * Sets a NetworkTables table x value for data storage and communication.
    */
-  public void SetX(double x) {}
+  public void setX(double x) {}
   
   /*
    * Sets a NetworkTables table y value for data storage.
    */
-  public void SetY(double y) {}
+  public void setY(double y) {}
 
 
   @Override

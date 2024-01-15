@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -82,7 +83,7 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left front motor in meters.
    */
   public double getLeftFrontMotorTraveledDistance() {
-    var m_leftFrontRotorSignal = m_leftFront.getRotorPosition();
+    StatusSignal<Double> m_leftFrontRotorSignal = m_leftFront.getRotorPosition();
     m_leftFrontRotorSignal.refresh();
 
     return m_leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
@@ -94,7 +95,7 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right front motor in meters.
    */
   public double getRightFrontMotorTraveledDistance() {
-    var m_rightFrontRotorSignal = m_rightFront.getRotorPosition();
+    StatusSignal<Double> m_rightFrontRotorSignal = m_rightFront.getRotorPosition();
     m_rightFrontRotorSignal.refresh();
 
     return m_rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
@@ -106,7 +107,7 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left rear motor in meters.
    */
   public double getLeftRearMotorTraveledDistance() {
-    var m_leftRearRotorSignal = m_leftRear.getRotorPosition();
+    StatusSignal<Double> m_leftRearRotorSignal = m_leftRear.getRotorPosition();
     m_leftRearRotorSignal.refresh();
 
     return m_leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
@@ -118,7 +119,7 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right rear motor in meters.
    */
   public double getRightRearMotorTraveledDistance() {
-    var m_rightRearRotorSignal = m_rightRear.getRotorPosition();
+    StatusSignal<Double> m_rightRearRotorSignal = m_rightRear.getRotorPosition();
     m_rightRearRotorSignal.refresh();
 
     return m_rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
