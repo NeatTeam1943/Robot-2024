@@ -10,8 +10,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class NetworkTables extends SubsystemBase {
-  NetworkTableInstance m_ntinstance;
-  NetworkTable m_nttable;
+  NetworkTableInstance instance;
+  NetworkTable table;
 
   DoubleTopic cordX;
   DoubleTopic cordY;
@@ -30,19 +30,19 @@ public class NetworkTables extends SubsystemBase {
    * Creates a new NetworkTables.
    */
   public NetworkTables() {
-    m_ntinstance = NetworkTableInstance.getDefault();
-    m_nttable = m_ntinstance.getTable("RealSense Data");
+    instance = NetworkTableInstance.getDefault();
+    table = instance.getTable("RealSense Data");
 
-    cordX = m_nttable.getDoubleTopic("cordX");
-    cordY = m_nttable.getDoubleTopic("cordY");
+    cordX = table.getDoubleTopic("cordX");
+    cordY = table.getDoubleTopic("cordY");
 
-    targetPitch = m_nttable.getDoubleTopic("Target Pitch");
-    targetRoll = m_nttable.getDoubleTopic("Target Roll");
-    targetYaw = m_nttable.getDoubleTopic("Target Yaw");
+    targetPitch = table.getDoubleTopic("Target Pitch");
+    targetRoll = table.getDoubleTopic("Target Roll");
+    targetYaw = table.getDoubleTopic("Target Yaw");
 
-    imuPitch = m_nttable.getDoubleTopic("IMU Pitch");
-    imuRoll = m_nttable.getDoubleTopic("IMU Roll");
-    imuYaw = m_nttable.getDoubleTopic("IMU Yaw");
+    imuPitch = table.getDoubleTopic("IMU Pitch");
+    imuRoll = table.getDoubleTopic("IMU Roll");
+    imuYaw = table.getDoubleTopic("IMU Yaw");
 
   }
 
@@ -50,7 +50,7 @@ public class NetworkTables extends SubsystemBase {
    * Retrieves a NetworkTables table for data storage and communication.
    */
   public NetworkTable getTable() {
-    return m_nttable;
+    return table;
   }
 
   /*
