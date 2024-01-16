@@ -90,6 +90,38 @@ public class NetworkTables extends SubsystemBase {
     imuYaw.publish().set(yaw);
   }
 
+  public double getCordX() {
+    return cordX.subscribe(0).get();
+  }
+
+  public double getCordY() {
+    return cordY.subscribe(0).get();
+  }
+
+  public double getTargetPitch() {
+    return targetPitch.subscribe(0).get();
+  }
+
+  public double getTargetRoll() {
+    return targetRoll.subscribe(0).get();
+  }
+
+  public double getTargetYaw() {
+    return targetYaw.subscribe(0).get();
+  }
+
+  public double getImuPitch() {
+    return imuPitch.subscribe(0).get();
+  }
+
+  public double getImuRoll() {
+    return imuRoll.subscribe(0).get();
+  }
+
+  public double getImuYaw() {
+    return imuYaw.subscribe(0).get();
+  }
+
   @Override
   public void periodic() {
     /*
