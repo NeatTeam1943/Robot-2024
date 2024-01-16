@@ -20,4 +20,8 @@ public final class Constants {
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
   }
+
+  public static class IntakeConstants {
+    public static final int kMotorId = 5;
+  }
 }
