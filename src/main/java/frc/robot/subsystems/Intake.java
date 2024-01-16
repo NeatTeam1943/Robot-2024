@@ -11,7 +11,7 @@ import frc.robot.Constants.IntakeConstants;
  */
 public class Intake extends SubsystemBase {
     private CANSparkMax m_motor;
-    
+
   /*
    * Constructs the DriveTrain subsystem with motor controllers
    */
@@ -24,13 +24,5 @@ public class Intake extends SubsystemBase {
    */
   public void setMotorSpeed(double speed) {
     m_motor.set(speed);
-  }
-
-  /*
-   * Returns if the note has been acquired.
-   */
-  public boolean gotNote() {
-
-    return false;
   }
 }
