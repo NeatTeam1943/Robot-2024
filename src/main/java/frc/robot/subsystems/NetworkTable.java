@@ -4,13 +4,20 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.DoublePublisher;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class NetworkTables extends SubsystemBase {
+public class NetworkTable extends SubsystemBase {
+  NetworkTableInstance m_ntinstance;
+  NetworkTable m_nttable;
+
+  DoublePublisher cordX;
+  DoublePublisher cordY;
   /*
    * Creates a new NetworkTables.
    */
-  public NetworkTables() {}
+  public NetworkTable() {}
 
   /*
    * Retrieves a NetworkTables table for data storage and communication.
@@ -28,7 +35,6 @@ public class NetworkTables extends SubsystemBase {
    * Sets a NetworkTables table y value for data storage.
    */
   public void setY(double y) {}
-
 
   @Override
   public void periodic() {
