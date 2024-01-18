@@ -10,6 +10,7 @@ import com.ctre.phoenix6.hardware.Pigeon2;
  */
 public class RobotOdometry extends SubsystemBase {
   private Pigeon2 m_imu;
+
   /*
    * Constructs RobotOdometry subsystem.
    */
@@ -51,14 +52,14 @@ public class RobotOdometry extends SubsystemBase {
    * Sets heading of robot relative to a selected heading.
    */
   public void setHeading(double angle) {
-    m_imu.setYaw(angle); // To Be Changed, setAngle() doesn't exist so we got a minor problem
+    m_imu.setYaw(angle);
   }
 
   /*
    * Gets heading of robot relative to a selected heading.
    */
   public double getHeading() {
-    return m_imu.getAngle();
+    return m_imu.getYaw().getValueAsDouble();
   }
 
   /*
@@ -70,7 +71,8 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the pitch of the robot from that of the AprilTag using LimeLight.
+   * Gets the difference of the pitch of the robot from that of the AprilTag using
+   * LimeLight.
    */
   public double getPitchToAT() {
 
@@ -78,7 +80,8 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the yaw of the robot from that of the AprilTag using LimeLight.
+   * Gets the difference of the yaw of the robot from that of the AprilTag using
+   * LimeLight.
    */
   public double getYawToAT() {
 
