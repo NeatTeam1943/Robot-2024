@@ -4,30 +4,50 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.TransportConstants;
 
 /*
  * The Transfer subsystem controls the mechanism which moves the Note from the Intake to Shooter
  */
 public class Transport extends SubsystemBase {
+  private CANSparkMax m_leftMotor;
+  private CANSparkMax m_rightMotor;
+
+  private DigitalInput m_intakeSwitch;
+  private DigitalInput m_shooterSwitch;
+
   /*
    * Constructs the Transport subsystem
    */
-  public Transport() {}
+  public Transport() {
+    m_leftMotor = new CANSparkMax(TransportConstants.kLeftMotor, MotorType.kBrushless);
+    m_rightMotor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
+    m_rightMotor.setInverted(true);
 
+    m_intakeSwitch = new DigitalInput(TransportConstants.kIntakeSwitch);
+    m_shooterSwitch = new DigitalInput(TransportConstants.kshooterSwitch);
+  }
+  
   /*
    * Sets speed to the motors of the mechanism
    * 
    * @param speed - sets the speed of the motors on scale of -1 to 1
    */
-  public void moveBelts(double speed){
+  public void moveBelts(double speed) {
+    m_leftMotor.set(speed);
+    m_rightMotor.set(speed);
   }
 
   /*
    * returns if the Note inside and ready to be shot
    */
-  public boolean isNoteReady(){
-    return false;
+  public boolean isNoteReady() {
+    return m_shooterSwitch.get();
   }
 
   /*
