@@ -25,10 +25,14 @@ public final class Constants {
     public static final int kMotorId = 5;
   }
 
-  public static class TransportConstants {
-    public static final int kLeftMotor = 6;
-    public static final int kRightMotor = 7;
-    public static final int kIntakeSwitch = 0;
-    public static final int kshooterSwitch = 1;
+  public static class ShooterConstants {
+    public static final int kLeftShooter = 6;
+    public static final int kRightShooter = 7; 
+
+    public static final double kMinAngle = 69; // TODO: Add angle
+    public static final double kMaxAngle = 420; // TODO: Add angle 
+    
+    public static final int kTopLimitSwitchPort = 0;
+    public static final int kBottomLimitSwitchPort = 1;
   }
 }
