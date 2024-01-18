@@ -21,6 +21,8 @@ public class Shooter extends SubsystemBase {
   DigitalInput m_topLimitSwitch;
   DigitalInput m_bottomLimitSwitch;
 
+  boolean m_inverted;
+
   /*
    * Constructs the Shooter subsystem with motor controllers.
    */
@@ -28,18 +30,48 @@ public class Shooter extends SubsystemBase {
     m_leftShooter = new TalonFX(ShooterConstants.kLeftShooter);
     m_rightShooter = new TalonFX(ShooterConstants.kRightShooter);
 
+    m_angler = new TalonFX(ShooterConstants.kAngler);
+
     m_pot = new AnalogPotentiometer(0, 180, ShooterConstants.kMinAngle);
     
     m_topLimitSwitch = new DigitalInput(ShooterConstants.kTopLimitSwitchPort);
     m_bottomLimitSwitch = new DigitalInput(ShooterConstants.kBottomLimitSwitchPort);
+
+    m_inverted = false;
   }
 
   /*
    * Sets the speed of the motors for initiating the shooting mechanism.
    */
-  public void setMotorSpeed(double speed) {
+  public void setShooterMotorSpeed(double speed) {
     m_leftShooter.set(speed);
     m_rightShooter.set(speed);
+  }
+
+  /*
+   * Toggles between a state and its inversion; used for determining the Angler orientation.
+   */
+  public void toggleInverted() {
+    m_inverted = !m_inverted;
+  }
+
+  /*
+   * Returns the speed of the Angler motor and inverts its orientation if needed.
+   */
+  public double getAnglerSpeed() {
+    double speed = m_angler.get();
+    if (m_inverted) {
+      speed *= -1;
+    }
+    return speed;
+  } 
+
+  /*
+   * Sets the orientation of the Angler motor.
+   */
+  public void setAnglerOrientation(boolean orientation) {
+    double speed = getAnglerSpeed();
+    m_angler.set(speed);
   }
 
   /*
