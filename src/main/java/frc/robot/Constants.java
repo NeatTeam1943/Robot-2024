@@ -29,6 +29,8 @@ public final class Constants {
     public static final int kLeftShooter = 6;
     public static final int kRightShooter = 7; 
 
+    public static final int kAngler = 8;
+
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle 
     
