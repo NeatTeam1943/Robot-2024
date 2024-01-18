@@ -14,6 +14,8 @@ public class Shooter extends SubsystemBase {
   TalonFX m_leftShooter;
   TalonFX m_rightShooter;
 
+  TalonFX m_angler;
+
   AnalogPotentiometer m_pot;
 
   DigitalInput m_topLimitSwitch;
@@ -41,18 +43,14 @@ public class Shooter extends SubsystemBase {
   }
 
   /*
-   * Sets the pitch angle of the shooting mechanism.
+   * Returns the pitch angle of the shooting mechanism.
    */
-  public void setAngle(double angle) {
-    
-  }
-
   public double getAngle() {
     return m_pot.get();
   }
 
   /*
-   * returns if the shooter angle got the limit of motion.
+   * Returns if the shooter angle got the limit of motion.
    */
   public boolean isAtLimit() {
     return m_topLimitSwitch.get() || m_bottomLimitSwitch.get(); // to be changed to shooter's angle
