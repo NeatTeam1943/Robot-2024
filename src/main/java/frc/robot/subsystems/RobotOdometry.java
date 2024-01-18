@@ -3,15 +3,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix6.hardware.Pigeon2;
 
 /*
  * RobotOdometry contains data from spatial sensors.
  */
 public class RobotOdometry extends SubsystemBase {
+  private Pigeon2 m_imu;
   /*
    * Constructs RobotOdometry subsystem.
    */
   public RobotOdometry() {
+    m_imu = new Pigeon2(0);
   }
 
   /*
@@ -48,15 +51,14 @@ public class RobotOdometry extends SubsystemBase {
    * Sets heading of robot relative to a selected heading.
    */
   public void setHeading(double angle) {
-
+    m_imu.setYaw(angle); // To Be Changed, setAngle() doesn't exist so we got a minor problem
   }
 
   /*
    * Gets heading of robot relative to a selected heading.
    */
   public double getHeading() {
-
-    return 0;
+    return m_imu.getAngle();
   }
 
   /*
