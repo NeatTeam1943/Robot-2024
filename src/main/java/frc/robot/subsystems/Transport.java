@@ -33,8 +33,8 @@ public class Transport extends SubsystemBase {
   /*
    * returns if the Intake acquired the Note
    */
-  public boolean isTheNoteAcquired(){
-    return false;
+  public boolean isNoteAcquired() {
+    return m_intakeSwitch.get();
   }
 
   @Override
