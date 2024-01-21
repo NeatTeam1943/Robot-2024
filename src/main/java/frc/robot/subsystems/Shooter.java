@@ -13,7 +13,8 @@ import frc.robot.Constants.ShooterConstants;
 public class Shooter extends SubsystemBase {
   TalonFX m_leftShooterMotor;
   TalonFX m_rightShooterMotor;
-  TalonFX m_angleMotor;
+  TalonFX m_leftAngleMotor;
+  TalonFX m_rightAngleMotor;
 
   AnalogPotentiometer m_pot;
 
@@ -24,10 +25,11 @@ public class Shooter extends SubsystemBase {
    * Constructs the Shooter subsystem with motor controllers.
    */
   public Shooter() {
-    m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooter);
-    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooter);
+    m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
+    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
 
-    m_angleMotor = new TalonFX(ShooterConstants.kAngler);
+    m_leftAngleMotor = new TalonFX(ShooterConstants.kLeftAngleMotor);
+    m_leftAngleMotor = new TalonFX(ShooterConstants.kRightAngleMotor);
 
     m_pot = new AnalogPotentiometer(0, 180, ShooterConstants.kMinAngle);
 
