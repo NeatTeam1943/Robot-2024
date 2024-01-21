@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,8 +15,8 @@ import frc.robot.Constants.ShooterConstants;
 public class Shooter extends SubsystemBase {
   TalonFX m_leftShooterMotor;
   TalonFX m_rightShooterMotor;
-  TalonFX m_leftAngleMotor;
-  TalonFX m_rightAngleMotor;
+  CANSparkMax m_rightAngleMotor;
+  CANSparkMax m_leftAngleMotor;
 
   AnalogPotentiometer m_pot;
 
@@ -28,8 +30,8 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
     m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
 
-    m_leftAngleMotor = new TalonFX(ShooterConstants.kLeftAngleMotor);
-    m_leftAngleMotor = new TalonFX(ShooterConstants.kRightAngleMotor);
+    m_leftAngleMotor = new CANSparkMax(ShooterConstants.kLeftAngleMotor, MotorType.kBrushless);
+    m_leftAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
 
     m_pot = new AnalogPotentiometer(0, 180, ShooterConstants.kMinAngle);
 
