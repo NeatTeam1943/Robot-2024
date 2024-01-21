@@ -32,7 +32,7 @@ public final class Constants {
     public static final int kRightAngleMotor = 9;
     
     public static final double kMinAngle = 69; // TODO: Add angle
-    public static final double kMaxAngle = 420; // TODO: Add angle 
+    public static final double kMaxAngle = 180; // TODO: Add angle 
     
     public static final int kTopLimitSwitchPort = 0;
     public static final int kBottomLimitSwitchPort = 1;
