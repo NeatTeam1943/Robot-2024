@@ -33,7 +33,7 @@ public class Shooter extends SubsystemBase {
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kLeftAngleMotor, MotorType.kBrushless);
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
 
-    m_pot = new AnalogPotentiometer(0, 180, ShooterConstants.kMinAngle);
+    m_pot = new AnalogPotentiometer(0, ShooterConstants.kMaxAngle, ShooterConstants.kMinAngle);
 
     m_topLimitSwitch = new DigitalInput(ShooterConstants.kTopLimitSwitchPort);
     m_bottomLimitSwitch = new DigitalInput(ShooterConstants.kBottomLimitSwitchPort);
@@ -47,27 +47,30 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor.set(speed);
   }
 
+  /*
+   * Sets the speed of the motors for initiating the angle-adjusting mechanism.
+   */
   public void setAngleSpeed(double speed) {
     m_leftAngleMotor.set(speed);
     m_rightAngleMotor.set(speed);
   }
 
   /*
-   * Returns the pitch angle of the shooting mechanism.
+   * Returns the pitch angle of the angle-adjusting mechanism.
    */
   public double getAngle() {
     return m_pot.get();
   }
 
   /*
-   * Returns if the shooter angle got the limit of motion.
+   * Returns if the shooter angle had reached the limit of motion.
    */
   public boolean isAtLimit() {
     return m_topLimitSwitch.get() || m_bottomLimitSwitch.get(); // to be changed to shooter's angle
   }
 
   /*
-   * Returns the RPM of the right motor.
+   * Returns the RPM of the left motor.
    */
   public double getLeftRPM() {
     return m_leftShooterMotor.getVelocity().getValueAsDouble() * 60;
