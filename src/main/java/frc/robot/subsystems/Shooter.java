@@ -33,7 +33,7 @@ public class Shooter extends SubsystemBase {
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kLeftAngleMotor, MotorType.kBrushless);
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
 
-    m_potentiometer = new AnalogPotentiometer(ShooterConstants.kPotentiometerPort, ShooterConstants.kPotentiometerRange, ShooterConstants.kMinAngle);
+    m_potentiometer = new AnalogPotentiometer(ShooterConstants.kPotentiometerPort, ShooterConstants.kPotentiometerRange, ShooterConstants.kPotentiometerOffset);
 
     m_topLimitSwitch = new DigitalInput(ShooterConstants.kTopLimitSwitchPort);
     m_bottomLimitSwitch = new DigitalInput(ShooterConstants.kBottomLimitSwitchPort);

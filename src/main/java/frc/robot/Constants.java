@@ -41,6 +41,7 @@ public final class Constants {
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle
     public static final double kPotentiometerRange = 270;
+    public static final double kPotentiometerOffset = 4269;
 
     public static final int kPotentiometerPort = 0;
     
