@@ -25,6 +25,13 @@ public final class Constants {
     public static final int kMotorId = 5;
   }
 
+  public static class TransportConstants {
+    public static final int kLeftMotor = 6;
+    public static final int kRightMotor = 7;
+    public static final int kIntakeSwitch = 0;
+    public static final int kshooterSwitch = 1;
+  }
+
   public static class ShooterConstants {
     public static final int kLeftShooterMotor = 6;
     public static final int kRightShooterMotor = 7; 
