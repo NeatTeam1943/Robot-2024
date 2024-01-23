@@ -31,4 +31,21 @@ public final class Constants {
     public static final int kIntakeSwitch = 0;
     public static final int kshooterSwitch = 1;
   }
+
+  public static class ShooterConstants {
+    public static final int kLeftShooterMotor = 6;
+    public static final int kRightShooterMotor = 7; 
+    public static final int kLeftAngleMotor = 8;
+    public static final int kRightAngleMotor = 9;
+    
+    public static final double kMinAngle = 69; // TODO: Add angle
+    public static final double kMaxAngle = 420; // TODO: Add angle
+    public static final double kPotentiometerRange = 270;
+    public static final double kPotentiometerOffset = 4269;
+
+    public static final int kPotentiometerPort = 0;
+    
+    public static final int kTopLimitSwitchPort = 0;
+    public static final int kBottomLimitSwitchPort = 1;
+  }
 }
