@@ -96,7 +96,7 @@ public class NetworkTables extends SubsystemBase {
   /*
    * Retrieves a NetworkTables table for data storage and communication.
    */
-  public NetworkTable getM_table() {
+  public NetworkTable getTable() {
     return m_table;
   }
 
