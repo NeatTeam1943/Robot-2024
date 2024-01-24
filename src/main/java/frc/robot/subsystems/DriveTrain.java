@@ -13,10 +13,13 @@ import frc.robot.Constants.DriveTrainConstants;
  * The DriveTrain subsystem controls the robot's drive system.
  */
 public class DriveTrain extends SubsystemBase {
-  private TalonFX m_leftFront;
-  private TalonFX m_leftRear;
-  private TalonFX m_rightFront;
-  private TalonFX m_rightRear;
+  /*
+   * masters are rear motors and followers are front motors.
+   */
+  private TalonFX m_leftFollower;
+  private TalonFX m_leftMaster;
+  private TalonFX m_rightFollower;
+  private TalonFX m_rightMaster;
 
   private DifferentialDrive m_drive;
 
@@ -25,18 +28,18 @@ public class DriveTrain extends SubsystemBase {
    * follower behavior.
    */
   public DriveTrain() {
-    m_leftFront = new TalonFX(DriveTrainConstants.kLeftFront);
-    m_leftRear = new TalonFX(DriveTrainConstants.kLeftRear);
-    m_rightFront = new TalonFX(DriveTrainConstants.kRightFront);
-    m_rightRear = new TalonFX(DriveTrainConstants.kRightRear);
+    m_leftMaster = new TalonFX(DriveTrainConstants.kLeftRear);
+    m_rightMaster = new TalonFX(DriveTrainConstants.kRightRear);
+    m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
+    m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-    m_rightFront.setInverted(true);
-    m_leftFront.setInverted(false);
+    m_rightFollower.setInverted(true);
+    m_leftFollower.setInverted(false);
 
-    m_rightRear.setControl(new Follower(m_rightFront.getDeviceID(), false));
-    m_leftRear.setControl(new Follower(m_leftFront.getDeviceID(), false));
+    m_leftMaster.setControl(new Follower(m_leftFollower.getDeviceID(), false));
+    m_rightMaster.setControl(new Follower(m_rightFollower.getDeviceID(), false));
 
-    m_drive = new DifferentialDrive(m_leftFront, m_rightFront);
+    m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
   }
 
   /*
@@ -83,10 +86,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left front motor in meters.
    */
   public double getLeftFrontMotorTraveledDistance() {
-    StatusSignal<Double> m_leftFrontRotorSignal = m_leftFront.getRotorPosition();
-    m_leftFrontRotorSignal.refresh();
+    StatusSignal<Double> leftFrontRotorSignal = m_leftFollower.getRotorPosition();
+    leftFrontRotorSignal.refresh();
 
-    return m_leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /*
@@ -95,10 +98,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right front motor in meters.
    */
   public double getRightFrontMotorTraveledDistance() {
-    StatusSignal<Double> m_rightFrontRotorSignal = m_rightFront.getRotorPosition();
-    m_rightFrontRotorSignal.refresh();
+    StatusSignal<Double> rightFrontRotorSignal = m_rightFollower.getRotorPosition();
+    rightFrontRotorSignal.refresh();
 
-    return m_rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /*
@@ -107,10 +110,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left rear motor in meters.
    */
   public double getLeftRearMotorTraveledDistance() {
-    StatusSignal<Double> m_leftRearRotorSignal = m_leftRear.getRotorPosition();
-    m_leftRearRotorSignal.refresh();
+    StatusSignal<Double> leftRearRotorSignal = m_leftMaster.getRotorPosition();
+    leftRearRotorSignal.refresh();
 
-    return m_leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /*
@@ -119,10 +122,10 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right rear motor in meters.
    */
   public double getRightRearMotorTraveledDistance() {
-    StatusSignal<Double> m_rightRearRotorSignal = m_rightRear.getRotorPosition();
-    m_rightRearRotorSignal.refresh();
+    StatusSignal<Double> rightRearRotorSignal = m_rightMaster.getRotorPosition();
+    rightRearRotorSignal.refresh();
 
-    return m_rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
   /*
@@ -131,7 +134,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position - The position to set.
    */
   public void setLeftFrontMotorTraveledDistance(double position) {
-    m_leftFront.setPosition(position);
+    m_leftFollower.setPosition(position);
   }
 
   /*
@@ -140,7 +143,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position - The position to set.
    */
   public void setRightFrontMotorTraveledDistance(double position) {
-    m_rightFront.setPosition(position);
+    m_rightFollower.setPosition(position);
   }
 
   /*
@@ -149,7 +152,7 @@ public class DriveTrain extends SubsystemBase {
    * @param position - The position to set.
    */
   public void setLeftRearMotorTraveledDistance(double position) {
-    m_leftRear.setPosition(position);
+    m_leftMaster.setPosition(position);
   }
 
   /*
@@ -158,16 +161,16 @@ public class DriveTrain extends SubsystemBase {
    * @param position - The position to set.
    */
   public void setRightRearMotorTraveledDistance(double position) {
-    m_rightRear.setPosition(position);
+    m_rightMaster.setPosition(position);
   }
 
   /*
    * Resets the encoders of all motors to zero.
    */
   public void resetEncoders() {
-    m_leftFront.setPosition(0);
-    m_rightFront.setPosition(0);
-    m_leftRear.setPosition(0);
-    m_rightRear.setPosition(0);
+    m_leftMaster.setPosition(0);
+    m_rightMaster.setPosition(0);
+    m_leftFollower.setPosition(0);
+    m_rightFollower.setPosition(0);
   }
 }
