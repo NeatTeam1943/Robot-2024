@@ -34,10 +34,10 @@ public final class Constants {
   }
 
   public static class ShooterConstants {
-    public static final int kLeftShooterMotor = 6;
-    public static final int kRightShooterMotor = 7; 
-    public static final int kLeftAngleMotor = 8;
-    public static final int kRightAngleMotor = 9;
+    public static final int kLeftShooterMotor = 8;
+    public static final int kRightShooterMotor = 9;
+    public static final int kLeftAngleMotor = 10;
+    public static final int kRightAngleMotor = 11;
     
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle
