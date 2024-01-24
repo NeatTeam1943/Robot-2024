@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
 
     private DigitalInput m_intakeSwitch;
 
-  /*
+  /**
    * Constructs the DriveTrain subsystem with motor controllers
    */
   public Intake() {
@@ -24,15 +24,17 @@ public class Intake extends SubsystemBase {
     m_intakeSwitch = new DigitalInput(IntakeConstants.kIntakeSwitch);
   }
 
-  /*
+  /**
    * Sets the speed of the motors for initiating the driving mechanism.
+   * 
+   * @param speed - rotation speed of the motor on the scale of -1 to 1 
    */
   public void setMotorSpeed(double speed) {
     m_motor.set(speed);
   }
 
-  /*
-   * @returns if the Intake acquired the Note
+  /**
+   * @return if the intake has acquired the Note
    */
   public boolean isNoteAcquired() {
     return m_intakeSwitch.get();
