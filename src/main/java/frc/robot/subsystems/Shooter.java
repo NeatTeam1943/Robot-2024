@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
-/*
+/**
  * The Shooter subsystem controls the robot's shooting mechanism.
  */
 public class Shooter extends SubsystemBase {
@@ -23,8 +23,8 @@ public class Shooter extends SubsystemBase {
   DigitalInput m_topLimitSwitch;
   DigitalInput m_bottomLimitSwitch;
 
-  /*
-   * Constructs the Shooter subsystem with motor controllers.
+  /**
+   * Constructs the Shooter subsystem with motor controllers and sensors.
    */
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
@@ -39,45 +39,49 @@ public class Shooter extends SubsystemBase {
     m_bottomLimitSwitch = new DigitalInput(ShooterConstants.kBottomLimitSwitchPort);
   }
 
-  /*
+  /**
    * Sets the speed of the motors for initiating the shooting mechanism.
+   * 
+   * @param speed - the speed at which the shooter motors will rotate
    */
   public void setShooterMotorSpeed(double speed) {
     m_leftShooterMotor.set(speed);
     m_rightShooterMotor.set(speed);
   }
 
-  /*
-   * Sets the speed that the pitch angle of the shooting mechanism will move (its more like direcsen 1 to -1)
+  /**
+   * Sets the speed at which the pitch motors will rotate the angling mechanism
+   * 
+   * @param speed - the speed at which the pitch motors move
    */
   public void setAngleSpeed(double speed) {
     m_leftAngleMotor.set(speed);
     m_rightAngleMotor.set(speed);
   }
 
-  /*
-   * Returns the pitch angle of the angle-adjusting mechanism.
+  /**
+   * @return the pitch angle of the angle-adjusting mechanism.
    */
   public double getAngle() {
     return m_potentiometer.get();
   }
 
-  /*
-   * Returns if the shooter angle had reached the limit of motion.
+  /**
+   * @return if the shooter angle has reached either the highest possible angle or the smallest possible angle of motion.
    */
   public boolean isAtLimit() {
-    return m_topLimitSwitch.get() || m_bottomLimitSwitch.get(); // to be changed to shooter's angle
+    return m_topLimitSwitch.get() || m_bottomLimitSwitch.get();
   }
 
-  /*
-   * Returns the RPM of the left motor.
+  /**
+   * @return the RPM of the left shooter motor.
    */
   public double getLeftRPM() {
     return m_leftShooterMotor.getVelocity().getValueAsDouble() * 60;
   }
 
-  /*
-   * Returns the RPM of the right motor.
+  /**
+   * @return the RPM of the right shooter motor.
    */
   public double getRightRPM() {
     return m_rightShooterMotor.getVelocity().getValueAsDouble() * 60;
