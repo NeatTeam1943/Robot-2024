@@ -28,7 +28,7 @@ public class Transport extends SubsystemBase {
     m_rightMotor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
     m_rightMotor.setInverted(true);
 
-    m_shooterSwitch = new DigitalInput(TransportConstants.kshooterSwitch);
+    m_shooterSwitch = new DigitalInput(TransportConstants.kShooterSwitch);
   }
   
   /**
