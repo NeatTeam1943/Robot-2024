@@ -22,7 +22,7 @@ public final class Constants {
   }
 
   public static class IntakeConstants {
-    public static final int kMotorId = 5;
+    public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
   }
 
@@ -44,9 +44,9 @@ public final class Constants {
     public static final double kPotentiometerRange = 270;
     public static final double kPotentiometerOffset = 4269;
 
-    public static final int kPotentiometerPort = 0;
+    public static final int kPotentiometer = 0;
     
-    public static final int kTopLimitSwitchPort = 0;
-    public static final int kBottomLimitSwitchPort = 1;
+    public static final int kTopLimitSwitch = 0;
+    public static final int kBottomLimitSwitch = 1;
   }
 }

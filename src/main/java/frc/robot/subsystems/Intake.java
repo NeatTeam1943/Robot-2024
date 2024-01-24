@@ -19,7 +19,7 @@ public class Intake extends SubsystemBase {
    * Constructs the DriveTrain subsystem with motor controllers
    */
   public Intake() {
-    m_motor = new CANSparkMax(IntakeConstants.kMotorId, MotorType.kBrushless);
+    m_motor = new CANSparkMax(IntakeConstants.kMotor, MotorType.kBrushless);
   
     m_intakeSwitch = new DigitalInput(IntakeConstants.kIntakeSwitch);
   }
