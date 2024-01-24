@@ -18,7 +18,6 @@ public class Transport extends SubsystemBase {
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
 
-  private DigitalInput m_intakeSwitch;
   private DigitalInput m_shooterSwitch;
 
   /*
@@ -29,7 +28,6 @@ public class Transport extends SubsystemBase {
     m_rightMotor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
     m_rightMotor.setInverted(true);
 
-    m_intakeSwitch = new DigitalInput(TransportConstants.kIntakeSwitch);
     m_shooterSwitch = new DigitalInput(TransportConstants.kshooterSwitch);
   }
   
@@ -48,13 +46,6 @@ public class Transport extends SubsystemBase {
    */
   public boolean isNoteReady() {
     return m_shooterSwitch.get();
-  }
-
-  /*
-   * returns if the Intake acquired the Note
-   */
-  public boolean isNoteAcquired() {
-    return m_intakeSwitch.get();
   }
 
   @Override
