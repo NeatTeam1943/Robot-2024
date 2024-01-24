@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.IntakeConstants;
 
-/*
- * The Intake subsystem controls the robot's drive system.
+/**
+ * The Intake subsystem controls the robot's Note intake mechanism.
  */
 public class Intake extends SubsystemBase {
     private CANSparkMax m_motor;

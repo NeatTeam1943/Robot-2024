@@ -9,11 +9,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 
-/*
+/**
  * The DriveTrain subsystem controls the robot's drive system.
  */
 public class DriveTrain extends SubsystemBase {
-  /*
+  /**
    * masters are rear motors and followers are front motors.
    */
   private TalonFX m_leftFollower;
@@ -23,7 +23,7 @@ public class DriveTrain extends SubsystemBase {
 
   private DifferentialDrive m_drive;
 
-  /*
+  /**
    * Constructs the DriveTrain subsystem with motor controllers and sets up
    * follower behavior.
    */
@@ -42,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
   }
 
-  /*
+  /**
    * Drives the robot using arcade drive control.
    *
    * @param movement - The forward/backward movement speed.
@@ -52,7 +52,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(movement, rotation);
   }
 
-  /*
+  /**
    * Drives the robot using arcade drive control with an Xbox controller.
    *
    * @param joystick - The Xbox controller used for driving.
@@ -61,7 +61,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getRightX());
   }
 
-  /*
+  /**
    * Drives the robot using tank drive control.
    *
    * @param left - The speed for the left side of the robot.
@@ -71,7 +71,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.tankDrive(left, right);
   }
 
-  /*
+  /**
    * Drives the robot using tank drive control with an Xbox controller.
    *
    * @param joystick - The Xbox controller used for driving.
@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.tankDrive(joystick.getLeftY(), joystick.getRightY());
   }
 
-  /*
+  /**
    * Gets the distance traveled by the left front motor in meters.
    *
    * @return The distance traveled by the left front motor in meters.
@@ -92,7 +92,7 @@ public class DriveTrain extends SubsystemBase {
     return leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
-  /*
+  /**
    * Gets the distance traveled by the right front motor in meters.
    *
    * @return The distance traveled by the right front motor in meters.
@@ -104,7 +104,7 @@ public class DriveTrain extends SubsystemBase {
     return rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
-  /*
+  /**
    * Gets the distance traveled by the left rear motor in meters.
    *
    * @return The distance traveled by the left rear motor in meters.
@@ -116,7 +116,7 @@ public class DriveTrain extends SubsystemBase {
     return leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
-  /*
+  /**
    * Gets the distance traveled by the right rear motor in meters.
    *
    * @return The distance traveled by the right rear motor in meters.
@@ -128,7 +128,7 @@ public class DriveTrain extends SubsystemBase {
     return rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
   }
 
-  /*
+  /**
    * Sets the position of the left front motor in sensor units.
    *
    * @param position - The position to set.
@@ -137,7 +137,7 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower.setPosition(position);
   }
 
-  /*
+  /**
    * Sets the position of the right front motor in sensor units.
    *
    * @param position - The position to set.
@@ -146,7 +146,7 @@ public class DriveTrain extends SubsystemBase {
     m_rightFollower.setPosition(position);
   }
 
-  /*
+  /**
    * Sets the position of the left rear motor in sensor units.
    *
    * @param position - The position to set.
@@ -155,7 +155,7 @@ public class DriveTrain extends SubsystemBase {
     m_leftMaster.setPosition(position);
   }
 
-  /*
+  /**
    * Sets the position of the right rear motor in sensor units.
    *
    * @param position - The position to set.
@@ -164,7 +164,7 @@ public class DriveTrain extends SubsystemBase {
     m_rightMaster.setPosition(position);
   }
 
-  /*
+  /**
    * Resets the encoders of all motors to zero.
    */
   public void resetEncoders() {
