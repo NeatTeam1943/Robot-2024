@@ -22,30 +22,31 @@ public final class Constants {
   }
 
   public static class IntakeConstants {
-    public static final int kMotorId = 5;
+    public static final int kMotor = 5;
+    public static final int kIntakeSwitch = 0;
   }
 
   public static class TransportConstants {
     public static final int kLeftMotor = 6;
     public static final int kRightMotor = 7;
-    public static final int kIntakeSwitch = 0;
-    public static final int kshooterSwitch = 1;
+    
+    public static final int kShooterSwitch = 1;
   }
 
   public static class ShooterConstants {
-    public static final int kLeftShooterMotor = 6;
-    public static final int kRightShooterMotor = 7; 
-    public static final int kLeftAngleMotor = 8;
-    public static final int kRightAngleMotor = 9;
+    public static final int kLeftShooterMotor = 8;
+    public static final int kRightShooterMotor = 9;
+    public static final int kLeftAngleMotor = 10;
+    public static final int kRightAngleMotor = 11;
     
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle
     public static final double kPotentiometerRange = 270;
     public static final double kPotentiometerOffset = 4269;
 
-    public static final int kPotentiometerPort = 0;
+    public static final int kPotentiometer = 0;
     
-    public static final int kTopLimitSwitchPort = 0;
-    public static final int kBottomLimitSwitchPort = 1;
+    public static final int kTopLimitSwitch = 0;
+    public static final int kBottomLimitSwitch = 1;
   }
 }
