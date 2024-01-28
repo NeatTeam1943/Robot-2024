@@ -15,8 +15,8 @@ import frc.robot.Constants.ShooterConstants;
 public class Shooter extends SubsystemBase {
   TalonFX m_leftShooterMotor;
   TalonFX m_rightShooterMotor;
-  CANSparkMax m_rightAngleMotor;
   CANSparkMax m_leftAngleMotor;
+  CANSparkMax m_rightAngleMotor;
 
   AnalogPotentiometer m_potentiometer;
 
@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
 
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kLeftAngleMotor, MotorType.kBrushless);
-    m_leftAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
+    m_rightAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
 
     m_potentiometer = new AnalogPotentiometer(ShooterConstants.kPotentiometer, ShooterConstants.kPotentiometerRange, ShooterConstants.kPotentiometerOffset);
 
@@ -85,5 +85,12 @@ public class Shooter extends SubsystemBase {
    */
   public double getRightRPM() {
     return m_rightShooterMotor.getVelocity().getValueAsDouble() * 60;
+  }
+
+    /**
+   * @return the average RPM of the two shooter motors.
+   */
+  public double getAverageRPM() {
+    return (getLeftRPM() + getRightRPM()) / 2;
   }
 }
