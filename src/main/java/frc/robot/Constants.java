@@ -40,6 +40,10 @@ public final class Constants {
   public static class ShooterConstants {
     public static final int kLeftShooterMotor = 8;
     public static final int kRightShooterMotor = 9;
+    
+    public static final double kp = -1;
+    public static final double ki = -1;
+    public static final double kd = -1;
   }
 
   public static class PitcherConstants {
