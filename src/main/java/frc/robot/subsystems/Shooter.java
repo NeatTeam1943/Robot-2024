@@ -15,8 +15,8 @@ import frc.robot.Constants.ShooterConstants;
 public class Shooter extends SubsystemBase {
   TalonFX m_leftShooterMotor;
   TalonFX m_rightShooterMotor;
-  CANSparkMax m_rightAngleMotor;
   CANSparkMax m_leftAngleMotor;
+  CANSparkMax m_rightAngleMotor;
 
   AnalogPotentiometer m_potentiometer;
 
@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
 
     m_leftAngleMotor = new CANSparkMax(ShooterConstants.kLeftAngleMotor, MotorType.kBrushless);
-    m_leftAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
+    m_rightAngleMotor = new CANSparkMax(ShooterConstants.kRightAngleMotor, MotorType.kBrushless);
 
     m_potentiometer = new AnalogPotentiometer(ShooterConstants.kPotentiometer, ShooterConstants.kPotentiometerRange, ShooterConstants.kPotentiometerOffset);
 
@@ -44,8 +44,21 @@ public class Shooter extends SubsystemBase {
    * 
    * @param speed - the speed at which the shooter motors will rotate
    */
-  public void setShooterMotorSpeed(double speed) {
+  public void setShooterMotorsSpeed(double speed) {
     m_leftShooterMotor.set(speed);
+    m_rightShooterMotor.set(speed);
+  }
+
+  public void setLeftShooterMotorSpeed(double speed) {
+    m_leftShooterMotor.set(speed);
+  }
+
+  /**
+   * Sets the speed of the motors for initiating the shooting mechanism.
+   * 
+   * @param speed - the speed at which the shooter motors will rotate
+   */
+  public void setRightShooterMotorSpeed(double speed) {
     m_rightShooterMotor.set(speed);
   }
 
