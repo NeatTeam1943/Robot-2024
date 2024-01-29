@@ -29,10 +29,18 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor.set(speed);
   }
 
+  /**
+   * 
+   * 
+   * @param speed - the speed at which the right shooter motor will rotate
+   */
   public void setRightShooterMotorSpeed(double speed) {
     m_rightShooterMotor.set(speed);
   }
 
+  /**
+   * @param speed the speed at which the left shooter motor will rotate
+   */
   public void setLeftShooterMotorSpeed(double speed) {
     m_leftShooterMotor.set(speed);
   }
