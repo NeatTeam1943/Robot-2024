@@ -3,15 +3,19 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix6.hardware.Pigeon2;
 
 /*
  * RobotOdometry contains data from spatial sensors.
  */
 public class RobotOdometry extends SubsystemBase {
+  private Pigeon2 m_imu;
+
   /*
    * Constructs RobotOdometry subsystem.
    */
   public RobotOdometry() {
+    m_imu = new Pigeon2(0);
   }
 
   /*
@@ -48,15 +52,14 @@ public class RobotOdometry extends SubsystemBase {
    * Sets heading of robot relative to a selected heading.
    */
   public void setHeading(double angle) {
-
+    m_imu.setYaw(angle);
   }
 
   /*
    * Gets heading of robot relative to a selected heading.
    */
   public double getHeading() {
-
-    return 0;
+    return m_imu.getYaw().getValueAsDouble();
   }
 
   /*
@@ -68,7 +71,8 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the pitch of the robot from that of the AprilTag using LimeLight.
+   * Gets the difference of the pitch of the robot from that of the AprilTag using
+   * LimeLight.
    */
   public double getPitchToAT() {
 
@@ -76,7 +80,8 @@ public class RobotOdometry extends SubsystemBase {
   }
 
   /*
-   * Gets the difference of the yaw of the robot from that of the AprilTag using LimeLight.
+   * Gets the difference of the yaw of the robot from that of the AprilTag using
+   * LimeLight.
    */
   public double getYawToAT() {
 
