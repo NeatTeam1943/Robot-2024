@@ -114,58 +114,100 @@ public class NetworkTables extends SubsystemBase {
     m_screenYPublisher.set(y);
   }
 
+  /*
+   * Sets a NetworkTables table target pitch value for data storage.
+   */
   public void setTargetPitch(double pitch) {
     m_targetPitchPublisher.set(pitch);
   }
 
+  /*
+   * Sets a NetworkTables table target roll value for data storage.
+   */
   public void setTargetRoll(double roll) {
     m_targetRollPublisher.set(roll);
   }
 
+  /*
+   * Sets a NetworkTables table target yaw value for data storage.
+   */
   public void setTargetYaw(double yaw) {
     m_targetYawPublisher.set(yaw);
   }
 
+  /*
+   * Sets a NetworkTables table imu pitch value for data storage.
+   */
   public void setImuPitch(double pitch) {
     m_imuPitchPublisher.set(pitch);
   }
 
+  /*
+   * Sets a NetworkTables table imu roll value for data storage.
+   */
   public void setImuRoll(double roll) {
     m_imuRollPublisher.set(roll);
   }
 
+  /*
+   * Sets a NetworkTables table imu yaw value for data storage.
+   */
   public void setImuYaw(double yaw) {
     m_imuYawPublisher.set(yaw);
   }
 
+  /*
+   * Retrieves a NetworkTables table x value for target on screen(X is a value in pixels on the screen) data storage and communication.
+   */
   public double getScreenX() {
     return m_screenXSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table y value for target on screen(Y is a Y value in the screen, in pixels), for data storage and communication.
+   */
   public double getScreenY() {
     return m_screenYSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table target pitch value for data storage and communication.
+   */
   public double getTargetPitch() {
     return m_targetPitchSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table target roll value for data storage and communication.
+   */
   public double getTargetRoll() {
     return m_targetRollSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table target yaw value for data storage and communication.
+   */
   public double getTargetYaw() {
     return m_targetYawSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table imu pitch value for data storage and communication.
+   */
   public double getImuPitch() {
     return m_targetPitchSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table imu roll value for data storage and communication.
+   */
   public double getImuRoll() {
     return m_imuRollSubscriber.get();
   }
 
+  /*
+   * Retrieves a NetworkTables table imu yaw value for data storage and communication.ss
+   */
   public double getImuYaw() {
     return m_imuYawSubscriber.get();
   }
