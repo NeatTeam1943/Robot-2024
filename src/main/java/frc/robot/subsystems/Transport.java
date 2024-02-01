@@ -36,7 +36,7 @@ public class Transport extends SubsystemBase {
    * 
    * @param speed - sets the speed of the motors on scale of -1 to 1
    */
-  public void moveBelts(double speed) {
+  public void setBeltsSpeed(double speed) {
     m_leftMotor.set(speed);
     m_rightMotor.set(speed);
   }
