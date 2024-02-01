@@ -1,0 +1,48 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.subsystems;
+
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.PitcherConstants;
+
+public class Pitcher extends SubsystemBase {
+  VictorSP m_leftAngleMotor;
+  VictorSP m_rightAngleMotor;
+
+  AnalogPotentiometer m_potentiometer;
+
+
+  /** Creates a new Pitcher. */
+  public Pitcher() {
+    m_leftAngleMotor = new VictorSP(PitcherConstants.kLeftAngleMotor);
+    m_rightAngleMotor = new VictorSP(PitcherConstants.kRightAngleMotor);
+
+    m_potentiometer = new AnalogPotentiometer(PitcherConstants.kPotentiometer, PitcherConstants.kPotentiometerRange, PitcherConstants.kPotentiometerOffset);
+  }
+
+  /**
+   * Sets the speed at which the pitch motors will move.
+   * 
+   * @param speed - the speed at which the pitch motors move.
+   */
+  public void setAngleMotorsSpeed(double speed) {
+    m_leftAngleMotor.set(speed);
+    m_rightAngleMotor.set(speed);
+  }
+
+  /**
+   * @return the pitch angle of the mechanism.
+   */
+  public double getAngle() {
+    return m_potentiometer.get();
+  }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}
