@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Transport;
 
-public class MoveNoteToShooter extends Command {
-  private Transport m_trandport;
+public class GetNoteReady extends Command {
+  private Transport m_transport;
   /** Creates a new MoveNoteToShooter. */
-  public MoveNoteToShooter(Transport transport) {
-    m_trandport = transport;
+  public GetNoteReady(Transport transport) {
+    m_transport = transport;
     addRequirements(transport);
   }
 
@@ -29,11 +29,11 @@ public class MoveNoteToShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_trandport.moveBelts(0);
+    m_transport.setBeltsSpeed(0);
   }  
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_trandport.isNoteReady();
+    return m_transport.isNoteReady();
   }
 }
