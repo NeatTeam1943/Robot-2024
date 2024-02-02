@@ -24,6 +24,13 @@ public final class Constants {
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+
+    public static final double kRotationP = 0.013095;
+    public static final double kRotationI = 0.000005;
+    public static final double kRotationD = 0.000322;
+
+    public static final double kRotationClampHigh = 0.75;
+    public static final double kRotationClampLow = -0.75;
   }
 
   public static class IntakeConstants {
