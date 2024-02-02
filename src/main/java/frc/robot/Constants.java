@@ -7,6 +7,11 @@ public final class Constants {
 
   public static class MeasurementConstants {
     public static final double kInchesToMeters = 0.0254;
+    public static final double kCmToInch = 0.393700787;
+    public static final double kMeterToInches = 39.37007874;
+    public static final double kDegToRad = Math.PI / 180.0;
+  }
+
   }
 
   public static class DriveTrainConstants {
