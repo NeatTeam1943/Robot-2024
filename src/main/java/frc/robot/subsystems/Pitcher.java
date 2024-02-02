@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.PitcherConstants;
 
+/**
+ * The Pitcher subsystem controls the Robot's pitch-angle tuning-mechanism.
+ */
 public class Pitcher extends SubsystemBase {
   VictorSP m_leftAngleMotor;
   VictorSP m_rightAngleMotor;
@@ -42,7 +45,5 @@ public class Pitcher extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 }
