@@ -12,6 +12,8 @@ public final class Constants {
     public static final double kDegToRad = Math.PI / 180.0;
   }
 
+  public static class FieldConstants {
+    public static final double kAmpATHeightMeters = 1.37;
   }
 
   public static class DriveTrainConstants {
