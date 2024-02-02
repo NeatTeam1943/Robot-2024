@@ -1,0 +1,95 @@
+package frc.robot.commands.DriveTrainCommands;
+
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.DriveTrainConstants;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.RobotOdometry;
+
+public abstract class TurnToAngleBase extends Command {
+  protected DriveTrain m_drive;
+  protected RobotOdometry m_odometry;
+  protected PIDController m_controller;
+
+  protected abstract double getTargetAngle();
+
+  public TurnToAngleBase(DriveTrain drive, RobotOdometry odometry) {
+    m_drive = drive;
+    m_odometry = odometry;
+
+    addRequirements(m_drive);
+  }
+
+  @Override
+  public void initialize() {
+    m_odometry.setHeading(0);
+
+    double targetAngle = getTargetAngle();
+
+    m_controller = getPID(targetAngle);
+    m_controller.setSetpoint(targetAngle);
+  }
+
+  @Override
+  public void execute() {
+    double pidSpeed = MathUtil.clamp(m_controller.calculate(m_odometry.getHeading()),
+        DriveTrainConstants.kRotationClampLow, DriveTrainConstants.kRotationClampHigh);
+
+    m_drive.rotateRobot(pidSpeed);
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    m_drive.rotateRobot(0);
+  }
+
+  @Override
+  public boolean isFinished() {
+    return shouldStop();
+  }
+
+  private boolean shouldStop() {
+    double positionError = m_controller.getPositionError();
+    double target = getTargetAngle();
+
+    final double NEGETIVE_TOLERENCE = -2;
+    final double POSITIVE_TOLERENCE = 1;
+
+    if (positionError != 0) {
+      String errorType = (positionError > 0) ? "PositionError" : "NegativeError";
+      SmartDashboard.putString("TurnToAngle",
+          String.format("%s: %s, Target: %s", errorType, positionError, target));
+
+      double heading = m_odometry.getHeading();
+      double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
+
+      return getTargetAngle() < heading + tolerance;
+    }
+
+    return true;
+  }
+
+  /**
+   * @param targetAngle - The PID's desired angle setpoint.
+   * @return A PID controller with the correct P, I, and D values. The P, I, and D
+   *         values are multiplied by the constant from getN()
+   */
+  private PIDController getPID(double targetAngle) {
+    final double N = getN(targetAngle);
+
+    return new PIDController(DriveTrainConstants.kRotationP * N, DriveTrainConstants.kRotationI * N,
+        DriveTrainConstants.kRotationD * N);
+  }
+
+  /**
+   * @param targetAngle - The PID's desired angle setpoint.
+   * @return A constant value to multiply the PID's P, I, and D values by.
+   */
+  private double getN(double targetAngle) {
+    final double BASE_ANGLE = 90;
+
+    return BASE_ANGLE / Math.abs(targetAngle);
+  }
+}
