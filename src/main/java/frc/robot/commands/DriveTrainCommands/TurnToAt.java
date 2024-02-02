@@ -15,6 +15,6 @@ public class TurnToAt extends TurnToAngleBase {
 
   @Override
   protected double getTargetAngle() {
-    return -(m_camera.getTargetYaw() / 2) + m_odometry.getHeading();
+    return -(m_camera.getTargetYaw() / 2);
   }
 }

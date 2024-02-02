@@ -9,10 +9,15 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.RobotOdometry;
 
 public abstract class TurnToAngleBase extends Command {
+  private double m_initialHeading;
+
   protected DriveTrain m_drive;
   protected RobotOdometry m_odometry;
   protected PIDController m_controller;
 
+  /**
+   * @return The target angle of the robot without the initial heading of the robot.
+   */
   protected abstract double getTargetAngle();
 
   public TurnToAngleBase(DriveTrain drive, RobotOdometry odometry) {
@@ -26,7 +31,9 @@ public abstract class TurnToAngleBase extends Command {
   public void initialize() {
     m_odometry.setHeading(0);
 
-    double targetAngle = getTargetAngle();
+    m_initialHeading = m_odometry.getHeading();
+
+    double targetAngle = getRobotTargetAngle();
 
     m_controller = getPID(targetAngle);
     m_controller.setSetpoint(targetAngle);
@@ -52,7 +59,7 @@ public abstract class TurnToAngleBase extends Command {
 
   private boolean shouldStop() {
     double positionError = m_controller.getPositionError();
-    double target = getTargetAngle();
+    double target = getRobotTargetAngle();
 
     final double NEGETIVE_TOLERENCE = -2;
     final double POSITIVE_TOLERENCE = 1;
@@ -65,10 +72,17 @@ public abstract class TurnToAngleBase extends Command {
       double heading = m_odometry.getHeading();
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 
-      return getTargetAngle() < heading + tolerance;
+      return getRobotTargetAngle() < heading + tolerance;
     }
 
     return true;
+  }
+
+  /**
+   * @return The target angle of the robot plus the initial heading of the robot.
+   */
+  private double getRobotTargetAngle() {
+    return getTargetAngle() + m_initialHeading;
   }
 
   /**

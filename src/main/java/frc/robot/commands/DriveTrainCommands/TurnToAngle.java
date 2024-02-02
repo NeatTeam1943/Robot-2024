@@ -9,7 +9,7 @@ public class TurnToAngle extends TurnToAngleBase {
   public TurnToAngle(DriveTrain drive, RobotOdometry odometry, double targetAngle) {
     super(drive, odometry);
 
-    m_targetAngle = (targetAngle / 2) + m_odometry.getHeading();
+    m_targetAngle = (targetAngle / 2);
   }
 
   @Override
