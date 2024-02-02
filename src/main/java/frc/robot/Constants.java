@@ -12,6 +12,13 @@ public final class Constants {
     public static final double kDegToRad = Math.PI / 180.0;
   }
 
+  public static class VisionConstants {
+    public static final double kLimelightPitch = 8.16; // TEMP!
+    public static final double kLimelightHeightMeters = 0.76;
+
+    public static final String kLimelightName = "limelight-nt";
+  }
+
   public static class FieldConstants {
     public static final double kAmpATHeightMeters = 1.37;
   }
@@ -38,14 +45,14 @@ public final class Constants {
   public static class IntakeConstants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
-    
+
     public static final double kIntakeMotorSpeed = 0.5;
   }
 
   public static class TransportConstants {
     public static final int kLeftMotor = 6;
     public static final int kRightMotor = 7;
-    
+
     public static final int kShooterSwitch = 1;
 
     public static final double kBeltsSpeed = 0.5;
@@ -56,14 +63,14 @@ public final class Constants {
     public static final int kRightShooterMotor = 9;
     public static final int kLeftAngleMotor = 10;
     public static final int kRightAngleMotor = 11;
-    
+
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle
     public static final double kPotentiometerRange = 270;
     public static final double kPotentiometerOffset = 4269;
 
     public static final int kPotentiometer = 0;
-    
+
     public static final int kTopLimitSwitch = 0;
     public static final int kBottomLimitSwitch = 1;
   }
