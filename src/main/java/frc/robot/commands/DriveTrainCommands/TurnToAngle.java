@@ -1,4 +1,4 @@
-package frc.robot.commands.DriveTrainCommands;
+package frc.robot.commands.driveTrainCommands;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.RobotOdometry;
