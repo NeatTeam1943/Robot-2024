@@ -8,10 +8,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Transport;
 
-public class GetNoteReady extends Command {
+/**
+ * Moves Note towards the shooter until it is in front of it using robot's Transport subsystem.
+ */
+public class MoveNoteTowardsShooter extends Command {
   private Transport m_transport;
+  
   /** Creates a new MoveNoteToShooter. */
-  public GetNoteReady(Transport transport) {
+  public MoveNoteTowardsShooter(Transport transport) {
     m_transport = transport;
     addRequirements(transport);
   }
