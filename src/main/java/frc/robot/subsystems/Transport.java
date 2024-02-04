@@ -44,7 +44,7 @@ public class Transport extends SubsystemBase {
   /**
    * @return if the Note ready to be shot
    */
-  public boolean isNoteReady() {
+  public boolean isSwitchPressed() {
     return m_shooterSwitch.get();
   }
 

@@ -13,7 +13,7 @@ import frc.robot.subsystems.Transport;
  */
 public class PutNoteInsideShooter extends Command {
   private Transport m_transport;
-  private boolean m_isReleased, m_pressedAgain;
+  private boolean m_frontOfTheNotePassedTheSwitch, m_backOfTheNotePassedTheSwitch;
   
   /**
    * Creates a new PutNoteInsideShooter.
@@ -22,8 +22,8 @@ public class PutNoteInsideShooter extends Command {
    */
   public PutNoteInsideShooter(Transport transport) {
     m_transport = transport;
-    m_isReleased = false;
-    m_pressedAgain = false;
+    m_frontOfTheNotePassedTheSwitch = false;
+    m_backOfTheNotePassedTheSwitch = false;
     addRequirements(transport);
   }
 
@@ -36,10 +36,10 @@ public class PutNoteInsideShooter extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (!m_isReleased){
-      m_isReleased = !m_transport.isNoteReady();
+    if (!m_frontOfTheNotePassedTheSwitch){
+      m_frontOfTheNotePassedTheSwitch = !m_transport.isSwitchPressed();
     } else {
-      m_pressedAgain = m_transport.isNoteReady();
+      m_backOfTheNotePassedTheSwitch = m_transport.isSwitchPressed();
     }
   }
 
@@ -52,6 +52,6 @@ public class PutNoteInsideShooter extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_pressedAgain;
+    return m_backOfTheNotePassedTheSwitch;
   }
 }
