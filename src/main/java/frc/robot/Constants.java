@@ -40,6 +40,9 @@ public final class Constants {
   public static class ShooterConstants {
     public static final int kLeftShooterMotor = 8;
     public static final int kRightShooterMotor = 9;
+  }
+
+  public static class PitcherConstants {
     public static final int kLeftAngleMotor = 10;
     public static final int kRightAngleMotor = 11;
     
@@ -48,9 +51,6 @@ public final class Constants {
     public static final double kPotentiometerRange = 270;
     public static final double kPotentiometerOffset = 4269;
 
-    public static final int kPotentiometer = 0;
-    
-    public static final int kTopLimitSwitch = 0;
-    public static final int kBottomLimitSwitch = 1;
+    public static final int kPotentiometerPort = 0;
   }
 }
