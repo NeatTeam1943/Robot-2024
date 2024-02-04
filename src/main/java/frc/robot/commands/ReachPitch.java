@@ -37,7 +37,7 @@ public class ReachPitch extends Command {
   public void initialize() {}
 
   /**
-   * Sets the speed of the angle-motors using BangBangControl; checks if the pitch-angle has been reached.
+   * Sets the speed of the angle-motors using BangBangControl; checks if the desired pitch-angle has been reached.
    */
   @Override
   public void execute() {
@@ -52,10 +52,13 @@ public class ReachPitch extends Command {
   public void end(boolean interrupted) {}
 
   /**
-   * @return If the pitch-angle has been reached.
+   * @return If the desired pitch-angle has been reached or if it is out of range.
    */
   @Override
   public boolean isFinished() {
-    return m_reachedPitch;
+    if (!m_pitcher.isInRange(m_desiredPitch)) {
+      System.err.println("IT'S NOT MY BEST ANGLE");
+    }
+    return m_reachedPitch || !m_pitcher.isInRange(m_desiredPitch);
   }
 }
