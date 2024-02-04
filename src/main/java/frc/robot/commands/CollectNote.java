@@ -8,10 +8,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Intake;
 
-public class IntakeNote extends Command {
+/**
+ * Inserts Note into robot using its Intake subsystem.
+ */
+public class CollectNote extends Command {
   private Intake m_intake;
-  /** Creates a new IntakeNote. */
-  public IntakeNote(Intake intake) {
+
+  /** 
+   * Creates a new CollectNote. 
+   * 
+   * @param intake - the subsystem that would be used
+   */
+  public CollectNote(Intake intake) {
     m_intake = intake;
     addRequirements(intake);
   }
