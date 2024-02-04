@@ -1,14 +1,26 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.ReachPitch;
+import frc.robot.subsystems.Pitcher;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
 
+  private Pitcher m_pitcher;
+
+  private double m_desiredPitch;
+  private ReachPitch m_reachPitch;
+
+
   public RobotContainer() {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+
+    m_pitcher = new Pitcher();
+
+    m_reachPitch = new ReachPitch(m_pitcher, m_desiredPitch);
 
     configureBindings();
   }
