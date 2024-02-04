@@ -43,7 +43,7 @@ public class ReachPitch extends Command {
   public void execute() {
     m_pitcher.setAngleMotorsSpeed(m_controller.calculate(m_pitcher.getAngle(), m_desiredPitch));
 
-    if (m_pitcher.getAngle() == m_desiredPitch) {
+    if (m_controller.atSetpoint()) {
       m_reachedPitch = true;
     }
   }
@@ -52,7 +52,7 @@ public class ReachPitch extends Command {
   public void end(boolean interrupted) {}
 
   /**
-   * @return If the desired pitch-angle has been reached or if it is out of range.
+   * @return If the desired pitch-angle has been reached or if it's out of range.
    */
   @Override
   public boolean isFinished() {
