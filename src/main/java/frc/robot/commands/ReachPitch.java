@@ -57,7 +57,7 @@ public class ReachPitch extends Command {
   @Override
   public boolean isFinished() {
     if (!m_pitcher.isInRange(m_desiredPitch)) {
-      System.err.println("IT'S NOT MY BEST ANGLE");
+      System.err.println("THAT PITCH AIN'T YOUR BITCH");
     }
     return m_reachedPitch || !m_pitcher.isInRange(m_desiredPitch);
   }
