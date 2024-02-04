@@ -44,6 +44,10 @@ public class Pitcher extends SubsystemBase {
     return m_potentiometer.get();
   }
 
+  public boolean isInRange(double angle) {
+    return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
+  }
+
   @Override
   public void periodic() {}
 }
