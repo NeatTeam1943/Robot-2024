@@ -51,6 +51,6 @@ public final class Constants {
     public static final double kPotentiometerRange = 270;
     public static final double kPotentiometerOffset = 4269;
 
-    public static final int kPotentiometer = 0;
+    public static final int kPotentiometerPort = 0;
   }
 }

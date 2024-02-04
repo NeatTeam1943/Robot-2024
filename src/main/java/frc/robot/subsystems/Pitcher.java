@@ -24,7 +24,7 @@ public class Pitcher extends SubsystemBase {
     m_leftAngleMotor = new VictorSP(PitcherConstants.kLeftAngleMotor);
     m_rightAngleMotor = new VictorSP(PitcherConstants.kRightAngleMotor);
 
-    m_potentiometer = new AnalogPotentiometer(PitcherConstants.kPotentiometer, PitcherConstants.kPotentiometerRange, PitcherConstants.kPotentiometerOffset);
+    m_potentiometer = new AnalogPotentiometer(PitcherConstants.kPotentiometerPort, PitcherConstants.kPotentiometerRange, PitcherConstants.kPotentiometerOffset);
   }
 
   /**
