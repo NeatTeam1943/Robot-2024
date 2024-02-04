@@ -8,11 +8,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Transport;
 
-public class MoveNoteIntoShooter extends Command {
+/**
+ * Puts Note inside the shooter using robot's Transport subsystem.
+ */
+public class PutNoteInsideShooter extends Command {
   private Transport m_transport;
   private boolean m_isReleased, m_pressedAgain;
   
-  public MoveNoteIntoShooter(Transport transport) {
+  /**
+   * Creates a new PutNoteInsideShooter.
+   * 
+   * @param transport - the Transport subsystem which will be used.
+   */
+  public PutNoteInsideShooter(Transport transport) {
     m_transport = transport;
     m_isReleased = false;
     m_pressedAgain = false;
