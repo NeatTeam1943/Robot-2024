@@ -13,10 +13,10 @@ import frc.robot.Constants.PitcherConstants;
  * The Pitcher subsystem controls the Robot's pitch-angle tuning-mechanism.
  */
 public class Pitcher extends SubsystemBase {
-  VictorSP m_leftAngleMotor;
-  VictorSP m_rightAngleMotor;
+  private VictorSP m_leftAngleMotor;
+  private VictorSP m_rightAngleMotor;
 
-  AnalogPotentiometer m_potentiometer;
+  private AnalogPotentiometer m_potentiometer;
 
 
   /** Creates a new Pitcher. */
