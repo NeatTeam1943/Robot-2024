@@ -10,25 +10,25 @@ import frc.robot.subsystems.Pitcher;
 
 /**
  * The ReachPitch command reaches the desired pitch-angle of the shooting-mechanism.
- * 
- * @param pitcher - the subsystem which will be used.
- * 
- * @param desiredPitch - the desired pitch-angle of the shooting-mechanism.
  */
 public class ReachPitch extends Command {
-  Pitcher m_pitcher;
+  private Pitcher m_pitcher;
 
-  BangBangController m_controller;
-  double m_desiredPitch;
-  boolean m_reachedPitch;
+  private BangBangController m_controller;
+  private double m_desiredPitch;
 
-  /** Creates a new ReachPitch. */
+  /** 
+   * Creates a new ReachPitch. 
+   * 
+   * @param pitcher - the subsystem which will be used.
+   * 
+   * @param desiredPitch - the desired pitch-angle of the shooting-mechanism.
+   */
   public ReachPitch(Pitcher pitcher, double desiredPitch) {
     m_pitcher = pitcher;
 
     m_controller = new BangBangController();
     m_desiredPitch = desiredPitch;
-    m_reachedPitch = false;
 
     addRequirements(m_pitcher);
   }
@@ -42,10 +42,6 @@ public class ReachPitch extends Command {
   @Override
   public void execute() {
     m_pitcher.setAngleMotorsSpeed(m_controller.calculate(m_pitcher.getAngle(), m_desiredPitch));
-
-    if (m_controller.atSetpoint()) {
-      m_reachedPitch = true;
-    }
   }
 
   @Override
@@ -59,6 +55,7 @@ public class ReachPitch extends Command {
     if (!m_pitcher.isInRange(m_desiredPitch)) {
       System.err.println("THAT PITCH AIN'T YOUR BITCH");
     }
-    return m_reachedPitch || !m_pitcher.isInRange(m_desiredPitch);
+    
+    return m_controller.atSetpoint() || !m_pitcher.isInRange(m_desiredPitch);
   }
 }
