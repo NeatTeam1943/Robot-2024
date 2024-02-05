@@ -38,16 +38,16 @@ public class Pitcher extends SubsystemBase {
   }
 
   /**
-   * @return The pitch angle of the mechanism.
+   * @return The pitch-angle of the mechanism.
    */
   public double getAngle() {
     return m_potentiometer.get();
   }
 
   /**
-   * @param angle - The pitch-angle of the robot's shooting mechanism.
+   * @param angle - The angle that we want to check.
    * 
-   * @return If angle is in the robot's pitch-angle range.
+   * @return If angle is in the robot's range.
    */
   public boolean isInRange(double angle) {
     return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
