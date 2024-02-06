@@ -30,7 +30,7 @@ public class Pitcher extends SubsystemBase {
   /**
    * Sets the speed at which the pitch motors will move.
    * 
-   * @param speed - the speed at which the pitch motors move.
+   * @param speed - The speed at which the pitch motors move.
    */
   public void setAngleMotorsSpeed(double speed) {
     m_leftAngleMotor.set(speed);
@@ -38,10 +38,19 @@ public class Pitcher extends SubsystemBase {
   }
 
   /**
-   * @return the pitch angle of the mechanism.
+   * @return The pitch-angle of the mechanism.
    */
   public double getAngle() {
     return m_potentiometer.get();
+  }
+
+  /**
+   * @param angle - The angle that we want to check.
+   * 
+   * @return If angle is in the robot's range.
+   */
+  public boolean isInRange(double angle) {
+    return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
   }
 
   @Override
