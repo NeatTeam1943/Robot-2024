@@ -94,119 +94,136 @@ public class NetworkTables extends SubsystemBase {
   }
 
   /*
-   * Retrieves a NetworkTables table for data storage and communication.
+   * @return A NetworkTable table for subscribing , or publishing.
+   * This method just returns the NetworkTable table
    */
   public NetworkTable getTable() {
     return m_table;
   }
 
   /*
-   * Sets a NetworkTables table x value for data storage and communication.
+   * @param x - A "X" value of a position on the screen(in pixels)
+   * Uses the publish() method to set the screenX coordinate to a particular X value we provide in the method.
    */
   public void setX(double x) {
     m_screenX.publish().set(x);
   }
   
   /*
-   * Sets a NetworkTables table y value for data storage.
+   * @param y - A "Y" value of a position on the screen(in pixels)
+   * Uses the publish() method to set the screenY coordinate to a particular X value we provide in the method.
    */
   public void setY(double y) {
     m_screenYPublisher.set(y);
   }
 
   /*
-   * Sets a NetworkTables table target pitch value for data storage.
+   * @param pitch - The target's pitch value from the camera view
+   * Sets the NetworkTable value of the target's pitch in the camera's view.
    */
   public void setTargetPitch(double pitch) {
     m_targetPitchPublisher.set(pitch);
   }
 
   /*
-   * Sets a NetworkTables table target roll value for data storage.
+   * @param pitch - The target's roll value from the camera view
+   * Sets the NetworkTable value of the target's roll in the camera's view.
    */
   public void setTargetRoll(double roll) {
     m_targetRollPublisher.set(roll);
   }
 
   /*
-   * Sets a NetworkTables table target yaw value for data storage.
+   * @param pitch - The target's yaw value from the camera view
+   * Sets the NetworkTable value of the target's yaw in the camera's view.
    */
   public void setTargetYaw(double yaw) {
     m_targetYawPublisher.set(yaw);
   }
 
   /*
-   * Sets a NetworkTables table imu pitch value for data storage.
+   * @param pitch - The pitch value the IMU we use provides
+   * Sets the NetworkTable value that represents the IMU's pitch value as the pitch we provide
    */
   public void setImuPitch(double pitch) {
     m_imuPitchPublisher.set(pitch);
   }
 
   /*
-   * Sets a NetworkTables table imu roll value for data storage.
+   * @param roll - The roll value the IMU we use provides
+   * Sets the NetworkTable value that represents the IMU's roll value as the pitch we provide
    */
   public void setImuRoll(double roll) {
     m_imuRollPublisher.set(roll);
   }
 
   /*
-   * Sets a NetworkTables table imu yaw value for data storage.
+   * @param yaw - The yaw value the IMU we use provides
+   * Sets the NetworkTable value that represents the IMU's yaw value as the pitch we provide
    */
   public void setImuYaw(double yaw) {
     m_imuYawPublisher.set(yaw);
   }
 
   /*
-   * Retrieves a NetworkTables table x value for target on screen(X is a value in pixels on the screen) data storage and communication.
+   * @return A position along the X axis of a screen(the unit is pixels)
+   * Provides the latest position of the target in the camera's screen(along the X axis)
    */
   public double getScreenX() {
     return m_screenXSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table y value for target on screen(Y is a Y value in the screen, in pixels), for data storage and communication.
+   * @return A position along the Y axis of a screen(the unit is pixels)
+   * Provides the latest position of the target in the camera's screen(along the Y axis)
    */
   public double getScreenY() {
     return m_screenYSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table target pitch value for data storage and communication.
+   * @return The target's pitch from the camera
+   * Provides the latest pitch value from the target from the camera's view
    */
   public double getTargetPitch() {
     return m_targetPitchSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table target roll value for data storage and communication.
+   * @return The target's roll from the camera
+   * Provides the latest roll value from the target from the camera's view
    */
   public double getTargetRoll() {
     return m_targetRollSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table target yaw value for data storage and communication.
+   * @return The target's yaw from the camera
+   * Provides the latest yaw value from the target from the camera's view
    */
   public double getTargetYaw() {
     return m_targetYawSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table imu pitch value for data storage and communication.
+   * @return The IMU pitch value that's registered in the NetworkTables
+   * Provides the latest IMU pitch value that's in the NetworkTable
    */
   public double getImuPitch() {
     return m_targetPitchSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table imu roll value for data storage and communication.
+   * @return The IMU roll value that's registered in the NetworkTables
+   * Provides the latest IMU roll value that's in the NetworkTable
    */
   public double getImuRoll() {
     return m_imuRollSubscriber.get();
   }
 
   /*
-   * Retrieves a NetworkTables table imu yaw value for data storage and communication.ss
+   * @return The IMU yaw value that's registered in the NetworkTables
+   * Provides the latest IMU yaw value that's in the NetworkTable
    */
   public double getImuYaw() {
     return m_imuYawSubscriber.get();
