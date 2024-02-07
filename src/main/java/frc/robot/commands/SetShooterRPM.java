@@ -14,6 +14,7 @@ import frc.robot.subsystems.Shooter;
  */
 public class SetShooterRPM extends Command {
   private Shooter m_shooter;
+  
   private PIDController m_leftController;
   private PIDController m_rightController;
 
@@ -23,8 +24,10 @@ public class SetShooterRPM extends Command {
   public SetShooterRPM(Shooter shooter, double setpoint) {
     m_setpoint = setpoint;
     m_shooter = shooter;
+
     m_leftController  = new PIDController(ShooterConstants.kp, ShooterConstants.ki, ShooterConstants.kd);
     m_rightController = new PIDController(ShooterConstants.kp, ShooterConstants.ki, ShooterConstants.kd);
+
     addRequirements(shooter);
   }
 
