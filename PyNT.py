@@ -33,10 +33,6 @@ while True:
     targetRoll = 0.0
     targetYaw = 0.0
 
-    imuPitch = 0.0
-    imuRoll = 0.0
-    imuYaw = 0.0
-
     # Publish the data
     m_screenXPublisher.setDouble(screenX)
     m_screenYPublisher.setDouble(screenY)
