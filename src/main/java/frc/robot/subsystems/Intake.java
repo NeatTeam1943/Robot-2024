@@ -33,7 +33,7 @@ public class Intake extends SubsystemBase {
    * @return if the intake has acquired the Note
    */
   public boolean isNoteAcquired() {
-    return m_transport.isSwitchPressed();
+    return m_transport.isNoteVisible();
   }
 
 }
