@@ -82,7 +82,7 @@ public class NetworkTables extends SubsystemBase {
 
     m_optimalShooterVelocity = m_table.getDoubleTopic("Optimal Shooter Velocity");
     m_optimalShooterAngle = m_table.getDoubleTopic("Optimal Shooter Angle");
-    m_deltaX = m_table.getDoubleTopic("Delta Y");
+    m_deltaX = m_table.getDoubleTopic("Delta X");
 
     // Publishers
     m_screenXPublisher = m_screenX.publish();
