@@ -4,20 +4,20 @@ inst = ntcore.NetworkTableInstance.getDefault()
 table = inst.getTable("RealSense Data")
 
 # Set up the topic
-m_screenX = table.getDoubleTopic("ScreenX")
-m_screenY = table.getDoubleTopic("ScreenY")
+SCREENX = table.getDoubleTopic("ScreenX")
+SCREENY = table.getDoubleTopic("ScreenY")
 
-m_targetPitch = table.getDoubleTopic("TargetPitch")
-m_targetRoll = table.getDoubleTopic("TargetRoll")
-m_targetYaw = table.getDoubleTopic("TargetYaw")
+TARGETPITCH = table.getDoubleTopic("TargetPitch")
+TARGETROLL = table.getDoubleTopic("TargetRoll")
+TARGETYAW = table.getDoubleTopic("TargetYaw")
 
 # Set up the publishers
-m_screenXPublisher = m_screenX.publish()
-m_screenYPublisher = m_screenY.publish()
+SCREENXPUBLISHER = SCREENX.publish()
+SCREENYPUBLISHER = SCREENY.publish()
 
-m_targetPitchPublisher = m_targetPitch.publish()
-m_targetRollPublisher = m_targetRoll.publish()
-m_targetYawPublisher = m_targetYaw.publish()
+TARGETPITCHPUBLISHER = TARGETPITCH.publish()
+TARGETYAWPUBLISHER = TARGETROLL.publish()
+TARGETYAWPUBLISHER = TARGETYAW.publish()
 
 inst.startClient4("Test")
 inst.setServer(1943) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
@@ -34,9 +34,9 @@ while True:
     targetYaw = 0.0
 
     # Publish the data
-    m_screenXPublisher.setDouble(screenX)
-    m_screenYPublisher.setDouble(screenY)
+    SCREENXPUBLISHER.setDouble(screenX)
+    SCREENYPUBLISHER.setDouble(screenY)
 
-    m_targetPitchPublisher.setDouble(targetPitch)
-    m_targetRollPublisher.setDouble(targetRoll)
-    m_targetYawPublisher.setDouble(targetYaw)
+    TARGETPITCHPUBLISHER.setDouble(targetPitch)
+    TARGETYAWPUBLISHER.setDouble(targetRoll)
+    TARGETYAWPUBLISHER.setDouble(targetYaw)
