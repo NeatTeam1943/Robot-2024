@@ -1,35 +1,35 @@
 import ntcore
 
-inst = ntcore.NetworkTableInstance.getDefault()
-table = inst.getTable("RealSense Data")
+INST = ntcore.NetworkTableInstance.getDefault()
+TABLE = INST.getTable("RealSense Data")
 
 # Set up the topic
-SCREENX = table.getDoubleTopic("ScreenX")
-SCREENY = table.getDoubleTopic("ScreenY")
+screenX = TABLE.getDoubleTopic("ScreenX")
+screenY = TABLE.getDoubleTopic("ScreenY")
 
-TARGETPITCH = table.getDoubleTopic("TargetPitch")
-TARGETROLL = table.getDoubleTopic("TargetRoll")
-TARGETYAW = table.getDoubleTopic("TargetYaw")
+targetPitch = TABLE.getDoubleTopic("TargetPitch")
+targetRoll = TABLE.getDoubleTopic("TargetRoll")
+targetYaw = TABLE.getDoubleTopic("TargetYaw")
 
-OPTIMALVELOCITY = table.getDoubleTopic("Optimal Shooter Velocity")
-SHOOTERANGLE = table.getDoubleTopic("Optimal Shooter Angle")
-DELTAX = table.getDoubleTopic("DeltaX")
+optimalVelocity = TABLE.getDoubleTopic("Optimal Shooter Velocity")
+shooterAngle = TABLE.getDoubleTopic("Optimal Shooter Angle")
+deltaX = TABLE.getDoubleTopic("DeltaX")
 
 # Set up the publishers
-SCREENXPUBLISHER = SCREENX.publish()
-SCREENYPUBLISHER = SCREENY.publish()
+screenXPublisher = screenX.publish()
+screenYPublisher = screenY.publish()
 
-TARGETPITCHPUBLISHER = TARGETPITCH.publish()
-TARGETYAWPUBLISHER = TARGETROLL.publish()
-TARGETYAWPUBLISHER = TARGETYAW.publish()
+targetPitchPublisher = targetPitch.publish()
+targetRollPublisher = targetRoll.publish()
+targetYawPublisher = targetYaw.publish()
 
-OPTIMALVELOCITYPUBLISHER = OPTIMALVELOCITY.publish()
-SHOOTERANGLEPUBLISHER = SHOOTERANGLE.publish()
-DELTAXPUBLISHER = DELTAX.publish()
+optimalVelocityPublisher = optimalVelocity.publish()
+shooterAnglePublisher = shooterAngle.publish()
+deltaXPublisher = deltaX.publish()
 
-inst.startClient4("Test")
-inst.setServer(1943) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
-inst.startDSClient() # recommended if running on DS computer; this gets the robot IP from the DS
+INST.startClient4("Test")
+INST.setServer(1943) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
+INST.startDSClient() # recommended if running on DS computer; this gets the robot IP from the DS
 
 # Main loop
 while True:
@@ -46,13 +46,13 @@ while True:
     deltaX = 0.0
 
     # Publish the data
-    SCREENXPUBLISHER.setDouble(screenX)
-    SCREENYPUBLISHER.setDouble(screenY)
+    screenXPublisher.setDouble(screenX)
+    screenYPublisher.setDouble(screenY)
 
-    TARGETPITCHPUBLISHER.setDouble(targetPitch)
-    TARGETYAWPUBLISHER.setDouble(targetRoll)
-    TARGETYAWPUBLISHER.setDouble(targetYaw)
+    targetPitchPublisher.setDouble(targetPitch)
+    targetRollPublisher.setDouble(targetRoll)
+    targetRollPublisher.setDouble(targetYaw)
 
-    OPTIMALVELOCITYPUBLISHER.setDouble(optimalVelocity)
-    SHOOTERANGLEPUBLISHER.setDouble(shooterAngle)
-    DELTAXPUBLISHER.setDouble(deltaX)
+    optimalVelocityPublisher.setDouble(optimalVelocity)
+    shooterAnglePublisher.setDouble(shooterAngle)
+    deltaXPublisher.setDouble(deltaX)
