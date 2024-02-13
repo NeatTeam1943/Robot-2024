@@ -44,6 +44,15 @@ public class Pitcher extends SubsystemBase {
     return m_potentiometer.get();
   }
 
+  /**
+   * @param angle - The angle that we want to check.
+   * 
+   * @return If angle is in the robot's range.
+   */
+  public boolean isInRange(double angle) {
+    return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
+  }
+
   @Override
   public void periodic() {}
 }
