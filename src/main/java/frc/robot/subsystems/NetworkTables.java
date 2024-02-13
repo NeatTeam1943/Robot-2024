@@ -31,13 +31,6 @@ public class NetworkTables extends SubsystemBase {
   private DoubleTopic m_deltaX;
 
   // Publishers
-  private DoublePublisher m_screenXPublisher;
-  private DoublePublisher m_screenYPublisher;
-
-  private DoublePublisher m_targetPitchPublisher;
-  private DoublePublisher m_targetRollPublisher;
-  private DoublePublisher m_targetYawPublisher;
-
   private DoublePublisher m_imuPitchPublisher;
   private DoublePublisher m_imuRollPublisher;
   private DoublePublisher m_imuYawPublisher;
@@ -85,13 +78,6 @@ public class NetworkTables extends SubsystemBase {
     m_deltaX = m_table.getDoubleTopic("Delta X");
 
     // Publishers
-    m_screenXPublisher = m_screenX.publish();
-    m_screenYPublisher = m_screenY.publish();
-
-    m_targetPitchPublisher = m_targetPitch.publish();
-    m_targetRollPublisher = m_targetRoll.publish();
-    m_targetYawPublisher = m_targetYaw.publish();
-
     m_imuPitchPublisher = m_imuPitch.publish();
     m_imuRollPublisher = m_imuRoll.publish();
     m_imuYawPublisher = m_imuYaw.publish();
@@ -123,46 +109,6 @@ public class NetworkTables extends SubsystemBase {
    */
   public NetworkTable getTable() {
     return m_table;
-  }
-
-  /*
-   * @param x - A "X" value of a position on the screen(in pixels)
-   * Uses the publish() method to set the screenX coordinate to a particular X value we provide in the method.
-   */
-  public void setX(double x) {
-    m_screenX.publish().set(x);
-  }
-  
-  /*
-   * @param y - A "Y" value of a position on the screen(in pixels)
-   * Uses the publish() method to set the screenY coordinate to a particular X value we provide in the method.
-   */
-  public void setY(double y) {
-    m_screenYPublisher.set(y);
-  }
-
-  /*
-   * @param pitch - The target's pitch value from the camera view
-   * Sets the NetworkTable value of the target's pitch in the camera's view.
-   */
-  public void setTargetPitch(double pitch) {
-    m_targetPitchPublisher.set(pitch);
-  }
-
-  /*
-   * @param pitch - The target's roll value from the camera view
-   * Sets the NetworkTable value of the target's roll in the camera's view.
-   */
-  public void setTargetRoll(double roll) {
-    m_targetRollPublisher.set(roll);
-  }
-
-  /*
-   * @param pitch - The target's yaw value from the camera view
-   * Sets the NetworkTable value of the target's yaw in the camera's view.
-   */
-  public void setTargetYaw(double yaw) {
-    m_targetYawPublisher.set(yaw);
   }
 
   /*
