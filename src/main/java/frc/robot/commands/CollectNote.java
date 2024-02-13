@@ -10,22 +10,24 @@ import frc.robot.subsystems.Intake;
 public class CollectNote extends Command {
   private Intake m_intake;
 
-  /** 
-   * Creates a new CollectNote. 
+  /**
+   * Creates a new CollectNote.
    * 
    * @param intake - the subsystem that would be used
    */
   public CollectNote(Intake intake) {
     m_intake = intake;
+
     addRequirements(intake);
   }
 
   @Override
-  public void initialize() {}
-  
+  public void initialize() {
+    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
+  }
+
   @Override
   public void execute() {
-    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
   }
 
   @Override
