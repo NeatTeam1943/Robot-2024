@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -24,34 +20,33 @@ public class SetShooterRPM extends Command {
   public SetShooterRPM(Shooter shooter, double setpoint) {
     m_setpoint = setpoint;
     m_shooter = shooter;
-
-    m_leftController  = new PIDController(ShooterConstants.kp, ShooterConstants.ki, ShooterConstants.kd);
-    m_rightController = new PIDController(ShooterConstants.kp, ShooterConstants.ki, ShooterConstants.kd);
+    
+    m_leftController  = new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD);
+    m_rightController = new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD);
 
     addRequirements(shooter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  m_leftController.setSetpoint(m_setpoint);
-  m_rightController.setSetpoint(m_setpoint);
+    m_leftController.setTolerance(ShooterConstants.kLeftControllerThreshold);
+    m_rightController.setTolerance(ShooterConstants.kRightControllerThreshold);
+
+    m_leftController.setSetpoint(m_setpoint);
+    m_rightController.setSetpoint(m_setpoint);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_shooter.setLeftShooterMotorSpeed(m_leftController.calculate(m_shooter.getLeftRPM(), m_setpoint));
     m_shooter.setRightShooterMotorSpeed(m_rightController.calculate(m_shooter.getRightRPM(), m_setpoint));
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.setShooterMotorsSpeed(0);
+    m_shooter.setShooterMotorsSpeed(0); // TODO Set the motors to a default speed.
   } 
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return m_leftController.atSetpoint() && (m_rightController.atSetpoint());
