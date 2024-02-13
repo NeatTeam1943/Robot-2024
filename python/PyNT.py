@@ -1,5 +1,8 @@
 import ntcore
 
+CLIENT = "Test"
+SERVER = 1943
+
 INST = ntcore.NetworkTableInstance.getDefault()
 TABLE = INST.getTable("RealSense Data")
 
@@ -27,8 +30,8 @@ optimal_velocity_publisher = optimal_velocity.publish()
 shooter_angle_publisher = shooter_angle.publish()
 deltaX_publisher = deltaX.publish()
 
-INST.startClient4("Test")
-INST.setServer(1943) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
+INST.startClient4(CLIENT)
+INST.setServer(SERVER) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
 INST.startDSClient() # recommended if running on DS computer; this gets the robot IP from the DS
 
 # Main loop
