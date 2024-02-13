@@ -44,6 +44,9 @@ public final class Constants {
     public static final double kP = 0.5; // TODO Add real values
     public static final double kI = 0;
     public static final double kD = 0;
+
+    public static final double kLeftControllerThreshold = 0; // TODO TEMP Values
+    public static final double kRightControllerThreshold = 0;
   }
 
   public static class PitcherConstants {
