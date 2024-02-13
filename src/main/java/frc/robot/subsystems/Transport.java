@@ -30,7 +30,7 @@ public class Transport extends SubsystemBase {
   /**
    * Sets speed to the motors of the mechanism
    * 
-   * @param speed - sets the speed of the motors on scale of -1 to 1
+   * @param speed - Sets the speed of the motors on scale of -1 to 1
    */
   public void setBeltsSpeed(double speed) {
     m_leftMotor.set(speed);
@@ -38,7 +38,7 @@ public class Transport extends SubsystemBase {
   }
 
   /**
-   * @return if the Note ready to be shot
+   * @return If the Note ready to be shot
    */
   public boolean isNoteVisible() {
     return m_shooterSwitch.get();

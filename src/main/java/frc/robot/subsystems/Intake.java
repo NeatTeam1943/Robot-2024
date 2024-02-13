@@ -23,14 +23,14 @@ public class Intake extends SubsystemBase {
   /**
    * Sets the speed of the motors for initiating the driving mechanism.
    * 
-   * @param speed - rotation speed of the motor on the scale of -1 to 1 
+   * @param speed - Rotation speed of the motor on the scale of -1 to 1 
    */
   public void setMotorSpeed(double speed) {
     m_motor.set(speed);
   }
 
   /**
-   * @return if the intake has acquired the Note
+   * @return If the intake has acquired the Note
    */
   public boolean isNoteAcquired() {
     return m_transport.isNoteVisible();

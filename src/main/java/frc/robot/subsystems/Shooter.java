@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
   /**
    * Sets the speed of the motors for initiating the mechanism.
    * 
-   * @param speed - the speed at which the shooter motors will rotate.
+   * @param speed - The speed at which the shooter motors will rotate.
    */
   public void setShooterMotorsSpeed(double speed) {
     m_leftShooterMotor.set(speed);
@@ -31,37 +31,35 @@ public class Shooter extends SubsystemBase {
   }
 
   /**
-   * 
-   * 
-   * @param speed - the speed at which the right shooter motor will rotate
+   * @param speed - The speed at which the right shooter motor will rotate
    */
   public void setRightShooterMotorSpeed(double speed) {
     m_rightShooterMotor.set(speed);
   }
 
   /**
-   * @param speed the speed at which the left shooter motor will rotate
+   * @param speed The speed at which the left shooter motor will rotate
    */
   public void setLeftShooterMotorSpeed(double speed) {
     m_leftShooterMotor.set(speed);
   }
 
   /**
-   * @return the RPM of the left shooter motor.
+   * @return The RPM of the left shooter motor.
    */
   public double getLeftRPM() {
     return m_leftShooterMotor.getVelocity().getValueAsDouble() * 60;
   }
 
   /**
-   * @return the RPM of the right shooter motor.
+   * @return The RPM of the right shooter motor.
    */
   public double getRightRPM() {
     return m_rightShooterMotor.getVelocity().getValueAsDouble() * 60;
   }
 
     /**
-   * @return the average RPM of the two shooter motors.
+   * @return The average RPM of the two shooter motors.
    */
   public double getAverageRPM() {
     return (getLeftRPM() + getRightRPM()) / 2;
