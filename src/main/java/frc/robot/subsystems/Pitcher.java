@@ -38,7 +38,7 @@ public class Pitcher extends SubsystemBase {
   }
 
   /**
-   * @return The pitch-angle of the mechanism.
+   * @return The pitch angle of the mechanism.
    */
   public double getAngle() {
     return m_potentiometer.get();

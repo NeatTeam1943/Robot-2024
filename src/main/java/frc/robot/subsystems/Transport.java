@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -34,17 +30,17 @@ public class Transport extends SubsystemBase {
   /**
    * Sets speed to the motors of the mechanism
    * 
-   * @param speed - sets the speed of the motors on scale of -1 to 1
+   * @param speed - Sets the speed of the motors on scale of -1 to 1
    */
-  public void moveBelts(double speed) {
+  public void setBeltsSpeed(double speed) {
     m_leftMotor.set(speed);
     m_rightMotor.set(speed);
   }
 
   /**
-   * @return if the Note ready to be shot
+   * @return If the Note ready to be shot
    */
-  public boolean isNoteReady() {
+  public boolean isNoteVisible() {
     return m_shooterSwitch.get();
   }
 
