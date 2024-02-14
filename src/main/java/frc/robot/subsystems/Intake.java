@@ -10,16 +10,12 @@ import frc.robot.Constants.IntakeConstants;
  */
 public class Intake extends SubsystemBase {
     private CANSparkMax m_motor;
-
-    private Transport m_transport;
-
+    
   /**
    * Constructs the Intake subsystem.
    */
   public Intake(Transport transport) {
     m_motor = new CANSparkMax(IntakeConstants.kMotor, MotorType.kBrushless);
-
-    m_transport = transport;
   }
 
   /**
@@ -29,12 +25,5 @@ public class Intake extends SubsystemBase {
    */
   public void setMotorSpeed(double speed) {
     m_motor.set(speed);
-  }
-
-  /**
-   * @return If the intake has acquired the Note.
-   */
-  public boolean isNoteAcquired() {
-    return m_transport.isNoteVisible();
   }
 }
