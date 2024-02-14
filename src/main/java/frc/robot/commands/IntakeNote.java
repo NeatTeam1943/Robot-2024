@@ -1,40 +1,49 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Transport;
 
+/**
+ * Intakes the note into the robot.
+ */
 public class IntakeNote extends Command {
   private Intake m_intake;
-  /** Creates a new IntakeNote. */
-  public IntakeNote(Intake intake) {
+
+  private Transport m_transport;
+
+  /**
+   * Creates a new IntakeNote Command.
+   * 
+   * @param intake    - An Intake subsystem instant.
+   * @param transport - A transport subsystem instant.
+   */
+  public IntakeNote(Intake intake, Transport transport) {
     m_intake = intake;
-    addRequirements(intake);
+    m_transport = transport;
+
+    addRequirements(intake, transport);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
+    m_transport.setBeltsSpeed(TransportConstants.kBeltsSpeed);
+  }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_intake.setMotorSpeed(0);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_intake.isNoteAcquired();
+    return m_transport.isNoteVisible();
   }
 }
