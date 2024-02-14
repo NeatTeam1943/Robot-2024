@@ -11,8 +11,7 @@ import frc.robot.Constants.TransportConstants;
  * The Transport subsystem controls the robot's note transport mechanism.
  */
 public class Transport extends SubsystemBase {
-  private CANSparkMax m_leftMotor;
-  private CANSparkMax m_rightMotor;
+  private CANSparkMax m_motor;
 
   private DigitalInput m_photoSwitch;
 
@@ -20,6 +19,8 @@ public class Transport extends SubsystemBase {
    * Constructs the Transport subsystem.
    */
   public Transport() {
+    m_motor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
+    
     m_photoSwitch = new DigitalInput(TransportConstants.kPhotoSwitch);
   }
   
@@ -29,8 +30,7 @@ public class Transport extends SubsystemBase {
    * @param speed - Sets the speed of the motor.
    */
   public void setBeltsSpeed(double speed) {
-    m_leftMotor.set(speed);
-    m_rightMotor.set(speed);
+    m_motor.set(speed);
   }
 
   /**
