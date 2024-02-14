@@ -23,7 +23,7 @@ public class IntakeNote extends Command {
     m_intake = intake;
     m_transport = transport;
 
-    addRequirements(intake);
+    addRequirements(intake, transport);
   }
 
   @Override
