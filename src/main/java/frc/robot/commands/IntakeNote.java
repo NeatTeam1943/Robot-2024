@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
+import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Transport;
 
@@ -33,6 +34,7 @@ public class IntakeNote extends Command {
   @Override
   public void execute() {
     m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
+    m_transport.setBeltsSpeed(TransportConstants.kBeltsSpeed);
   }
 
   @Override
