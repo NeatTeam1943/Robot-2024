@@ -16,7 +16,7 @@ public class IntakeNote extends Command {
   /**
    * Creates a new IntakeNote Command.
    * 
-   * @param intake - An Intake subsystem instant.
+   * @param intake    - An Intake subsystem instant.
    * @param transport - A transport subsystem instant.
    */
   public IntakeNote(Intake intake, Transport transport) {
@@ -28,11 +28,12 @@ public class IntakeNote extends Command {
 
   @Override
   public void initialize() {
-    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
   }
 
   @Override
-  public void execute() {}
+  public void execute() {
+    m_intake.setMotorSpeed(IntakeConstants.kIntakeMotorSpeed);
+  }
 
   @Override
   public void end(boolean interrupted) {
