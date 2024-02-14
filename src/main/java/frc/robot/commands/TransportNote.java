@@ -10,7 +10,7 @@ import frc.robot.subsystems.Transport;
 public class TransportNote extends Command {
   private Transport m_transport;
   private boolean m_frontOfTheNotePassedTheSwitch, m_backOfTheNotePassedTheSwitch;
-  
+
   /**
    * Creates a new TransportNote command.
    * 
@@ -26,13 +26,13 @@ public class TransportNote extends Command {
   }
 
   @Override
-  public void initialize() {
-    m_transport.setBeltsSpeed(TransportConstants.kBeltsSpeed);
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
-    if (!m_frontOfTheNotePassedTheSwitch){
+    m_transport.setBeltsSpeed(TransportConstants.kBeltsSpeed);
+
+    if (!m_frontOfTheNotePassedTheSwitch) {
       m_frontOfTheNotePassedTheSwitch = !m_transport.isNoteVisible();
     } else {
       m_backOfTheNotePassedTheSwitch = m_transport.isNoteVisible();
