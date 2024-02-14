@@ -16,9 +16,10 @@ public class Intake extends SubsystemBase {
   /**
    * Constructs the Intake subsystem.
    */
-  public Intake() {
+  public Intake(Transport transport) {
     m_motor = new CANSparkMax(IntakeConstants.kMotor, MotorType.kBrushless);
-    m_transport = new Transport();
+
+    m_transport = transport;
   }
 
   /**
@@ -36,5 +37,4 @@ public class Intake extends SubsystemBase {
   public boolean isNoteAcquired() {
     return m_transport.isNoteVisible();
   }
-
 }
