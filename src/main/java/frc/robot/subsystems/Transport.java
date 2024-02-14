@@ -14,17 +14,13 @@ public class Transport extends SubsystemBase {
   private CANSparkMax m_leftMotor;
   private CANSparkMax m_rightMotor;
 
-  private DigitalInput m_shooterSwitch;
+  private DigitalInput m_photoSwitch;
 
   /**
    * Constructs the Transport subsystem.
    */
   public Transport() {
-    m_leftMotor = new CANSparkMax(TransportConstants.kLeftMotor, MotorType.kBrushless);
-    m_rightMotor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
-    m_rightMotor.setInverted(true);
-
-    m_shooterSwitch = new DigitalInput(TransportConstants.kShooterSwitch);
+    m_photoSwitch = new DigitalInput(TransportConstants.kPhotoSwitch);
   }
   
   /**
@@ -41,7 +37,7 @@ public class Transport extends SubsystemBase {
    * @return If the Note ready to be shot.
    */
   public boolean isNoteVisible() {
-    return m_shooterSwitch.get();
+    return m_photoSwitch.get();
   }
 
   @Override
