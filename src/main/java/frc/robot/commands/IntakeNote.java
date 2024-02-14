@@ -5,15 +5,15 @@ import frc.robot.Constants.IntakeConstants;
 import frc.robot.subsystems.Intake;
 
 /**
- * Inserts Note into robot using its Intake subsystem.
+ * Intakes the note into the robot.
  */
 public class IntakeNote extends Command {
   private Intake m_intake;
 
   /**
-   * Creates a new CollectNote Command.
+   * Creates a new IntakeNote Command.
    * 
-   * @param intake - The subsystem that would be used
+   * @param intake - An Intake subsystem instant.
    */
   public IntakeNote(Intake intake) {
     m_intake = intake;
