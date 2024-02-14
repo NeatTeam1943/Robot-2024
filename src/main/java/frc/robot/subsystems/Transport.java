@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TransportConstants;
 
 /**
- * The Transfer subsystem controls the mechanism which moves the Note from the Intake to Shooter
+ * The Transport subsystem controls the robot's note transport mechanism.
  */
 public class Transport extends SubsystemBase {
   private CANSparkMax m_leftMotor;
@@ -17,7 +17,7 @@ public class Transport extends SubsystemBase {
   private DigitalInput m_shooterSwitch;
 
   /**
-   * Constructs the Transport subsystem
+   * Constructs the Transport subsystem.
    */
   public Transport() {
     m_leftMotor = new CANSparkMax(TransportConstants.kLeftMotor, MotorType.kBrushless);
@@ -28,9 +28,9 @@ public class Transport extends SubsystemBase {
   }
   
   /**
-   * Sets speed to the motors of the mechanism
+   * Sets the motor's speed.
    * 
-   * @param speed - Sets the speed of the motors on scale of -1 to 1
+   * @param speed - Sets the speed of the motor.
    */
   public void setBeltsSpeed(double speed) {
     m_leftMotor.set(speed);
@@ -38,14 +38,12 @@ public class Transport extends SubsystemBase {
   }
 
   /**
-   * @return If the Note ready to be shot
+   * @return If the Note ready to be shot.
    */
   public boolean isNoteVisible() {
     return m_shooterSwitch.get();
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 }
