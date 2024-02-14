@@ -5,18 +5,18 @@ import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Transport;
 
 /**
- * Puts Note inside the shooter using robot's Transport subsystem.
+ * Transports the note to the shooter.
  */
-public class PutNoteInsideShooter extends Command {
+public class TransportNote extends Command {
   private Transport m_transport;
   private boolean m_frontOfTheNotePassedTheSwitch, m_backOfTheNotePassedTheSwitch;
   
   /**
-   * Creates a new PutNoteInsideShooter.
+   * Creates a new TransportNote command.
    * 
-   * @param transport - the Transport subsystem which will be used.
+   * @param transport - A Transport subsystem instant.
    */
-  public PutNoteInsideShooter(Transport transport) {
+  public TransportNote(Transport transport) {
     m_transport = transport;
 
     m_frontOfTheNotePassedTheSwitch = false;
