@@ -1,30 +1,32 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.Rev2mDistanceSensor;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.PitcherConstants;
 
+
 /**
- * The Pitcher subsystem controls the Robot's pitch-angle tuning-mechanism.
+ * The Pitcher subsystem controls the shooter's pitch angle.
  */
 public class Pitcher extends SubsystemBase {
-  private VictorSP m_leftAngleMotor;
-  private VictorSP m_rightAngleMotor;
+  private VictorSPX m_leftAngleMotor;
+  private VictorSPX m_rightAngleMotor;
 
-  private AnalogPotentiometer m_potentiometer;
+  private Rev2mDistanceSensor m_tof;
 
-
-  /** Creates a new Pitcher. */
+  /**
+   * Constructs the Pitcher subsystem.
+   */
   public Pitcher() {
-    m_leftAngleMotor = new VictorSP(PitcherConstants.kLeftAngleMotor);
-    m_rightAngleMotor = new VictorSP(PitcherConstants.kRightAngleMotor);
+    m_leftAngleMotor = new VictorSPX(PitcherConstants.kLeftAngleMotor);
+    m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
 
-    m_potentiometer = new AnalogPotentiometer(PitcherConstants.kPotentiometerPort, PitcherConstants.kPotentiometerRange, PitcherConstants.kPotentiometerOffset);
+    m_tof = new Rev2mDistanceSensor(Port.kOnboard);
   }
 
   /**
@@ -33,15 +35,15 @@ public class Pitcher extends SubsystemBase {
    * @param speed - The speed at which the pitch motors move.
    */
   public void setAngleMotorsSpeed(double speed) {
-    m_leftAngleMotor.set(speed);
-    m_rightAngleMotor.set(speed);
+    m_leftAngleMotor.set(VictorSPXControlMode.PercentOutput, speed);
+    m_rightAngleMotor.set(VictorSPXControlMode.PercentOutput, speed);
   }
 
   /**
    * @return The pitch angle of the mechanism.
    */
   public double getAngle() {
-    return m_potentiometer.get();
+    return 0.0; 
   }
 
   /**
