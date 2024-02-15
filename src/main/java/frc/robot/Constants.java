@@ -7,6 +7,7 @@ public final class Constants {
 
   public static class MeasurementConstants {
     public static final double kInchesToMeters = 0.0254;
+    public static final double kMilimetersToCentimeters = 0.10;
   }
 
   public static class DriveTrainConstants {
@@ -24,7 +25,7 @@ public final class Constants {
   public static class IntakeConstants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
-    
+
     public static final double kIntakeMotorSpeed = 0.5;
   }
 
@@ -40,7 +41,7 @@ public final class Constants {
   public static class ShooterConstants {
     public static final int kLeftShooterMotor = 8;
     public static final int kRightShooterMotor = 9;
-    
+
     public static final double kP = 0.5; // TODO Add real values
     public static final double kI = 0;
     public static final double kD = 0;
@@ -52,12 +53,24 @@ public final class Constants {
   public static class PitcherConstants {
     public static final int kLeftAngleMotor = 10;
     public static final int kRightAngleMotor = 11;
-    
+
     public static final double kMinAngle = 69; // TODO: Add angle
     public static final double kMaxAngle = 420; // TODO: Add angle
-    public static final double kPotentiometerRange = 270;
-    public static final double kPotentiometerOffset = 4269;
 
-    public static final int kPotentiometerPort = 0;
+    /**
+     * kTofToBase - The distance between the TOF sensor to the base of the robot (CM).
+     */
+    public static final double kTofToBase = 28.5;
+
+    /**
+     * kLinearToHinge - The distance between the hinge of the shooter to the bottom of the linear
+     * motor (CM).
+     */
+    public static final double kLinearToHinge = 38;
+
+    /**
+     * kHingeToEndpoint - The distance between the hinge of the shooter to the tip of the linear motor (CM).
+     */
+    public static final double kHingeToEndpoint = 51.5;
   }
 }

@@ -26,9 +26,9 @@ public class ReachPitch extends Command {
    */
   public ReachPitch(Pitcher pitcher, double desiredPitch) {
     m_pitcher = pitcher;
+    m_desiredPitch = desiredPitch;
 
     m_controller = new BangBangController();
-    m_desiredPitch = desiredPitch;
 
     addRequirements(m_pitcher);
   }
@@ -41,7 +41,7 @@ public class ReachPitch extends Command {
    */
   @Override
   public void execute() {
-    m_pitcher.setAngleMotorsSpeed(m_controller.calculate(m_pitcher.getAngle(), m_desiredPitch));
+    m_pitcher.setAngleMotorsSpeed(m_controller.calculate(m_pitcher.getAngleDegrees(), m_desiredPitch));
   }
 
   @Override
@@ -52,10 +52,6 @@ public class ReachPitch extends Command {
    */
   @Override
   public boolean isFinished() {
-    if (!m_pitcher.isInRange(m_desiredPitch)) {
-      System.err.println("THAT PITCH AIN'T YOUR BITCH");
-    }
-    
     return m_controller.atSetpoint() || !m_pitcher.isInRange(m_desiredPitch);
   }
 }
