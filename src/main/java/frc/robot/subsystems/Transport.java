@@ -19,7 +19,7 @@ public class Transport extends SubsystemBase {
    * Constructs the Transport subsystem.
    */
   public Transport() {
-    m_motor = new CANSparkMax(TransportConstants.kRightMotor, MotorType.kBrushless);
+    m_motor = new CANSparkMax(TransportConstants.kMotor, MotorType.kBrushless);
     
     m_photoSwitch = new DigitalInput(TransportConstants.kPhotoSwitch);
   }
