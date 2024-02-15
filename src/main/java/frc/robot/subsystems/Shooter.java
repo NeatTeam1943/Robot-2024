@@ -54,7 +54,12 @@ public class Shooter extends SubsystemBase {
    * @return The RPM of the right shooter motor.
    */
   public double getRightRPM() {
-    return m_rightShooterMotor.getVelocity().getValueAsDouble() * ShooterConstants.kVelocityToRPM;
+  public double getLeftRate() {
+    return m_leftShooterMotor.getVelocity().getValueAsDouble();
+  }
+
+  public double getRightRate() {
+    return m_leftShooterMotor.getVelocity().getValueAsDouble();
   }
 
     /**
