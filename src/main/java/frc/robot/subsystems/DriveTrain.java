@@ -33,8 +33,8 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-    m_rightFollower.setInverted(true);
-    m_leftFollower.setInverted(false);
+    m_rightMaster.setInverted(true);
+    m_leftMaster.setInverted(false);
 
     m_leftMaster.setControl(new Follower(m_leftFollower.getDeviceID(), false));
     m_rightMaster.setControl(new Follower(m_rightFollower.getDeviceID(), false));
