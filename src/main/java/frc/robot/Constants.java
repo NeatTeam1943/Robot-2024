@@ -41,6 +41,8 @@ public final class Constants {
     public static final int kLeftShooterMotor = 8;
     public static final int kRightShooterMotor = 9;
 
+    public static final int kVelocityToRPM = 60;
+    
     public static final double kP = 0.5; // TODO Add real values
     public static final double kI = 0;
     public static final double kD = 0;
