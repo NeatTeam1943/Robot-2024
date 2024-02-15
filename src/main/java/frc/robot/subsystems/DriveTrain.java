@@ -14,7 +14,7 @@ import frc.robot.Constants.DriveTrainConstants;
  */
 public class DriveTrain extends SubsystemBase {
   /**
-   * masters are rear motors and followers are front motors.
+   * Masters are rear motors and Followers are front motors.
    */
   private TalonFX m_leftFollower;
   private TalonFX m_leftMaster;
