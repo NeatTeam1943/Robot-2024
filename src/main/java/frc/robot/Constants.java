@@ -30,8 +30,7 @@ public final class Constants {
   }
 
   public static class TransportConstants {
-    public static final int kLeftMotor = 6;
-    public static final int kRightMotor = 7;
+    public static final int kMotor = 6;
     
     public static final int kPhotoSwitch = 1;
 
