@@ -16,9 +16,7 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
-    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
-    
-    m_rightShooterMotor.setInverted(true);
+    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor); 
   }
 
   /**
@@ -28,7 +26,7 @@ public class Shooter extends SubsystemBase {
    */
   public void setShooterMotorsSpeed(double speed) {
     m_leftShooterMotor.set(speed);
-    m_rightShooterMotor.set(-speed);
+    m_rightShooterMotor.set(speed);
   }
 
   /**
