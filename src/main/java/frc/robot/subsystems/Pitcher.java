@@ -4,11 +4,12 @@ import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
+import com.revrobotics.Rev2mDistanceSensor.Unit;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.PitcherConstants;
-
 
 /**
  * The Pitcher subsystem controls the shooter's pitch angle.
@@ -27,6 +28,34 @@ public class Pitcher extends SubsystemBase {
     m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
 
     m_tof = new Rev2mDistanceSensor(Port.kOnboard);
+
+    setupTof();
+  }
+
+  /**
+   * Setups the TOF.
+   */
+  private void setupTof() {
+    m_tof.setRangeProfile(RangeProfile.kHighAccuracy);
+    m_tof.setAutomaticMode(true);
+    m_tof.setDistanceUnits(Unit.kMillimeters);
+  }
+
+  /**
+   * @return The distance from the TOF in CM.
+   */
+  private double getTofDistanceCM() {
+    return m_tof.getRange() * MeasurementConstants.kMilimetersToCentimeters;
+  }
+
+  /**
+   * @param a - A side in a tringle.
+   * @param b - A side in a tringle.
+   * @param c - A side in a tringle.
+   * @return - The angle between a & b.
+   */
+  public double calculateLawOfCosinesDegrees(double a, double b, double c) {
+    return Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2.0 * a * b)));
   }
 
   /**
@@ -42,8 +71,13 @@ public class Pitcher extends SubsystemBase {
   /**
    * @return The pitch angle of the mechanism.
    */
-  public double getAngle() {
-    return 0.0; 
+  public double getAngleDegrees() {
+    double tofDistanceCM = getTofDistanceCM();
+
+    return calculateLawOfCosinesDegrees(
+        PitcherConstants.kLinearToHinge,
+        PitcherConstants.kHingeToEndpoint,
+        PitcherConstants.kTofToBase + tofDistanceCM);
   }
 
   /**
