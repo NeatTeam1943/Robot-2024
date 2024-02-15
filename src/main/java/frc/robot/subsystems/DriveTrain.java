@@ -14,7 +14,7 @@ import frc.robot.Constants.DriveTrainConstants;
  */
 public class DriveTrain extends SubsystemBase {
   /**
-   * masters are rear motors and followers are front motors.
+   * Masters are rear motors and Followers are front motors.
    */
   private TalonFX m_leftFollower;
   private TalonFX m_leftMaster;
@@ -33,8 +33,8 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-    m_rightFollower.setInverted(true);
-    m_leftFollower.setInverted(false);
+    m_rightMaster.setInverted(true);
+    m_leftMaster.setInverted(false);
 
     m_leftMaster.setControl(new Follower(m_leftFollower.getDeviceID(), false));
     m_rightMaster.setControl(new Follower(m_rightFollower.getDeviceID(), false));
@@ -58,7 +58,7 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getRightX());
+    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
   }
 
   /**

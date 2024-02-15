@@ -16,9 +16,7 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
-    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
-    
-    m_rightShooterMotor.setInverted(true);
+    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor); 
   }
 
   /**
@@ -49,14 +47,14 @@ public class Shooter extends SubsystemBase {
    * @return The RPM of the left shooter motor.
    */
   public double getLeftRPM() {
-    return m_leftShooterMotor.getVelocity().getValueAsDouble() * 60;
+    return m_leftShooterMotor.getVelocity().getValueAsDouble() * ShooterConstants.kVelocityToRPM;
   }
 
   /**
    * @return The RPM of the right shooter motor.
    */
   public double getRightRPM() {
-    return m_rightShooterMotor.getVelocity().getValueAsDouble() * 60;
+    return m_rightShooterMotor.getVelocity().getValueAsDouble() * ShooterConstants.kVelocityToRPM;
   }
 
     /**
