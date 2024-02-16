@@ -31,10 +31,11 @@ shooter_angle_publisher = shooter_angle.publish()
 deltaX_publisher = deltaX.publish()
 
 INST.startClient4(CLIENT)
-INST.setServer(SERVER) # where TEAM=190, 294, etc, or use inst.setServer("hostname") or similar
-INST.startDSClient() # recommended if running on DS computer; this gets the robot IP from the DS
+INST.setServer(
+    SERVER
+)
+INST.startDSClient()
 
-# Main loop
 while True:
     # Get the data(Change to values gotten by the RealSense Camera)
     screenX = 0.0
