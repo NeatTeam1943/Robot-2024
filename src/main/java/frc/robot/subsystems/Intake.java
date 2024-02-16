@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
   /**
    * Sets the speed of the motors for initiating the driving mechanism.
    * 
-   * @param speed - Rotation speed of the motor on the scale of -1 to 1. 
+   * @param speed - Rotation speed of the motor.
    */
   public void setMotorSpeed(double speed) {
     m_motor.set(speed);
