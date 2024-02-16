@@ -51,7 +51,6 @@ public abstract class SetShooterRPMBase extends Command {
 
   @Override
   public boolean isFinished() {
-    // Abstract commands don't finish by default.
     return false;
   }
 }
