@@ -26,17 +26,18 @@ public class NetworkTables extends SubsystemBase {
   private DoubleTopic m_imuRoll;
   private DoubleTopic m_imuYaw;
 
+  private DoubleTopic m_optimalShooterVelocity;
+  private DoubleTopic m_optimalShooterAngle;
+  private DoubleTopic m_deltaX;
+
   // Publishers
-  private DoublePublisher m_screenXPublisher;
-  private DoublePublisher m_screenYPublisher;
-
-  private DoublePublisher m_targetPitchPublisher;
-  private DoublePublisher m_targetRollPublisher;
-  private DoublePublisher m_targetYawPublisher;
-
   private DoublePublisher m_imuPitchPublisher;
   private DoublePublisher m_imuRollPublisher;
   private DoublePublisher m_imuYawPublisher;
+
+  private DoublePublisher m_optimalShooterVelocitPublisher;
+  private DoublePublisher m_optimalShooterAnglePublisher;
+  private DoublePublisher m_deltaXPublisher;
   
   // Subscribers
   private DoubleSubscriber m_screenXSubscriber;
@@ -49,6 +50,10 @@ public class NetworkTables extends SubsystemBase {
   private DoubleSubscriber m_imuPitchSubscriber;
   private DoubleSubscriber m_imuRollSubscriber;
   private DoubleSubscriber m_imuYawSubscriber;
+
+  private DoubleSubscriber m_optimalShooterVelocitySubscriber;
+  private DoubleSubscriber m_optimalShooterAngleSubscriber;
+  private DoubleSubscriber m_deltaXPSubscruber;
 
   /*
    * Creates a new NetworkTables.
@@ -68,17 +73,18 @@ public class NetworkTables extends SubsystemBase {
     m_imuRoll = m_table.getDoubleTopic("IMU Roll");
     m_imuYaw = m_table.getDoubleTopic("IMU Yaw");
 
+    m_optimalShooterVelocity = m_table.getDoubleTopic("Optimal Shooter Velocity");
+    m_optimalShooterAngle = m_table.getDoubleTopic("Optimal Shooter Angle");
+    m_deltaX = m_table.getDoubleTopic("Delta X");
+
     // Publishers
-    m_screenXPublisher = m_screenX.publish();
-    m_screenYPublisher = m_screenY.publish();
-
-    m_targetPitchPublisher = m_targetPitch.publish();
-    m_targetRollPublisher = m_targetRoll.publish();
-    m_targetYawPublisher = m_targetYaw.publish();
-
     m_imuPitchPublisher = m_imuPitch.publish();
     m_imuRollPublisher = m_imuRoll.publish();
     m_imuYawPublisher = m_imuYaw.publish();
+
+    m_optimalShooterVelocitPublisher = m_optimalShooterVelocity.publish();
+    m_optimalShooterAnglePublisher = m_optimalShooterAngle.publish();
+    m_deltaXPublisher = m_deltaX.publish();
 
     // Subscribers
     m_screenXSubscriber = m_screenX.subscribe(0);
@@ -91,6 +97,10 @@ public class NetworkTables extends SubsystemBase {
     m_imuPitchSubscriber = m_imuPitch.subscribe(0);
     m_imuRollSubscriber = m_imuRoll.subscribe(0);
     m_imuYawSubscriber = m_imuYaw.subscribe(0);
+
+    m_optimalShooterVelocitySubscriber = m_optimalShooterVelocity.subscribe(0);
+    m_optimalShooterAngleSubscriber = m_optimalShooterAngle.subscribe(0);
+    m_deltaXPSubscruber = m_deltaX.subscribe(0);
   }
 
   /*
@@ -99,46 +109,6 @@ public class NetworkTables extends SubsystemBase {
    */
   public NetworkTable getTable() {
     return m_table;
-  }
-
-  /*
-   * @param x - A "X" value of a position on the screen(in pixels)
-   * Uses the publish() method to set the screenX coordinate to a particular X value we provide in the method.
-   */
-  public void setX(double x) {
-    m_screenX.publish().set(x);
-  }
-  
-  /*
-   * @param y - A "Y" value of a position on the screen(in pixels)
-   * Uses the publish() method to set the screenY coordinate to a particular X value we provide in the method.
-   */
-  public void setY(double y) {
-    m_screenYPublisher.set(y);
-  }
-
-  /*
-   * @param pitch - The target's pitch value from the camera view
-   * Sets the NetworkTable value of the target's pitch in the camera's view.
-   */
-  public void setTargetPitch(double pitch) {
-    m_targetPitchPublisher.set(pitch);
-  }
-
-  /*
-   * @param pitch - The target's roll value from the camera view
-   * Sets the NetworkTable value of the target's roll in the camera's view.
-   */
-  public void setTargetRoll(double roll) {
-    m_targetRollPublisher.set(roll);
-  }
-
-  /*
-   * @param pitch - The target's yaw value from the camera view
-   * Sets the NetworkTable value of the target's yaw in the camera's view.
-   */
-  public void setTargetYaw(double yaw) {
-    m_targetYawPublisher.set(yaw);
   }
 
   /*
@@ -163,6 +133,30 @@ public class NetworkTables extends SubsystemBase {
    */
   public void setImuYaw(double yaw) {
     m_imuYawPublisher.set(yaw);
+  }
+
+  /*
+   * @param velocity - The optimal velocity of the shooter
+   * Sets the NetworkTable value that represents the optimal velocity of the shooter
+   */
+  public void setOptimalShooterVelocity(double velocity) {
+    m_optimalShooterVelocitPublisher.set(velocity);
+  }
+
+  /*
+   * @param angle - The optimal angle of the shooter
+   * Sets the NetworkTable value that represents the optimal angle of the shooter
+   */
+  public void setOptimalShooterAngle(double angle) {
+    m_optimalShooterAnglePublisher.set(angle);
+  }
+
+  /*
+   * @param deltaX - The delta X value of the target
+   * Sets the NetworkTable value that represents the delta Y value of the target
+   */
+  public void setDeltaX(double deltaX) {
+    m_deltaXPublisher.set(deltaX);
   }
 
   /*
@@ -227,6 +221,30 @@ public class NetworkTables extends SubsystemBase {
    */
   public double getImuYaw() {
     return m_imuYawSubscriber.get();
+  }
+
+  /*
+   * @return The optimal velocity of the shooter that's registered in the NetworkTables
+   * Provides the latest optimal velocity of the shooter that's in the NetworkTable
+   */
+  public double getOptimalShooterVelocity() {
+    return m_optimalShooterVelocitySubscriber.get();
+  }
+
+  /*
+   * @return The optimal angle of the shooter that's registered in the NetworkTables
+   * Provides the latest optimal angle of the shooter that's in the NetworkTable
+   */
+  public double getOptimalShooterAngle() {
+    return m_optimalShooterAngleSubscriber.get();
+  }
+
+  /*
+   * @return The delta X value of the target that's registered in the NetworkTables
+   * Provides the latest delta Y value of the target that's in the NetworkTable
+   */
+  public double getDeltaX() {
+    return m_deltaXPSubscruber.get();
   }
 
   @Override
