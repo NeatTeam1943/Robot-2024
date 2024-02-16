@@ -31,9 +31,7 @@ shooter_angle_publisher = shooter_angle.publish()
 deltaX_publisher = deltaX.publish()
 
 INST.startClient4(CLIENT)
-INST.setServer(
-    SERVER
-)
+INST.setServer(SERVER)
 INST.startDSClient()
 
 while True:
