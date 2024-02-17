@@ -16,6 +16,12 @@ public final class Constants {
     public static final int kRightFront = 3;
     public static final int kRightRear = 4;
 
+    public static final boolean kIntakeHeadingLeftInverted = false;
+    public static final boolean kIntakeHeadingRightInverted = true;
+
+    public static final boolean kShooterHeadingLeftInverted = true;
+    public static final boolean kShooterHeadingRightInverted = false;
+
     public static final double kGearRatio = 10.71 / 1;
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
@@ -31,7 +37,7 @@ public final class Constants {
 
   public static class TransportConstants {
     public static final int kMotor = 6;
-    
+
     public static final int kPhotoSwitch = 1;
 
     public static final double kBeltsSpeed = 0.5;
@@ -40,10 +46,9 @@ public final class Constants {
   public static class ShooterConstants {
     public static final int kLeftShooterMotor = 8;
     public static final int kRightShooterMotor = 9;
+    public static final int kAngularVelocityToRPM = 60;
 
     public static final int kDefaultRPM = -0; 
-
-    public static final int kAngularVelocityToRPM = 60;
     
     public static final double kP = 0.5; // TODO Add real values
     public static final double kI = 0;
@@ -64,18 +69,21 @@ public final class Constants {
     public static final double kMaxAngle = 420; // TODO: Add angle
 
     /**
-     * kTofToBase - The distance between the TOF sensor to the base of the robot (CM).
+     * kTofToBase - The distance between the TOF sensor to the base of the robot
+     * (CM).
      */
     public static final double kTofToBase = 28.5;
 
     /**
-     * kLinearToHinge - The distance between the hinge of the shooter to the bottom of the linear
+     * kLinearToHinge - The distance between the hinge of the shooter to the bottom
+     * of the linear
      * motor (CM).
      */
     public static final double kLinearToHinge = 38;
 
     /**
-     * kHingeToEndpoint - The distance between the hinge of the shooter to the tip of the linear motor (CM).
+     * kHingeToEndpoint - The distance between the hinge of the shooter to the tip
+     * of the linear motor (CM).
      */
     public static final double kHingeToEndpoint = 51.5;
   }
