@@ -44,6 +44,8 @@ public class DriveTrain extends SubsystemBase {
 
     m_currentHeading = RobotHeading.INTAKE;
 
+    setMotorInversions();
+    
     m_drive = new DifferentialDrive(m_left, m_right);
   }
 
