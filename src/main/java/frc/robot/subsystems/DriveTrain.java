@@ -47,20 +47,36 @@ public class DriveTrain extends SubsystemBase {
     m_drive = new DifferentialDrive(m_left, m_right);
   }
 
+  /**
+   * Sets the current robot heading.
+   *
+   * @param heading The new robot heading.
+   */
   public void setRobotHeading(RobotHeading heading) {
     m_currentHeading = heading;
   }
 
+  /**
+   * Gets the current robot heading.
+   *
+   * @return The current robot heading.
+   */
   public RobotHeading getRobotHeading() {
     return m_currentHeading;
   }
 
+  /**
+   * Toggles the robot heading between INTAKE and SHOOTER.
+   */
   public void toggleHeading() {
     m_currentHeading = (m_currentHeading == RobotHeading.INTAKE)
         ? RobotHeading.SHOOTER
         : RobotHeading.INTAKE;
   }
 
+  /**
+   * Sets the motor inversions based on the current robot heading.
+   */
   public void setMotorInversions() {
     m_leftMaster.setInverted(m_currentHeading.shouldInvertLeftMotors());
     m_rightMaster.setInverted(m_currentHeading.shouldInvertRightMotors());
