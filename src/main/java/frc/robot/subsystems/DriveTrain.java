@@ -1,13 +1,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
+import frc.robot.general.RobotHeading;
 
 /**
  * The DriveTrain subsystem controls the robot's drive system.
@@ -20,10 +21,13 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX m_leftMaster;
   private TalonFX m_rightFollower;
   private TalonFX m_rightMaster;
+
   private MotorControllerGroup m_left;
   private MotorControllerGroup m_right;
 
   private DifferentialDrive m_drive;
+
+  private RobotHeading m_currentHeading;
 
   /**
    * Constructs the DriveTrain subsystem with motor controllers and sets up
@@ -38,8 +42,28 @@ public class DriveTrain extends SubsystemBase {
     m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
+    m_currentHeading = RobotHeading.INTAKE;
+
     m_drive = new DifferentialDrive(m_left, m_right);
   }
+
+  public void setRobotHeading(RobotHeading heading) {
+    m_currentHeading = heading;
+  }
+
+  public RobotHeading getRobotHeading() {
+    return m_currentHeading;
+  }
+
+  public void toggleHeading() {
+    m_currentHeading = (m_currentHeading == RobotHeading.INTAKE)
+        ? RobotHeading.SHOOTER
+        : RobotHeading.INTAKE;
+  }
+
+  public void setMotorInversions() {
+    m_leftMaster.setInverted(m_currentHeading.shouldInvertLeftMotors());
+    m_rightMaster.setInverted(m_currentHeading.shouldInvertRightMotors());
   }
 
   /**
@@ -64,7 +88,7 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Drives the robot using tank drive control.
    *
-   * @param left - The speed for the left side of the robot.
+   * @param left  - The speed for the left side of the robot.
    * @param right - The speed for the right side of the robot.
    */
   public void driveTank(double left, double right) {
