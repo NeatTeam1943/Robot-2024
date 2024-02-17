@@ -10,6 +10,14 @@ public final class Constants {
     public static final double kMilimetersToCentimeters = 0.10;
   }
 
+  public static class IntakeModeConstants {
+    public static final int kDefaultPitcherAngle = -0;
+  }
+
+  public static class ShooterModeConstants {
+    public static final int kDefaultPitcherAngle = -0;
+  }
+
   public static class DriveTrainConstants {
     public static final int kLeftFront = 1;
     public static final int kLeftRear = 2;
