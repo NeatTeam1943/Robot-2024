@@ -20,6 +20,8 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX m_leftMaster;
   private TalonFX m_rightFollower;
   private TalonFX m_rightMaster;
+  private MotorControllerGroup m_left;
+  private MotorControllerGroup m_right;
 
   private DifferentialDrive m_drive;
 
@@ -33,13 +35,11 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-    m_rightMaster.setInverted(true);
-    m_leftMaster.setInverted(false);
+    m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
+    m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
-    m_leftMaster.setControl(new Follower(m_leftFollower.getDeviceID(), false));
-    m_rightMaster.setControl(new Follower(m_rightFollower.getDeviceID(), false));
-
-    m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
+    m_drive = new DifferentialDrive(m_left, m_right);
+  }
   }
 
   /**
