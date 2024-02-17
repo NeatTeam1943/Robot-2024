@@ -8,8 +8,8 @@ import frc.robot.subsystems.Pitcher;
 import frc.robot.subsystems.Shooter;
 
 /**
- * - Sets the shooter's pitch with regard to vision data.
- * - Sets the shooter velocity with regard to vision data.
+ * - Sets the shooter's pitch to a default value.
+ * - Sets the shooter velocity to a default value until april tag is visible.
  */
 public class InitializeShooterMode extends ParallelCommandGroup {
   public InitializeShooterMode(Pitcher pitcher, Shooter shooter) {
