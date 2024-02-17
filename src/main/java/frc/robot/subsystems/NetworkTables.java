@@ -229,6 +229,14 @@ public class NetworkTables extends SubsystemBase {
     return m_imuYawSubscriber.get();
   }
 
+  public double getDesiredRPM(){
+    return -0;
+  }
+
+  public double getDesiredAngle(){
+    return -0;
+  }
+
   @Override
   public void periodic() {}
 }
