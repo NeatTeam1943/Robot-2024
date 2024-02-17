@@ -40,6 +40,7 @@ public class IntakeNote extends Command {
   @Override
   public void end(boolean interrupted) {
     m_intake.setMotorSpeed(0);
+    m_transport.setBeltsSpeed(0);
   }
 
   @Override

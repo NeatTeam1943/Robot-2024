@@ -25,6 +25,13 @@ public class RobotOdometry extends SubsystemBase {
 
   }
 
+  public boolean isSpeakerVisible(){
+    return false; // TODO Add limelight support so we can add functions's content.
+  }
+
+  public boolean isAMPVisible(){
+    return false; // TODO Add limelight support so we can add functions's content.
+  }
   /*
    * Gets position of robot in a 2d field.
    */
