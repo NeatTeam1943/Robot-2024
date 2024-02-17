@@ -33,7 +33,7 @@ public class Pitcher extends SubsystemBase {
   }
 
   /**
-   * Setups the TOF.
+   * Setups the TOF sensor.
    */
   private void setupTof() {
     m_tof.setRangeProfile(RangeProfile.kHighAccuracy);
