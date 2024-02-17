@@ -14,6 +14,6 @@ public class IsInMode extends Command {
 
   @Override
   public boolean isFinished() {
-    return m_robotCurrentHeading.sameAs(m_heading);
+    return !m_robotCurrentHeading.sameAs(m_heading);
   }
 }
