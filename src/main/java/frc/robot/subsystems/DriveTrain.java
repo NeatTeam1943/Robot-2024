@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
-import frc.robot.general.RobotHeading;
+import frc.robot.general.RobotHeadingUtils;
 
 /**
  * The DriveTrain subsystem controls the robot's drive system.
@@ -25,9 +25,9 @@ public class DriveTrain extends SubsystemBase {
   private MotorControllerGroup m_left;
   private MotorControllerGroup m_right;
 
-  private DifferentialDrive m_drive;
+  private RobotHeadingUtils m_currentHeading;
 
-  private RobotHeading m_currentHeading;
+  private DifferentialDrive m_drive;
 
   /**
    * Constructs the DriveTrain subsystem with motor controllers and sets up
@@ -42,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
     m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
-    m_currentHeading = RobotHeading.INTAKE;
+    m_currentHeading = RobotHeadingUtils.getInstance();
 
     setMotorInversions();
     
@@ -50,38 +50,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   /**
-   * Sets the current robot heading.
-   *
-   * @param heading The new robot heading.
-   */
-  public void setRobotHeading(RobotHeading heading) {
-    m_currentHeading = heading;
-  }
-
-  /**
-   * Gets the current robot heading.
-   *
-   * @return The current robot heading.
-   */
-  public RobotHeading getRobotHeading() {
-    return m_currentHeading;
-  }
-
-  /**
-   * Toggles the robot heading between INTAKE and SHOOTER.
-   */
-  public void toggleHeading() {
-    m_currentHeading = (m_currentHeading == RobotHeading.INTAKE)
-        ? RobotHeading.SHOOTER
-        : RobotHeading.INTAKE;
-  }
-
-  /**
    * Sets the motor inversions based on the current robot heading.
    */
   public void setMotorInversions() {
-    m_leftMaster.setInverted(m_currentHeading.shouldInvertLeftMotors());
-    m_rightMaster.setInverted(m_currentHeading.shouldInvertRightMotors());
+    m_leftMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
+    m_rightMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
   }
 
   /**
