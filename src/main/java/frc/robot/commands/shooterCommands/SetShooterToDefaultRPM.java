@@ -18,6 +18,6 @@ public class SetShooterToDefaultRPM extends SetShooterRPM {
 
   @Override
   public boolean isFinished() {
-    return m_odometry.isSpeakerVisible() || m_odometry.isSpeakerVisible();
+    return m_odometry.isSpeakerVisible() || m_odometry.isAMPVisible();
   }
 }
