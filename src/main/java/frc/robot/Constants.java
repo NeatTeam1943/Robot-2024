@@ -8,6 +8,7 @@ public final class Constants {
   public static class MeasurementConstants {
     public static final double kInchesToMeters = 0.0254;
     public static final double kMilimetersToCentimeters = 0.10;
+    public static final double kDegreesPerSecToRadsPerSec = 0.017453;
   }
 
   public static class IntakeModeConstants {
