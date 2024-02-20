@@ -43,7 +43,7 @@ public final class Constants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
 
-    public static final double kIntakeMotorSpeed = 0.5;
+    public static final double kIntakeMotorSpeed = -0.8;
   }
 
   public static class TransportConstants {
