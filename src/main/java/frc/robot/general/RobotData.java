@@ -4,6 +4,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants.MeasurementConstants;
+import frc.robot.Constants.RobotDataConstants;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
 
@@ -18,7 +19,7 @@ public class RobotData {
    * Constructs RobotOdometry subsystem.
    */
   private RobotData() {
-    m_imu = new Pigeon2(0);
+    m_imu = new Pigeon2(RobotDataConstants.kPigeon);
   }
 
   /*
@@ -51,7 +52,7 @@ public class RobotData {
    * Sets position of robot in a 3d field.
    */
   public void setPosition3D(Pose3d position) {
-    // Implement logic to set position
+    // Implement logic to set   
   }
 
   /*
