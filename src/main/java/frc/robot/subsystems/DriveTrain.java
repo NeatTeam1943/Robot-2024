@@ -2,12 +2,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
+import frc.robot.general.Odometry;
+import frc.robot.general.RobotData;
 import frc.robot.general.RobotHeadingUtils;
 
 /**
@@ -27,6 +32,8 @@ public class DriveTrain extends SubsystemBase {
 
   private RobotHeadingUtils m_currentHeading;
 
+  private Odometry m_odometry;
+
   private DifferentialDrive m_drive;
 
   /**
@@ -45,8 +52,26 @@ public class DriveTrain extends SubsystemBase {
     m_currentHeading = RobotHeadingUtils.getInstance();
 
     setMotorInversions();
-    
+
     m_drive = new DifferentialDrive(m_left, m_right);
+
+    m_odometry = new Odometry(this, RobotData.getInstance());
+
+    AutoBuilder.configureRamsete(
+        m_odometry::getCurrentPosMeters,
+        m_odometry::resetPP,
+        m_odometry::getCurrentChassisSpeeds,
+        chassisSpeeds -> driveArcade(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond),
+        new ReplanningConfig(),
+        m_odometry::isRedAlliance,
+        this);
+  }
+
+  @Override
+  public void periodic() {
+    m_odometry.update();
+
+    m_odometry.updateRobotPoseOnField();
   }
 
   /**
