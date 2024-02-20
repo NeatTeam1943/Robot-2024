@@ -34,6 +34,8 @@ public final class Constants {
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+
+    public static final double kTrackWidthMeters = -0;
   }
 
   public static class IntakeConstants {
