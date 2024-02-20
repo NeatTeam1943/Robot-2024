@@ -179,6 +179,18 @@ public class DriveTrain extends SubsystemBase {
     m_rightMaster.setPosition(position);
   }
 
+  public double getLeftMasterVelocity() {
+    return m_leftMaster.getVelocity().getValueAsDouble();
+  }
+
+  public double getRightMasterVelocity() {
+    return m_rightMaster.getVelocity().getValueAsDouble();
+  }
+
+  public double getVelocityX() {
+    return (getLeftMasterVelocity() + getRightMasterVelocity()) / 2;
+  }
+
   /**
    * Resets the encoders of all motors to zero.
    */
