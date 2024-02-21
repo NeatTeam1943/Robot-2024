@@ -1,4 +1,4 @@
-package frc.robot.commands.driveTrainCommands;
+package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
@@ -91,7 +91,7 @@ public abstract class TurnToAngleBase extends Command {
    *         values are multiplied by the constant from getN()
    */
   private PIDController getPID(double targetAngle) {
-    final double N = getN(targetAngle);
+    final double N = getMultConstant(targetAngle);
 
     return new PIDController(DriveTrainConstants.kRotationP * N, DriveTrainConstants.kRotationI * N,
         DriveTrainConstants.kRotationD * N);
@@ -101,7 +101,7 @@ public abstract class TurnToAngleBase extends Command {
    * @param targetAngle - The PID's desired angle setpoint.
    * @return A constant value to multiply the PID's P, I, and D values by.
    */
-  private double getN(double targetAngle) {
+  private double getMultConstant(double targetAngle) {
     final double BASE_ANGLE = 90;
 
     return BASE_ANGLE / Math.abs(targetAngle);
