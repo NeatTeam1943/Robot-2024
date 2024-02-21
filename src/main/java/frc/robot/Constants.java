@@ -74,4 +74,20 @@ public final class Constants {
     public static final int kTopLimitSwitch = 0;
     public static final int kBottomLimitSwitch = 1;
   }
+
+  public static class FieldConstants {
+    public static final int kAmpATId = 5;
+    public static final int kSpeakerATFirstId = 6;
+    public static final int kSpeakerATSecondId = 7;
+    public static final int kHumanATPlayerId = 7;
+    public static final int kTrapATId = 7;
+
+    public static final double kCameraHeightMeters = 0.395;
+
+    public static final double kAmpATHeightMeters = 1.37;
+    public static final double kSpeakerATHeightMeters = -0;
+    public static final double kTrapATHeightMeters = -0;
+    public static final double kHumanPlayerATHeightMeters = -0;
+  }
+
 }
