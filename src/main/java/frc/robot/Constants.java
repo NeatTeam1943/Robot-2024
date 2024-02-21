@@ -19,10 +19,6 @@ public final class Constants {
     public static final String kLimelightName = "limelight-nt";
   }
 
-  public static class FieldConstants {
-    public static final double kAmpATHeightMeters = 1.37;
-  }
-
   public static class DriveTrainConstants {
     public static final int kLeftFront = 1;
     public static final int kLeftRear = 2;
@@ -94,5 +90,4 @@ public final class Constants {
     public static final double kLimelightPitch = 1.631;
     public static final String kLimelightName = "limelight-nt";
   }
-
 }
