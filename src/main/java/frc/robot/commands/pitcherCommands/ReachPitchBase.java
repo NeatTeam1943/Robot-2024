@@ -13,6 +13,8 @@ public abstract class ReachPitchBase extends Command {
   private Pitcher m_pitcher;
   private BangBangController m_controller;
 
+  private double m_currentPitch;
+
   /**
    * Abstract method to define how the setpoint is determined.
    *
@@ -35,10 +37,11 @@ public abstract class ReachPitchBase extends Command {
    */
   @Override
   public void execute() {
-    double currentPitch = m_pitcher.getAngleDegrees();
+    m_currentPitch = m_pitcher.getAngleDegrees();
+
     double setpoint = getSetpoint().get();
 
-    double speed = m_controller.calculate(currentPitch, setpoint);
+    double speed = m_controller.calculate(m_currentPitch, setpoint);
 
     m_pitcher.setAngleMotorsSpeed(speed);
   }
@@ -51,8 +54,6 @@ public abstract class ReachPitchBase extends Command {
    */
   @Override
   public boolean isFinished() {
-    double currentPitch = m_pitcher.getAngleDegrees();
-
-    return m_controller.atSetpoint() || !m_pitcher.isInRange(currentPitch);
+    return m_controller.atSetpoint() || !m_pitcher.isInRange(m_currentPitch);
   }
 }
