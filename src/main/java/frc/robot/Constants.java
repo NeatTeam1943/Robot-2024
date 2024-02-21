@@ -90,4 +90,9 @@ public final class Constants {
     public static final double kHumanPlayerATHeightMeters = -0;
   }
 
+  public static class LimeLightConstants {
+    public static final double kLimelightPitch = 1.631;
+    public static final String kLimelightName = "limelight-nt";
+  }
+
 }
