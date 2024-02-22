@@ -29,8 +29,6 @@ public abstract class TurnToAngleBase extends Command {
 
   @Override
   public void initialize() {
-    m_odometry.setHeading(0);
-
     m_initialHeading = m_odometry.getHeading();
 
     double targetAngle = getRobotTargetAngle();
@@ -45,6 +43,8 @@ public abstract class TurnToAngleBase extends Command {
         DriveTrainConstants.kRotationClampLow, DriveTrainConstants.kRotationClampHigh);
 
     m_drive.rotateRobot(pidSpeed);
+
+    SmartDashboard.putData(m_controller);
   }
 
   @Override
@@ -69,6 +69,8 @@ public abstract class TurnToAngleBase extends Command {
       SmartDashboard.putString("TurnToAngle",
           String.format("%s: %s, Target: %s", errorType, positionError, target));
 
+      SmartDashboard.putNumber("IMU HEADING", m_odometry.getHeading());
+      
       double heading = m_odometry.getHeading();
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 
