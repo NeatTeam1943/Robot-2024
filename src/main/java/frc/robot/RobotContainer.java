@@ -27,9 +27,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.driveTrainCommands.TurnToAngle;
+import frc.robot.subsystems.DriveTrain;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
+  private final RobotOdometry m_odometry;
+  private final DriveTrain m_drive;
 
   private final DriveTrain m_drive;
   private final Pitcher m_pitcher;
@@ -42,6 +47,8 @@ public class RobotContainer {
 
   public RobotContainer() {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+    m_odometry = new RobotOdometry();
+    m_drive = new DriveTrain();
 
     m_drive = new DriveTrain();
     m_pitcher = new Pitcher(); 
@@ -70,11 +77,11 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_drive.setDefaultCommand(new DriveRobot(m_drive, m_driverController));
-
-    m_driverController.a().onTrue(new RunCommand(() -> new Odometry(m_drive, RobotData.getInstance()).reset()));
-    m_driverController.b().whileTrue(new IntakeNote(m_intake, m_transport));
-  } 
+    
+    m_driverController.a().onTrue(new TurnToAngle(m_drive, m_odometry, 90));
+    m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
+    m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
+  }
 
   public Command getAutonomousCommand() {
     return m_autoChooser.getSelected();
