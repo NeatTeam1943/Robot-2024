@@ -15,7 +15,7 @@ public class RobotOdometry extends SubsystemBase {
    * Constructs RobotOdometry subsystem.
    */
   public RobotOdometry() {
-    m_imu = new Pigeon2(0);
+    m_imu = new Pigeon2(12);
   }
 
   /*
