@@ -1,13 +1,19 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.StatusSignal;
-import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
+import frc.robot.general.Odometry;
+import frc.robot.general.RobotData;
+import frc.robot.general.RobotHeadingUtils;
 
 /**
  * The DriveTrain subsystem controls the robot's drive system.
@@ -21,6 +27,13 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX m_rightFollower;
   private TalonFX m_rightMaster;
 
+  private MotorControllerGroup m_left;
+  private MotorControllerGroup m_right;
+
+  private RobotHeadingUtils m_currentHeading;
+
+  private Odometry m_odometry;
+
   private DifferentialDrive m_drive;
 
   /**
@@ -33,13 +46,40 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-    m_rightMaster.setInverted(true);
-    m_leftMaster.setInverted(false);
+    m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
+    m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
-    m_leftMaster.setControl(new Follower(m_leftFollower.getDeviceID(), false));
-    m_rightMaster.setControl(new Follower(m_rightFollower.getDeviceID(), false));
+    m_currentHeading = RobotHeadingUtils.getInstance();
 
-    m_drive = new DifferentialDrive(m_leftMaster, m_rightMaster);
+    setMotorInversions();
+
+    m_drive = new DifferentialDrive(m_left, m_right);
+
+    m_odometry = new Odometry(this, RobotData.getInstance());
+
+    AutoBuilder.configureRamsete(
+        m_odometry::getCurrentPosMeters,
+        m_odometry::resetPP,
+        m_odometry::getCurrentChassisSpeeds,
+        chassisSpeeds -> driveArcade(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond),
+        new ReplanningConfig(),
+        m_odometry::isRedAlliance,
+        this);
+  }
+
+  @Override
+  public void periodic() {
+    m_odometry.update();
+
+    m_odometry.updateRobotPoseOnField();
+  }
+
+  /**
+   * Sets the motor inversions based on the current robot heading.
+   */
+  public void setMotorInversions() {
+    m_leftMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
+    m_rightMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
   }
 
   /**
@@ -64,7 +104,7 @@ public class DriveTrain extends SubsystemBase {
   /**
    * Drives the robot using tank drive control.
    *
-   * @param left - The speed for the left side of the robot.
+   * @param left  - The speed for the left side of the robot.
    * @param right - The speed for the right side of the robot.
    */
   public void driveTank(double left, double right) {
@@ -162,6 +202,18 @@ public class DriveTrain extends SubsystemBase {
    */
   public void setRightRearMotorTraveledDistance(double position) {
     m_rightMaster.setPosition(position);
+  }
+
+  public double getLeftMasterVelocity() {
+    return m_leftMaster.getVelocity().getValueAsDouble();
+  }
+
+  public double getRightMasterVelocity() {
+    return m_rightMaster.getVelocity().getValueAsDouble();
+  }
+
+  public double getVelocityX() {
+    return (getLeftMasterVelocity() + getRightMasterVelocity()) / 2;
   }
 
   /**
