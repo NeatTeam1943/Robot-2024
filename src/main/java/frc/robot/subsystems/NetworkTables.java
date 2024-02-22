@@ -258,6 +258,14 @@ public class NetworkTables extends SubsystemBase {
     return Limelight.getDistanceFrom(Target.AMP);
   }
 
+  public double getDesiredAngle() {
+    return 0;
+  }
+
+  public double getDesiredRPM() {
+    return 0;
+  }
+
 
   @Override
   public void periodic() {
