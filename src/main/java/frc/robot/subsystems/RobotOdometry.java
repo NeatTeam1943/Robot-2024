@@ -1,4 +1,4 @@
-package frc.robot.general;
+package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
@@ -11,14 +11,14 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 /*
  * RobotOdometry contains data from spatial sensors.
  */
-public class RobotData {
-  private static RobotData instance; // Private static instance variable
+public class RobotOdometry {
+  private static RobotOdometry instance; // Private static instance variable
   private Pigeon2 m_imu;
 
   /*
    * Constructs RobotOdometry subsystem.
    */
-  private RobotData() {
+  private RobotOdometry() {
     m_imu = new Pigeon2(RobotDataConstants.kPigeon);
   }
 
@@ -151,9 +151,9 @@ public class RobotData {
    * Gets the single instance of RobotData.
    * @return the instance of RobotData
    */
-  public static RobotData getInstance() {
+  public static RobotOdometry getInstance() {
     if (instance == null) {
-      instance = new RobotData();
+      instance = new RobotOdometry();
     }
     return instance;
   }
