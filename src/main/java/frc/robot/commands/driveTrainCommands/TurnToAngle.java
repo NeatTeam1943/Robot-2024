@@ -1,6 +1,5 @@
-package frc.robot.commands;
+package frc.robot.commands.driveTrainCommands;
 
-import frc.robot.commands.driveTrainCommands.TurnToAngleBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.RobotOdometry;
 
@@ -10,7 +9,7 @@ public class TurnToAngle extends TurnToAngleBase {
   public TurnToAngle(DriveTrain drive, RobotOdometry odometry, double targetAngle) {
     super(drive, odometry);
 
-    m_targetAngle = (targetAngle / 2);
+    m_targetAngle = (targetAngle);
   }
 
   @Override
