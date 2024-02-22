@@ -1,4 +1,4 @@
-package frc.robot.commands.routines;
+package frc.robot.commands.routines.automatic;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Constants.IntakeModeConstants;
