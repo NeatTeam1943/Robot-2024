@@ -6,14 +6,15 @@ import org.apache.commons.math3.optim.nonlinear.scalar.GoalType;
 import org.apache.commons.math3.optim.nonlinear.scalar.ObjectiveFunction;
 import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.PowellOptimizer;
 
-public class ProjectileSolver {
+public class ShooterCalculations {
+    public static ShooterCalculations m_instance;
+
     public static void main(String[] args) {
         double deltaX = 3;
         double deltaY = 3.5;
         double g = 9.8;
 
         MultivariateFunction objective = point -> calculateError(point, deltaX, deltaY, g);
-
         PointValuePair solution = findSolution(objective);
 
         double v0 = solution.getPoint()[0];

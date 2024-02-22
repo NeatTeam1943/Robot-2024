@@ -2,14 +2,12 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.HeadingCommands.ChangeMode;
-import frc.robot.commands.driveTrainCommands.DriveRobot;
 import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
 import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.commands.transportationCommands.TransportNote;
-import frc.robot.general.Odometry;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pitcher;
