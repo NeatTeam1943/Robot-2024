@@ -38,10 +38,10 @@ public abstract class SetShooterRPMBase extends Command {
   @Override
   public void execute() {
     m_shooter.setLeftMotorVoltage(
-        m_ff.calculate(m_shooter.getLeftRate()) + m_leftController.calculate(m_shooter.getLeftRPM()));
+        m_ff.calculate(m_shooter.getLeftRPM()) + m_leftController.calculate(m_shooter.getLeftRPM()));
 
     m_shooter.setRightMotorVoltage(
-        m_ff.calculate(m_shooter.getRightRate()) + m_leftController.calculate(m_shooter.getRightRPM()));
+        m_ff.calculate(m_shooter.getRightRPM()) + m_leftController.calculate(m_shooter.getRightRPM()));
   }
 
   @Override
