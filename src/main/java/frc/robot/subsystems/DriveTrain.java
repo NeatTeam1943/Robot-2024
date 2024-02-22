@@ -5,14 +5,12 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 import frc.robot.general.Odometry;
-import frc.robot.general.RobotData;
 import frc.robot.general.RobotHeadingUtils;
 
 /**
@@ -55,7 +53,7 @@ public class DriveTrain extends SubsystemBase {
 
     m_drive = new DifferentialDrive(m_left, m_right);
 
-    m_odometry = new Odometry(this, RobotData.getInstance());
+    m_odometry = new Odometry(this, RobotOdometry.getInstance());
 
     AutoBuilder.configureRamsete(
         m_odometry::getCurrentPosMeters,

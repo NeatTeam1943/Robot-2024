@@ -11,6 +11,7 @@ public final class Constants {
     public static final double kCmToInch = 0.393700787;
     public static final double kMeterToInches = 39.37007874;
     public static final double kDegToRad = Math.PI / 180.0;
+    public static final double kDegreesPerSecToRadsPerSec = 0.017453;
   }
 
   public static class VisionConstants {
@@ -123,5 +124,17 @@ public final class Constants {
   public static class LimeLightConstants {
     public static final double kLimelightPitch = 1.631;
     public static final String kLimelightName = "limelight-nt";
+  }
+
+  public static class RobotDataConstants {
+    public static final int kPigeon = 12;
+  }
+
+  public static class IntakeModeConstants {
+    public static final int kDefaultPitcherAngle = -0;
+  }
+
+  public static class ShooterModeConstants {
+    public static final int kDefaultPitcherAngle = -0;
   }
 }

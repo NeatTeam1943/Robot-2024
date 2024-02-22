@@ -2,18 +2,16 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.HeadingCommands.ChangeMode;
-import frc.robot.commands.driveTrainCommands.DriveRobot;
 import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
 import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.commands.transportationCommands.TransportNote;
-import frc.robot.general.Odometry;
-import frc.robot.general.RobotData;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pitcher;
+import frc.robot.subsystems.RobotOdometry;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Transport;
 
@@ -27,14 +25,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
-import frc.robot.subsystems.DriveTrain;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
   private final RobotOdometry m_odometry;
-  private final DriveTrain m_drive;
 
   private final DriveTrain m_drive;
   private final Pitcher m_pitcher;
@@ -47,10 +42,9 @@ public class RobotContainer {
 
   public RobotContainer() {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
-    m_odometry = new RobotOdometry();
+    m_odometry = RobotOdometry.getInstance();
     m_drive = new DriveTrain();
 
-    m_drive = new DriveTrain();
     m_pitcher = new Pitcher(); 
     m_shooter = new Shooter();
     m_intake = new Intake();

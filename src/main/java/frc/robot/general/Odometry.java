@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.RobotOdometry;
 
 /**
  * A class responsible for updating the odometry of the robot.
@@ -15,11 +16,11 @@ import frc.robot.subsystems.DriveTrain;
 public class Odometry {
     private DifferentialDriveOdometry m_robotOdomtry;
     private DriveTrain m_drive;
-    private RobotData m_robotData;
+    private RobotOdometry m_robotData;
 
     private Field2d m_field2d;
 
-    public Odometry(DriveTrain drive, RobotData data) {
+    public Odometry(DriveTrain drive, RobotOdometry data) {
         m_robotData = data;
         m_drive = drive;
 
