@@ -13,7 +13,7 @@ import frc.robot.subsystems.Shooter;
  */
 public class InitializeShooterMode extends ParallelDeadlineGroup {
   public InitializeShooterMode(Pitcher pitcher, Shooter shooter) {
-    super(new SetShooterToDefaultRPM(shooter, null));
+    super(new SetShooterToDefaultRPM(shooter));
 
     addCommands(new ReachPitch(pitcher, ShooterModeConstants.kDefaultPitcherAngle));
   }

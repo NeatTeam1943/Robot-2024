@@ -8,6 +8,11 @@ public final class Constants {
   public static class MeasurementConstants {
     public static final double kInchesToMeters = 0.0254;
     public static final double kMilimetersToCentimeters = 0.10;
+    public static final double kDegreesPerSecToRadsPerSec = 0.017453;
+  }
+
+  public static class RobotDataConstants {
+    public static final int kPigeon = 12;
   }
 
   public static class IntakeModeConstants {
@@ -34,13 +39,15 @@ public final class Constants {
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+
+    public static final double kTrackWidthMeters = -0;
   }
 
   public static class IntakeConstants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
 
-    public static final double kIntakeMotorSpeed = 0.5;
+    public static final double kIntakeMotorSpeed = -0.8;
   }
 
   public static class TransportConstants {
@@ -56,8 +63,8 @@ public final class Constants {
     public static final int kRightShooterMotor = 9;
     public static final int kAngularVelocityToRPM = 60;
 
-    public static final int kDefaultRPM = -0; 
-    
+    public static final int kDefaultRPM = -0;
+
     public static final double kP = 0.5; // TODO Add real values
     public static final double kI = 0;
     public static final double kD = 0;
