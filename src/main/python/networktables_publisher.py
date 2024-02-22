@@ -1,10 +1,20 @@
+from shooter_calculator import ProjectileSolver
+
 import ntcore
 
 CLIENT = "Test"
 SERVER = 1943
 
-INST = ntcore.NetworkTableInstance.getDefault()
-TABLE = INST.getTable("RealSense Data")
+DELTA_Y = 2.0445
+
+"""
+    1.984M LOW 
+    2.1M HIGH
+    2.0445M Average Height 
+"""
+
+inst = ntcore.NetworkTableInstance.getDefault()
+table = inst.getTable("RealSense Data")
 
 # Set up the topic
 screenX_topic = table.getDoubleTopic("ScreenX")
@@ -30,31 +40,23 @@ optimal_velocity_publisher = optimal_velocity_topic.publish()
 shooter_angle_publisher = shooter_angle_topic.publish()
 deltaX_publisher = deltaX_topic.publish()
 
-INST.startClient4(CLIENT)
-INST.setServer(SERVER)
-INST.startDSClient()
+# DeltaX Subscriber
+deltaX_subscriber = deltaX_topic.subscribe(-1)
+
+inst.startClient4(CLIENT)
+inst.setServer(SERVER)
+inst.startDSClient()
+
+calculator = ProjectileSolver()
+
+calculator.set_initial_guess(v0_guess=10, theta_guess=55)
 
 while True:
-    # Get the data(Change to values gotten by the RealSense Camera)
-    screenX = 0.0
-    screenY = 0.0
+    screenX = deltaX_subscriber.getAsDouble()
 
-    target_pitch = 0.0
-    target_roll = 0.0
-    target_yaw = 0.0
+    calculator.update_deltas(delta_x=screenX, delta_y=DELTA_Y)
 
-    optimal_velocity = 0.0
-    shooter_angle = 0.0
-    deltaX = 0.0
-
-    # Publish the data
-    screenX_publisher.setDouble(screenX)
-    screenY_publisher.setDouble(screenY)
-
-    target_pitch_publisher.setDouble(target_pitch)
-    target_roll_publisher.setDouble(target_roll)
-    target_roll_publisher.setDouble(target_yaw)
+    optimal_velocity, shooter_angle = calculator.solve()
 
     optimal_velocity_publisher.setDouble(optimal_velocity)
     shooter_angle_publisher.setDouble(shooter_angle)
-    deltaX_publisher.setDouble(deltaX)
