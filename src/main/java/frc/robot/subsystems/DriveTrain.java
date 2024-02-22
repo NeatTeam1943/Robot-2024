@@ -225,4 +225,13 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower.setPosition(0);
     m_rightFollower.setPosition(0);
   }
+
+ /**
+   * Rotates the robot using arcade drive control.
+   *
+   * @param rotationSpeed - The speed of the rotation.
+   */
+  public void rotateRobot(double rotationSpeed) {
+    m_drive.arcadeDrive(0, rotationSpeed);
+  }
 }

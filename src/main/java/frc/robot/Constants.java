@@ -8,19 +8,16 @@ public final class Constants {
   public static class MeasurementConstants {
     public static final double kInchesToMeters = 0.0254;
     public static final double kMilimetersToCentimeters = 0.10;
-    public static final double kDegreesPerSecToRadsPerSec = 0.017453;
+    public static final double kCmToInch = 0.393700787;
+    public static final double kMeterToInches = 39.37007874;
+    public static final double kDegToRad = Math.PI / 180.0;
   }
 
-  public static class RobotDataConstants {
-    public static final int kPigeon = 12;
-  }
+  public static class VisionConstants {
+    public static final double kLimelightPitch = 8.16;
+    public static final double kLimelightHeightMeters = 0.76;
 
-  public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = -0;
-  }
-
-  public static class ShooterModeConstants {
-    public static final int kDefaultPitcherAngle = -0;
+    public static final String kLimelightName = "limelight-nt";
   }
 
   public static class DriveTrainConstants {
@@ -40,6 +37,12 @@ public final class Constants {
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
 
+    public static final double kRotationP = 0.013095;
+    public static final double kRotationI = 0.000005;
+    public static final double kRotationD = 0.000322;
+
+    public static final double kRotationClampHigh = 0.75;
+    public static final double kRotationClampLow = -0.75;
     public static final double kTrackWidthMeters = -0;
   }
 
@@ -54,7 +57,6 @@ public final class Constants {
     public static final int kMotor = 6;
 
     public static final int kPhotoSwitch = 1;
-
     public static final double kBeltsSpeed = 0.5;
   }
 
@@ -101,5 +103,25 @@ public final class Constants {
      * of the linear motor (CM).
      */
     public static final double kHingeToEndpoint = 51.5;
+  }
+
+  public static class FieldConstants {
+    public static final int kAmpATId = 5;
+    public static final int kSpeakerATFirstId = 6;
+    public static final int kSpeakerATSecondId = 7;
+    public static final int kHumanATPlayerId = 7;
+    public static final int kTrapATId = 7;
+
+    public static final double kCameraHeightMeters = 0.395;
+
+    public static final double kAmpATHeightMeters = 1.37;
+    public static final double kSpeakerATHeightMeters = -0;
+    public static final double kTrapATHeightMeters = -0;
+    public static final double kHumanPlayerATHeightMeters = -0;
+  }
+
+  public static class LimeLightConstants {
+    public static final double kLimelightPitch = 1.631;
+    public static final String kLimelightName = "limelight-nt";
   }
 }
