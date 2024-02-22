@@ -18,13 +18,8 @@ public class RobotData {
   /*
    * Constructs RobotOdometry subsystem.
    */
-<<<<<<< HEAD:src/main/java/frc/robot/subsystems/RobotOdometry.java
-  public RobotOdometry() {
-    m_imu = new Pigeon2(12);
-=======
   private RobotData() {
     m_imu = new Pigeon2(RobotDataConstants.kPigeon);
->>>>>>> main:src/main/java/frc/robot/general/RobotData.java
   }
 
   /*
