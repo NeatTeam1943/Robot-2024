@@ -16,7 +16,7 @@ public class Shooter extends SubsystemBase {
    */
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
-    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor); 
+    m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
   }
 
   /**
@@ -43,21 +43,37 @@ public class Shooter extends SubsystemBase {
     m_leftShooterMotor.set(speed);
   }
 
+  public void setLeftMotorVoltage(double voltage) {
+    m_leftShooterMotor.setVoltage(voltage);
+  }
+
+  public void setRightMotorVoltage(double voltage) {
+    m_rightShooterMotor.setVoltage(voltage);
+  }
+
   /**
    * @return The RPM of the left shooter motor.
    */
   public double getLeftRPM() {
-    return m_leftShooterMotor.getVelocity().getValueAsDouble() * ShooterConstants.kVelocityToRPM;
+    return getLeftRate() * ShooterConstants.kAngularVelocityToRPM;
   }
 
   /**
    * @return The RPM of the right shooter motor.
    */
   public double getRightRPM() {
-    return m_rightShooterMotor.getVelocity().getValueAsDouble() * ShooterConstants.kVelocityToRPM;
+    return getRightRate() * ShooterConstants.kAngularVelocityToRPM;
   }
 
-    /**
+  public double getLeftRate() {
+    return m_leftShooterMotor.getVelocity().getValueAsDouble();
+  }
+
+  public double getRightRate() {
+    return m_rightShooterMotor.getVelocity().getValueAsDouble();
+  }
+
+  /**
    * @return The average RPM of the two shooter motors.
    */
   public double getAverageRPM() {
