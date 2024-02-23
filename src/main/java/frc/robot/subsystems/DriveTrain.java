@@ -7,6 +7,8 @@ import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
@@ -24,6 +26,9 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX m_leftMaster;
   private TalonFX m_rightFollower;
   private TalonFX m_rightMaster;
+
+  private VictorSP m_ima_shelha;
+  private VictorSP m_aba_shelha;
 
   private MotorControllerGroup m_left;
   private MotorControllerGroup m_right;
@@ -51,7 +56,10 @@ public class DriveTrain extends SubsystemBase {
 
     setMotorInversions();
 
-    m_drive = new DifferentialDrive(m_left, m_right);
+    m_ima_shelha = new VictorSP(0);
+    m_aba_shelha = new VictorSP(1);
+
+    m_drive = new DifferentialDrive(m_ima_shelha, m_aba_shelha);
 
     m_odometry = new Odometry(this, RobotOdometry.getInstance());
 
