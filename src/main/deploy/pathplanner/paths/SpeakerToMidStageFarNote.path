@@ -1,0 +1,68 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.3842846515935527,
+        "y": 5.515804013063089
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.3842846515935525,
+        "y": 5.515804013063089
+      },
+      "isLocked": false,
+      "linkedName": "SpeakerStartPoint"
+    },
+    {
+      "anchor": {
+        "x": 4.874113942236443,
+        "y": 4.450117887396973
+      },
+      "prevControl": {
+        "x": 3.845349090915996,
+        "y": 5.21216592541212
+      },
+      "nextControl": {
+        "x": 5.822691702444745,
+        "y": 3.7474676946500822
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.305389050150424,
+        "y": 4.098792791023527
+      },
+      "prevControl": {
+        "x": 7.305389050150424,
+        "y": 4.098792791023527
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "MidStageFarNoteLocation"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 0.2,
+    "maxAcceleration": 0.01,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Speaker",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

@@ -42,7 +42,7 @@ public abstract class TurnToAngleBase extends Command {
     double pidSpeed = MathUtil.clamp(m_controller.calculate(m_odometry.getHeading()),
         DriveTrainConstants.kRotationClampLow, DriveTrainConstants.kRotationClampHigh);
 
-    m_drive.rotateRobot(pidSpeed);
+    m_drive.rotateRobot(-pidSpeed);
 
     SmartDashboard.putData(m_controller);
   }
@@ -71,7 +71,7 @@ public abstract class TurnToAngleBase extends Command {
 
       SmartDashboard.putNumber("IMU HEADING", m_odometry.getHeading());
       SmartDashboard.putNumber("ERROR", positionError);
-          
+
       double heading = m_odometry.getHeading();
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 

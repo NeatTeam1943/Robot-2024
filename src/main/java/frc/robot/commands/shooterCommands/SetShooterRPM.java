@@ -22,6 +22,7 @@ public class SetShooterRPM extends SetShooterRPMBase {
 
   @Override
   public boolean isFinished() {
-    return m_leftController.atSetpoint() && m_rightController.atSetpoint();
+    // return m_leftController.atSetpoint() && m_rightController.atSetpoint();
+    return false;
   }
 }

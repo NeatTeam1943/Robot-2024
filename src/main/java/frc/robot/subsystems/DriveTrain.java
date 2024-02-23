@@ -104,7 +104,8 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
+    // m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
+    m_drive.arcadeDrive(joystick.getLeftX(), -(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis()));
   }
 
   /**
@@ -238,6 +239,6 @@ public class DriveTrain extends SubsystemBase {
    * @param rotationSpeed - The speed of the rotation.
    */
   public void rotateRobot(double rotationSpeed) {
-    m_drive.arcadeDrive(0, rotationSpeed);
+    m_drive.arcadeDrive(rotationSpeed,0);
   }
 }

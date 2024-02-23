@@ -6,6 +6,7 @@ import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
 import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
+import frc.robot.commands.shooterCommands.SetShooterRPM;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.commands.transportationCommands.TransportNote;
 import frc.robot.subsystems.DriveTrain;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.driveTrainCommands.DriveRobot;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
 
 public class RobotContainer {
@@ -71,10 +73,12 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
+    // m_driverController.a().onTrue(new TurnToAngle(m_drive, 90));
+    // m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
     
-    m_driverController.a().onTrue(new TurnToAngle(m_drive, 90));
-    m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
-    m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
+    m_driverController.a().onTrue(new IntakeNote(m_intake, m_transport));
+    
+    m_drive.setDefaultCommand(new DriveRobot(m_drive, m_driverController));
   }
 
   public Command getAutonomousCommand() {

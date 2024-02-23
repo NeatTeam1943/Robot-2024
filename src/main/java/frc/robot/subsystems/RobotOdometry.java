@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.RobotDataConstants;
 
@@ -13,13 +15,15 @@ import com.ctre.phoenix6.hardware.Pigeon2;
  */
 public class RobotOdometry {
   private static RobotOdometry instance; // Private static instance variable
-  private Pigeon2 m_imu;
-
+  // private Pigeon2 m_imu;
+  private ADIS16470_IMU m_imu;
+  
   /*
    * Constructs RobotOdometry subsystem.
    */
   private RobotOdometry() {
-    m_imu = new Pigeon2(RobotDataConstants.kPigeon);
+    // m_imu = new Pigeon2(RobotDataConstants.kPigeon);
+    m_imu = new ADIS16470_IMU();
   }
 
   /*
@@ -67,18 +71,21 @@ public class RobotOdometry {
    * Sets heading of robot relative to a selected heading.
    */
   public void setHeading(double angle) {
-    m_imu.setYaw(angle);
+    // m_imu.setYaw(angle);
+    m_imu.setGyroAngle(IMUAxis.kYaw, angle);
   }
 
   /*
    * Gets heading of robot relative to a selected heading.
    */
   public double getHeading() {
-    return m_imu.getYaw().getValueAsDouble();
+    // return m_imu.getYaw().getValueAsDouble();
+    return m_imu.getAngle(IMUAxis.kYaw);
   }
 
   public Rotation2d getHeadingRotaion2d() {
-    return m_imu.getRotation2d();
+    // return m_imu.getRotation2d();
+    return new Rotation2d(m_imu.getAngle(IMUAxis.kYaw));
   }
 
   /*

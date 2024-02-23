@@ -2,7 +2,13 @@
   "robotWidth": 0.69,
   "robotLength": 0.74,
   "holonomicMode": false,
-  "pathFolders": [],
+  "pathFolders": [
+    "Amp",
+    "shhh",
+    "OutOfWing",
+    "Speaker",
+    "Stage"
+  ],
   "autoFolders": [],
   "defaultMaxVel": 0.5,
   "defaultMaxAccel": 0.1,
