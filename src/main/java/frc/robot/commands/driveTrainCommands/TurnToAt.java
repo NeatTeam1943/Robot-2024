@@ -2,11 +2,10 @@ package frc.robot.commands.driveTrainCommands;
 
 import frc.robot.Limelight;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.RobotOdometry;
 
 public class TurnToAt extends TurnToAngleBase {
-    public TurnToAt(DriveTrain drive, RobotOdometry odometry) {
-        super(drive, odometry);
+    public TurnToAt(DriveTrain drive) {
+        super(drive);
     }
 
   @Override

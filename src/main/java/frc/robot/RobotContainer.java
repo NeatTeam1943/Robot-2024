@@ -72,7 +72,7 @@ public class RobotContainer {
 
   private void configureBindings() {
     
-    m_driverController.a().onTrue(new TurnToAngle(m_drive, m_odometry, 90));
+    m_driverController.a().onTrue(new TurnToAngle(m_drive, 90));
     m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
   }
