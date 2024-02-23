@@ -20,9 +20,9 @@ public abstract class TurnToAngleBase extends Command {
    */
   protected abstract double getTargetAngle();
 
-  public TurnToAngleBase(DriveTrain drive, RobotOdometry odometry) {
+  public TurnToAngleBase(DriveTrain drive) {
     m_drive = drive;
-    m_odometry = odometry;
+    m_odometry = RobotOdometry.getInstance();
 
     addRequirements(m_drive);
   }
