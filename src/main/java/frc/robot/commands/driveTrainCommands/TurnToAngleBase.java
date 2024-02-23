@@ -70,7 +70,8 @@ public abstract class TurnToAngleBase extends Command {
           String.format("%s: %s, Target: %s", errorType, positionError, target));
 
       SmartDashboard.putNumber("IMU HEADING", m_odometry.getHeading());
-      
+      SmartDashboard.putNumber("ERROR", positionError);
+          
       double heading = m_odometry.getHeading();
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 
