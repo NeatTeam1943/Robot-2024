@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos.DriveIntake;
 import frc.robot.commands.HeadingCommands.ChangeMode;
 import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
@@ -24,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
 
@@ -36,6 +38,9 @@ public class RobotContainer {
   private final Shooter m_shooter;
   private final Intake m_intake;
   private final Transport m_transport; 
+
+  private final TransportToShoot m_transportToShoot;
+  private final IntakeNote m_intakeNote;
 
   private final SendableChooser<Command> m_autoChooser;
   private final Map<String, Command> m_commands;
@@ -50,11 +55,16 @@ public class RobotContainer {
     m_intake = new Intake();
     m_transport = new Transport();
 
-    m_autoChooser = AutoBuilder.buildAutoChooser();
+    m_transportToShoot = new TransportToShoot(m_pitcher, m_shooter, m_transport);
+    m_intakeNote = new IntakeNote(m_intake, m_transport);
+    m_autoChooser = new SendableChooser<>();
 
     m_commands = Map.of(
-      "Intake Note", new IntakeNote(m_intake, m_transport),
-      "Transport Note", new TransportNote(m_transport),
+      "AMP", new TransportNote(m_transport),
+      "AMPTWO", new SequentialCommandGroup(new TransportNote(m_transport),
+                                              new DriveIntake(m_drive,
+                                              m_intakeNote,
+                                              "AmpSpeakerToNote")),
       "Init Shooter Mode", new InitializeShooterMode(m_pitcher, m_shooter),
       "Init Intake Mode", new InitializeIntakeMode(m_pitcher, m_shooter),
       "Shooter Vision Mode", new ShooterVision(m_pitcher, m_shooter, null),
@@ -75,8 +85,8 @@ public class RobotContainer {
 
     m_driverController.a().onTrue(new IntakeNote(m_intake, m_transport));
 
-    m_driverController.b().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1)));
-    m_driverController.b().whileFalse(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1)));
+    m_driverController.b().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1)));
+    m_driverController.b().whileFalse(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1)));
 
     m_driverController.x().onTrue(new TransportNote(m_transport));
 
