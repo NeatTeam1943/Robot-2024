@@ -71,9 +71,17 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    
-    m_driverController.a().onTrue(new TurnToAngle(m_drive, 90));
-    m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
+    m_driverController.y().onTrue(new TurnToAngle(m_drive, 90));
+
+    m_driverController.a().onTrue(new IntakeNote(m_intake, m_transport));
+
+    m_driverController.b().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1)));
+    m_driverController.b().whileFalse(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1)));
+
+    m_driverController.x().onTrue(new TransportNote(m_transport));
+
+    m_driverController.leftTrigger().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.7)));
+
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
   }
 
