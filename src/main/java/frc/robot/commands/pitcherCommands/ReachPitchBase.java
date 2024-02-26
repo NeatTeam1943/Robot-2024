@@ -3,6 +3,7 @@ package frc.robot.commands.pitcherCommands;
 import java.util.function.Supplier;
 
 import edu.wpi.first.math.controller.BangBangController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Pitcher;
 
@@ -42,18 +43,22 @@ public abstract class ReachPitchBase extends Command {
     double setpoint = getSetpoint().get();
 
     double speed = m_controller.calculate(m_currentPitch, setpoint);
+    SmartDashboard.putNumber("Current power", speed);
 
     m_pitcher.setAngleMotorsSpeed(speed);
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_pitcher.setAngleMotorsSpeed(0);
+  }
 
   /**
    * Checks if the desired pitch has been reached or if it's out of range.
    */
   @Override
   public boolean isFinished() {
+    
     return m_controller.atSetpoint() || !m_pitcher.isInRange(m_currentPitch);
   }
 }

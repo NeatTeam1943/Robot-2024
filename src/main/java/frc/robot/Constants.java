@@ -92,8 +92,8 @@ public final class Constants {
     public static final int kLeftAngleMotor = 10;
     public static final int kRightAngleMotor = 11;
 
-    public static final double kMinAngle = 69; // TODO: Add angle
-    public static final double kMaxAngle = 420; // TODO: Add angle
+    public static final double kMinAngle = 36; // TODO: Add angle
+    public static final double kMaxAngle = 70; // TODO: Add angle
 
     /**
      * kTofToBase - The distance between the TOF sensor to the base of the robot

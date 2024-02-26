@@ -74,7 +74,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     m_odometry.update();
-    System.out.println(String.format("HEADING: %s", m_currentHeading.getRobotHeading()));
+    // System.out.println(String.format("HEADING: %s", m_currentHeading.getRobotHeading()));
 
     m_odometry.updateRobotPoseOnField();
   }
@@ -103,8 +103,7 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    // m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getLeftX());
-    m_drive.tankDrive(joystick.getLeftY(), joystick.getRightY());
+    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getLeftX());
   }
 
   public double getUltraSonic(){

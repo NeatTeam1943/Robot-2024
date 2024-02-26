@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
+import frc.robot.commands.pitcherCommands.ReachPitch;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
@@ -76,13 +77,13 @@ public class RobotContainer {
     m_driverController.y().whileTrue(new RunCommand(() -> m_transport.setBeltsSpeed(-0.5), m_transport));
     m_driverController.y().whileFalse(new RunCommand(() -> m_transport.setBeltsSpeed(0), m_transport));
 
-    m_driverController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-0.8), m_intake));
+    m_driverController.a().whileTrue(new ReachPitch(m_pitcher, 50));
     m_driverController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
 
     // m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.22), m_shooter));
     // m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(1), m_shooter));
     // m_driverController.x().whileFalse(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0), m_shooter));
-    m_driverController.x().whileTrue(new SetShooterRPM(m_shooter, 400));
+    m_driverController.x().whileTrue(new SetShooterRPM(m_shooter, 4));
     
     m_driverController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_driverController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
