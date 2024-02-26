@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.293678213604645,
+        "y": 7.424670370025477
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.626057811761996,
+        "y": 7.424670370025477
+      },
+      "isLocked": false,
+      "linkedName": "AmpFarNote"
+    },
+    {
+      "anchor": {
+        "x": 0.82,
+        "y": 6.8
+      },
+      "prevControl": {
+        "x": 1.079802901403234,
+        "y": 7.541778735483292
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "AmpStartLocation"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 0.2,
+    "maxAcceleration": 0.01,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": true,
+  "folder": "OutOfWing",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

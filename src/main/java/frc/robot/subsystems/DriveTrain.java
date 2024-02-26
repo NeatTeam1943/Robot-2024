@@ -5,6 +5,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,6 +31,8 @@ public class DriveTrain extends SubsystemBase {
 
   private RobotHeadingUtils m_currentHeading;
 
+  private AnalogInput m_ultraSonic;
+
   private Odometry m_odometry;
 
   private DifferentialDrive m_drive;
@@ -48,6 +51,8 @@ public class DriveTrain extends SubsystemBase {
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
     m_currentHeading = RobotHeadingUtils.getInstance();
+
+    m_ultraSonic = new AnalogInput(0);
 
     setMotorInversions();
 
@@ -68,6 +73,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     m_odometry.update();
+    System.out.println(String.format("HEADING: %s", m_currentHeading.getRobotHeading()));
 
     m_odometry.updateRobotPoseOnField();
   }
@@ -77,7 +83,9 @@ public class DriveTrain extends SubsystemBase {
    */
   public void setMotorInversions() {
     m_leftMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
+    m_leftFollower.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
     m_rightMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
+    m_rightFollower.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
   }
 
   /**
@@ -97,6 +105,10 @@ public class DriveTrain extends SubsystemBase {
    */
   public void driveArcade(CommandXboxController joystick) {
     m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
+  }
+
+  public double getUltraSonic(){
+    return m_ultraSonic.getVoltage()*9.77;
   }
 
   /**

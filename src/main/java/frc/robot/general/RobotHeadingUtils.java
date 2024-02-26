@@ -57,4 +57,12 @@ public class RobotHeadingUtils {
     public boolean sameAs(RobotHeading otherHeading){
         return m_currentHeading == otherHeading;
     }
+
+    public boolean isIntakeMode(){
+        return m_currentHeading == RobotHeading.INTAKE; 
+    }
+
+    public boolean isShooterMode(){
+        return m_currentHeading == RobotHeading.SHOOTER; 
+    }
 }

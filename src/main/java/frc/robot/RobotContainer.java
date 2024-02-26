@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.driveTrainCommands.InvertDrive;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
 
 public class RobotContainer {
@@ -71,17 +72,19 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_driverController.y().whileTrue(new RunCommand(() -> m_transport.setBeltsSpeed(0.5), m_transport));
+    m_driverController.y().whileTrue(new RunCommand(() -> m_transport.setBeltsSpeed(-0.5), m_transport));
     m_driverController.y().whileFalse(new RunCommand(() -> m_transport.setBeltsSpeed(0), m_transport));
 
-    m_driverController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(0.8), m_intake));
+    m_driverController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-0.8), m_intake));
     m_driverController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
 
-    m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.8), m_shooter));
+    m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.22), m_shooter));
     m_driverController.x().whileFalse(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0), m_shooter));
 
     m_driverController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_driverController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
+    
+    m_driverController.back().onTrue(new InvertDrive(m_drive));    
 
     m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
