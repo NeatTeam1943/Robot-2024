@@ -104,6 +104,12 @@ public final class Constants {
      * of the linear motor (CM).
      */
     public static final double kHingeToEndpoint = 51.5;
+
+    /**
+     * kEndpointToTrueller - The distance between the palestinian build that marks the
+     * endpoint of the TOF sensor range to the endpoint of the robot.
+     */
+    public static final double kEndpointToTrueller = -0;
   }
 
   public static class FieldConstants {
