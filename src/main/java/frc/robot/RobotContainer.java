@@ -71,17 +71,19 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    m_driverController.y().onTrue(new TurnToAngle(m_drive, 90));
+    m_driverController.y().whileTrue(new RunCommand(() -> m_transport.setBeltsSpeed(0.5), m_transport));
+    m_driverController.y().whileFalse(new RunCommand(() -> m_transport.setBeltsSpeed(0), m_transport));
 
-    m_driverController.a().onTrue(new IntakeNote(m_intake, m_transport));
+    m_driverController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(0.8), m_intake));
+    m_driverController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
 
-    m_driverController.b().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1)));
-    m_driverController.b().whileFalse(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1)));
+    m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.8), m_shooter));
+    m_driverController.x().whileFalse(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0), m_shooter));
 
-    m_driverController.x().onTrue(new TransportNote(m_transport));
+    m_driverController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
+    m_driverController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
 
-    m_driverController.leftTrigger().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.7)));
-
+    m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
   }
 
