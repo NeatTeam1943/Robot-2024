@@ -68,12 +68,21 @@ public final class Constants {
 
     public static final int kDefaultRPM = -0;
 
-    public static final double kP = 0.5; // TODO Add real values
-    public static final double kI = 0;
-    public static final double kD = 0;
+    public static final double kLeftP = 0.001676;
+    public static final double kLeftI = 0;
+    public static final double kLeftD = 0;
 
-    public static final double kS = -0;
-    public static final double kV = -0;
+    public static final double kLeftS = 0.14783;
+    public static final double kLeftV = 0.11522;
+    public static final double kLeftA = 0.0064632;
+
+    public static final double kRightP = 0.001676;
+    public static final double kRightI = 0;
+    public static final double kRightD = 0;
+
+    public static final double kRightS = 0.14783;
+    public static final double kRightV = 0.11522;
+    public static final double kRightA = 0.0076178;
 
     public static final double kLeftControllerThreshold = 0; // TODO TEMP Values
     public static final double kRightControllerThreshold = 0;
@@ -90,26 +99,27 @@ public final class Constants {
      * kTofToBase - The distance between the TOF sensor to the base of the robot
      * (CM).
      */
-    public static final double kTofToBase = 28.5;
+    public static final double kTofToBase = 27;
 
     /**
      * kLinearToHinge - The distance between the hinge of the shooter to the bottom
      * of the linear
      * motor (CM).
      */
-    public static final double kLinearToHinge = 38;
+    public static final double kLinearToHinge = 40;
 
     /**
      * kHingeToEndpoint - The distance between the hinge of the shooter to the tip
      * of the linear motor (CM).
      */
-    public static final double kHingeToEndpoint = 51.5;
+    public static final double kHingeToEndpoint = 53;
 
     /**
-     * kEndpointToTrueller - The distance between the palestinian build that marks the
+     * kEndpointToTrueller - The distance between the palestinian build that marks
+     * the
      * endpoint of the TOF sensor range to the endpoint of the robot.
      */
-    public static final double kEndpointToTrueller = -0;
+    public static final double kEndpointToTrueller = 1;
   }
 
   public static class FieldConstants {
