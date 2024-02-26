@@ -99,5 +99,6 @@ public class Pitcher extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("TOF DISTANCE", getTofDistanceCM());
+    SmartDashboard.putNumber("ANGLE", getAngleDegrees());
   }
 }

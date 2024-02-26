@@ -6,6 +6,7 @@ import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
 import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
+import frc.robot.commands.shooterCommands.SetShooterRPM;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.commands.transportationCommands.TransportNote;
 import frc.robot.subsystems.DriveTrain;
@@ -78,9 +79,11 @@ public class RobotContainer {
     m_driverController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-0.8), m_intake));
     m_driverController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
 
-    m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.22), m_shooter));
-    m_driverController.x().whileFalse(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0), m_shooter));
-
+    // m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0.22), m_shooter));
+    // m_driverController.x().whileTrue(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(1), m_shooter));
+    // m_driverController.x().whileFalse(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0), m_shooter));
+    m_driverController.x().whileTrue(new SetShooterRPM(m_shooter, 400));
+    
     m_driverController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_driverController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
     

@@ -16,18 +16,20 @@ public abstract class SetShooterRPMBase extends Command {
   protected PIDController m_leftController;
   protected PIDController m_rightController;
 
-  protected SimpleMotorFeedforward m_ff;
+  protected SimpleMotorFeedforward m_ffLeft;
+  protected SimpleMotorFeedforward m_ffRight;
 
   public SetShooterRPMBase(Shooter shooter) {
     m_shooter = shooter;
 
-    m_leftController = new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD);
-    m_rightController = new PIDController(ShooterConstants.kP, ShooterConstants.kI, ShooterConstants.kD);
+    m_leftController = new PIDController(ShooterConstants.kLeftP, ShooterConstants.kLeftI, ShooterConstants.kLeftD);
+    m_rightController = new PIDController(ShooterConstants.kRightP, ShooterConstants.kRightI, ShooterConstants.kRightD);
+
+    m_ffLeft = new SimpleMotorFeedforward(ShooterConstants.kLeftS, ShooterConstants.kLeftV, ShooterConstants.kLeftA);
+    m_ffRight = new SimpleMotorFeedforward(ShooterConstants.kRightS, ShooterConstants.kRightV, ShooterConstants.kRightA);
 
     m_leftController.setTolerance(ShooterConstants.kLeftControllerThreshold);
     m_rightController.setTolerance(ShooterConstants.kRightControllerThreshold);
-
-    m_ff = new SimpleMotorFeedforward(ShooterConstants.kS, ShooterConstants.kV);
 
     addRequirements(shooter);
   }
@@ -38,10 +40,10 @@ public abstract class SetShooterRPMBase extends Command {
   @Override
   public void execute() {
     m_shooter.setLeftMotorVoltage(
-        m_ff.calculate(m_shooter.getLeftRPM()) + m_leftController.calculate(m_shooter.getLeftRPM()));
+        m_ffLeft.calculate(m_shooter.getLeftRPM()) + m_leftController.calculate(m_shooter.getLeftRPM()));
 
     m_shooter.setRightMotorVoltage(
-        m_ff.calculate(m_shooter.getRightRPM()) + m_leftController.calculate(m_shooter.getRightRPM()));
+        m_ffRight.calculate(m_shooter.getRightRPM()) + m_rightController.calculate(m_shooter.getRightRPM()));
   }
 
   @Override

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 import frc.robot.general.Odometry;
+import frc.robot.general.RobotHeading;
 import frc.robot.general.RobotHeadingUtils;
 
 /**
@@ -82,10 +83,8 @@ public class DriveTrain extends SubsystemBase {
    * Sets the motor inversions based on the current robot heading.
    */
   public void setMotorInversions() {
-    m_leftMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
-    m_leftFollower.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
-    m_rightMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
-    m_rightFollower.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
+    m_left.setInverted(m_currentHeading.getRobotHeading() == RobotHeading.INTAKE);
+    m_right.setInverted(m_currentHeading.getRobotHeading() != RobotHeading.INTAKE);
   }
 
   /**
@@ -95,7 +94,7 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
-    m_drive.arcadeDrive(movement, rotation);
+    m_drive.arcadeDrive(movement, m_currentHeading.isIntakeMode() ? -rotation : rotation);
   }
 
   /**
@@ -104,11 +103,12 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
+    // m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getLeftX());
+    m_drive.tankDrive(joystick.getLeftY(), joystick.getRightY());
   }
 
   public double getUltraSonic(){
-    return m_ultraSonic.getVoltage()*9.77;
+    return m_ultraSonic.getVoltage() * 9.77;
   }
 
   /**
