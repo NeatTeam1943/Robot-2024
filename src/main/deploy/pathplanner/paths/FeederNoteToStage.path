@@ -1,0 +1,68 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.281967377058862,
+        "y": 0.772915212021579
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.281967377058862,
+        "y": 0.7729152120215791
+      },
+      "isLocked": false,
+      "linkedName": "FeederNoteLocation"
+    },
+    {
+      "anchor": {
+        "x": 4.241728768764241,
+        "y": 2.0611072320575454
+      },
+      "prevControl": {
+        "x": 6.433909033180072,
+        "y": 0.8334862839846808
+      },
+      "nextControl": {
+        "x": 2.192332373252477,
+        "y": 3.2087692135441324
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 0.857297007033385,
+        "y": 4.262744502664469
+      },
+      "prevControl": {
+        "x": 1.2203329399526117,
+        "y": 3.5718051464633596
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "StageStartPoint"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 0.2,
+    "maxAcceleration": 0.01,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": true,
+  "folder": "OutOfWing",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

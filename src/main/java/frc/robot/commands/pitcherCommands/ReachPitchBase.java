@@ -2,7 +2,7 @@ package frc.robot.commands.pitcherCommands;
 
 import java.util.function.Supplier;
 
-import edu.wpi.first.math.controller.BangBangController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Pitcher;
 
@@ -11,9 +11,9 @@ import frc.robot.subsystems.Pitcher;
  */
 public abstract class ReachPitchBase extends Command {
   private Pitcher m_pitcher;
-  private BangBangController m_controller;
 
   private double m_currentPitch;
+  private double m_error;
 
   /**
    * Abstract method to define how the setpoint is determined.
@@ -24,13 +24,13 @@ public abstract class ReachPitchBase extends Command {
 
   public ReachPitchBase(Pitcher pitcher) {
     m_pitcher = pitcher;
-    m_controller = new BangBangController();
 
     addRequirements(m_pitcher);
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   /**
    * Sets the motor speed based on the current pitch and the desired setpoint.
@@ -41,19 +41,29 @@ public abstract class ReachPitchBase extends Command {
 
     double setpoint = getSetpoint().get();
 
-    double speed = m_controller.calculate(m_currentPitch, setpoint);
+    m_error = m_currentPitch - setpoint;
+
+    double speed = m_error < 0 ? -.9 : .9;
+
+    SmartDashboard.putNumber("Current power", speed);
+    SmartDashboard.putNumber("ERROR", m_error);
 
     m_pitcher.setAngleMotorsSpeed(speed);
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_pitcher.setAngleMotorsSpeed(0);
+  }
 
   /**
    * Checks if the desired pitch has been reached or if it's out of range.
    */
   @Override
   public boolean isFinished() {
-    return m_controller.atSetpoint() || !m_pitcher.isInRange(m_currentPitch);
+    boolean shouldFinish = Math.abs(m_error) <= 0.2;
+    SmartDashboard.putBoolean("FINISH?", shouldFinish);
+
+    return shouldFinish;
   }
 }

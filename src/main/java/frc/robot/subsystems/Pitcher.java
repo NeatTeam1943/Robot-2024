@@ -7,6 +7,7 @@ import com.revrobotics.Rev2mDistanceSensor.Port;
 import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
 import com.revrobotics.Rev2mDistanceSensor.Unit;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.PitcherConstants;
@@ -74,10 +75,16 @@ public class Pitcher extends SubsystemBase {
   public double getAngleDegrees() {
     double tofDistanceCM = getTofDistanceCM();
 
-    return calculateLawOfCosinesDegrees(
-        PitcherConstants.kLinearToHinge,
-        PitcherConstants.kHingeToEndpoint,
-        PitcherConstants.kTofToBase + tofDistanceCM);
+    final double LINEAR_TO_ENDPOINT = PitcherConstants.kEndpointToTrueller + tofDistanceCM
+        + PitcherConstants.kTofToBase;
+
+    double numerator = (LINEAR_TO_ENDPOINT * LINEAR_TO_ENDPOINT)
+        - (PitcherConstants.kHingeToEndpoint * PitcherConstants.kHingeToEndpoint)
+        - (PitcherConstants.kLinearToHinge * PitcherConstants.kLinearToHinge);
+
+    double denominator = -2 * PitcherConstants.kHingeToEndpoint * PitcherConstants.kLinearToHinge;
+
+    return Math.toDegrees(Math.acos(numerator / denominator)); 
   }
 
   /**
@@ -90,5 +97,8 @@ public class Pitcher extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    SmartDashboard.putNumber("TOF DISTANCE", getTofDistanceCM());
+    SmartDashboard.putNumber("ANGLE", getAngleDegrees());
+  }
 }

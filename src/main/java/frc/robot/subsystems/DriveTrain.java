@@ -5,12 +5,14 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 import frc.robot.general.Odometry;
+import frc.robot.general.RobotHeading;
 import frc.robot.general.RobotHeadingUtils;
 
 /**
@@ -29,6 +31,8 @@ public class DriveTrain extends SubsystemBase {
   private MotorControllerGroup m_right;
 
   private RobotHeadingUtils m_currentHeading;
+
+  private AnalogInput m_ultraSonic;
 
   private Odometry m_odometry;
 
@@ -49,6 +53,8 @@ public class DriveTrain extends SubsystemBase {
 
     m_currentHeading = RobotHeadingUtils.getInstance();
 
+    m_ultraSonic = new AnalogInput(0);
+
     setMotorInversions();
 
     m_drive = new DifferentialDrive(m_left, m_right);
@@ -68,6 +74,7 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     m_odometry.update();
+    // System.out.println(String.format("HEADING: %s", m_currentHeading.getRobotHeading()));
 
     m_odometry.updateRobotPoseOnField();
   }
@@ -76,8 +83,8 @@ public class DriveTrain extends SubsystemBase {
    * Sets the motor inversions based on the current robot heading.
    */
   public void setMotorInversions() {
-    m_leftMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertLeftMotors());
-    m_rightMaster.setInverted(m_currentHeading.getRobotHeading().shouldInvertRightMotors());
+    m_left.setInverted(m_currentHeading.isIntakeMode());
+    m_right.setInverted(!m_currentHeading.isIntakeMode());
   }
 
   /**
@@ -87,7 +94,7 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
-    m_drive.arcadeDrive(movement, rotation);
+    m_drive.arcadeDrive(movement, m_currentHeading.isIntakeMode() ? -rotation : rotation);
   }
 
   /**
@@ -96,7 +103,16 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), -joystick.getLeftX());
+    double x = joystick.getLeftX();
+    if (m_currentHeading.isIntakeMode()) {
+      x *= -1;
+    }
+
+    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), x);
+  }
+
+  public double getUltraSonic(){
+    return m_ultraSonic.getVoltage() * 9.77;
   }
 
   /**

@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.82,
+        "y": 6.8
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.0680920648574521,
+        "y": 7.3426945142050055
+      },
+      "isLocked": false,
+      "linkedName": "AmpStartLocation"
+    },
+    {
+      "anchor": {
+        "x": 2.894982565999367,
+        "y": 5.5
+      },
+      "prevControl": {
+        "x": 1.894982565999367,
+        "y": 5.5
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "SpeakerNoteLocation"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 0.2,
+    "maxAcceleration": 0.01,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Amp",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

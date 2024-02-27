@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -17,6 +19,9 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
     m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
+
+    m_leftShooterMotor.setInverted(true);
+    m_rightShooterMotor.setInverted(false);
   }
 
   /**

@@ -20,8 +20,14 @@ public class SetShooterRPM extends SetShooterRPMBase {
     m_rightController.setSetpoint(m_setpoint);
   }
 
+  public void end(boolean interrupted) {
+    m_shooter.setLeftShooterMotorSpeed(0);
+    m_shooter.setRightShooterMotorSpeed(0);
+  }
+
   @Override
   public boolean isFinished() {
-    return m_leftController.atSetpoint() && m_rightController.atSetpoint();
+    // return m_leftController.atSetpoint() && m_rightController.atSetpoint();
+    return false;
   }
 }

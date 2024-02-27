@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.general.RobotHeading;
 import frc.robot.general.RobotHeadingUtils;
+import frc.robot.subsystems.DriveTrain;
 
 public class ChangeMode {
     private static RobotHeadingUtils m_robotHeading;
 
-    public ChangeMode() {
+    public ChangeMode(DriveTrain drive) {
         m_robotHeading = RobotHeadingUtils.getInstance();
     }
 

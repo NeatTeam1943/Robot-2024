@@ -17,11 +17,11 @@ public class SetVisionShooterRPM extends SetShooterRPMBase {
         double desiredRPM = m_nt.getDesiredRPM();
 
         m_shooter.setLeftMotorVoltage(
-                m_ff.calculate(m_shooter.getLeftRate())
+                m_ffLeft.calculate(m_shooter.getLeftRate())
                         + m_leftController.calculate(m_shooter.getLeftRPM(), desiredRPM));
 
         m_shooter.setRightMotorVoltage(
-                m_ff.calculate(m_shooter.getRightRate())
+                m_ffLeft.calculate(m_shooter.getRightRate())
                         + m_leftController.calculate(m_shooter.getRightRPM(), desiredRPM));
     }
 
