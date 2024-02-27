@@ -3,6 +3,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kMechanismController = 1;
   }
 
   public static class MeasurementConstants {
@@ -147,10 +148,11 @@ public final class Constants {
   }
 
   public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = -0;
+    public static final int kDefaultPitcherAngle = 36;
   }
 
   public static class ShooterModeConstants {
-    public static final int kDefaultPitcherAngle = -0;
+    public static final int kAmpAngle = 60;
+    public static final int kSpeakerAngle = 50;
   }
 }
