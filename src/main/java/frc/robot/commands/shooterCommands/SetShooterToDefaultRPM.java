@@ -18,6 +18,7 @@ public class SetShooterToDefaultRPM extends SetShooterRPM {
 
   @Override
   public boolean isFinished() {
-    return m_robotData.isSpeakerVisible() || m_robotData.isAMPVisible();
+    return true;
+    // return m_robotData.isSpeakerVisible() || m_robotData.isAMPVisible();
   }
 }

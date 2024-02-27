@@ -52,13 +52,13 @@ public final class Constants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
 
-    public static final double kIntakeMotorSpeed = -0.8;
+    public static final double kIntakeMotorSpeed = -1;
   }
 
   public static class TransportConstants {
     public static final int kMotor = 6;
 
-    public static final int kPhotoSwitch = 1;
+    public static final int kPhotoSwitch = 0;
     public static final double kBeltsSpeed = 0.5;
   }
 
@@ -148,7 +148,7 @@ public final class Constants {
   }
 
   public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = 36;
+    public static final int kDefaultPitcherAngle = 37;
   }
 
   public static class ShooterModeConstants {

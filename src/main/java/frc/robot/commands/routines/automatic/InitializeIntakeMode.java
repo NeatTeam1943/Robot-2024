@@ -14,7 +14,8 @@ import frc.robot.subsystems.Shooter;
 public class InitializeIntakeMode extends ParallelCommandGroup {
   public InitializeIntakeMode(Pitcher pitcher, Shooter shooter) {
     addCommands(
-        new ReachPitch(pitcher, IntakeModeConstants.kDefaultPitcherAngle),
-        new SetShooterRPM(shooter, 0));
+        new ReachPitch(pitcher, IntakeModeConstants.kDefaultPitcherAngle)
+        // new SetShooterRPM(shooter, 0));
+        );
   }
 }

@@ -26,7 +26,9 @@ public class TransportNote extends Command {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+      m_transport.setBeltsSpeed(0.4);
+  }
 
   @Override
   public void execute() {

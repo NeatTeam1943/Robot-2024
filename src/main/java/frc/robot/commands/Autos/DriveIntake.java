@@ -10,7 +10,6 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
 
 public class DriveIntake extends ParallelCommandGroup {
   public DriveIntake(DriveTrain drive, IntakeNote intake, String pathName) {
