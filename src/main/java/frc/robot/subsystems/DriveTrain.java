@@ -83,8 +83,8 @@ public class DriveTrain extends SubsystemBase {
    * Sets the motor inversions based on the current robot heading.
    */
   public void setMotorInversions() {
-    m_left.setInverted(m_currentHeading.getRobotHeading() == RobotHeading.INTAKE);
-    m_right.setInverted(m_currentHeading.getRobotHeading() != RobotHeading.INTAKE);
+    m_left.setInverted(m_currentHeading.isIntakeMode());
+    m_right.setInverted(!m_currentHeading.isIntakeMode());
   }
 
   /**
@@ -103,7 +103,12 @@ public class DriveTrain extends SubsystemBase {
    * @param joystick - The Xbox controller used for driving.
    */
   public void driveArcade(CommandXboxController joystick) {
-    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), joystick.getLeftX());
+    double x = joystick.getLeftX();
+    if (m_currentHeading.isIntakeMode()) {
+      x *= -1;
+    }
+
+    m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), x);
   }
 
   public double getUltraSonic(){
