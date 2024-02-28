@@ -119,9 +119,10 @@ public class RobotContainer {
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
 
-    m_driverController.back().onTrue(new InvertDrive(m_drive));
     m_mechanismController.start().onTrue(m_dis2Commands.intake(1)); // Outtake
-
+    
+    m_driverController.back().onTrue(new InvertDrive(m_drive));
+    
     m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
   }
@@ -136,7 +137,7 @@ public class RobotContainer {
         new Shoot(m_dis2Commands, false),
         new InitializeIntakeMode(m_pitcher, m_shooter),
         new ParallelDeadlineGroup(new DriveDistance(m_drive, 1, 0.5), m_dis2Commands.intake(-1)),
-        m_dis2Commands.transportIntake(0, 0);
+        m_dis2Commands.transportIntake(0, 0),
         new DriveDistance(m_drive, 1, 0.5),
         new Shoot(m_dis2Commands, false));
   }
