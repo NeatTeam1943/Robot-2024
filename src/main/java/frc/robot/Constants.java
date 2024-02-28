@@ -152,7 +152,7 @@ public final class Constants {
   }
 
   public static class ShooterModeConstants {
-    public static final int kAmpAngle = -0;
+    public static final int kAmpAngle = 60;
     public static final int kSpeakerAngle = 50;
   }
 }

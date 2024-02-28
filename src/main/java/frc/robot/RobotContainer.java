@@ -71,9 +71,13 @@ public class RobotContainer {
     m_intakeNote = new IntakeNote(m_intake, m_transport);
     m_autoChooser = new SendableChooser<>();
 
+    m_dis2Commands = new Dis2FunctionalCommands(m_shooter, m_transport, m_intake);
+    m_intake.setDefaultCommand(m_dis2Commands.intake(0));
+    m_transport.setDefaultCommand(m_dis2Commands.transportIntake(0,0));
+
     m_commands = Map.of(
-        "Intake Note", new IntakeNote(m_intake, m_transport),
-        "Transport Note", new TransportNote(m_transport),
+        "Shoot Note", new SequentialCommandGroup(new InitializeShooterMode(m_pitcher, m_shooter, false),new Shoot(m_dis2Commands, false)),
+        "Intake Note", new SequentialCommandGroup(m_dis2Commands.intake(0.6),m_dis2Commands.transportIntake(0, 0)),
         "Init Shooter Mode", new InitializeShooterMode(m_pitcher, m_shooter, false),
         "Init Intake Mode", new InitializeIntakeMode(m_pitcher, m_shooter),
         "Shooter Vision Mode", new ShooterVision(m_pitcher, m_shooter, null),
@@ -83,7 +87,6 @@ public class RobotContainer {
 
     NamedCommands.registerCommands(m_commands);
 
-    m_dis2Commands = new Dis2FunctionalCommands(m_shooter, m_transport, m_intake);
 
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
@@ -133,6 +136,7 @@ public class RobotContainer {
         new Shoot(m_dis2Commands, false),
         new InitializeIntakeMode(m_pitcher, m_shooter),
         new ParallelDeadlineGroup(new DriveDistance(m_drive, 1, 0.5), m_dis2Commands.intake(-1)),
+        m_dis2Commands.transportIntake(0, 0);
         new DriveDistance(m_drive, 1, 0.5),
         new Shoot(m_dis2Commands, false));
   }
