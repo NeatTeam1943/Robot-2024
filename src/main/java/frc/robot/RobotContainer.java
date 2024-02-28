@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
 
@@ -59,22 +60,17 @@ public class RobotContainer {
     m_intake = new Intake();
     m_transport = new Transport();
 
-    m_autoChooser = AutoBuilder.buildAutoChooser();
+    m_autoChooser = AutoBuilder.buildAutoChooser("Auto Chooser");
 
+    m_dis2Commands = new Dis2FunctionalCommands(m_shooter, m_transport, m_intake);
+    
     m_commands = Map.of(
-      "Intake Note", new IntakeNote(m_intake, m_transport),
-      "Transport Note", new TransportNote(m_transport),
-      "Init Shooter Mode", new InitializeShooterMode(m_pitcher, m_shooter, false),
-      "Init Intake Mode", new InitializeIntakeMode(m_pitcher, m_shooter),
-      "Shooter Vision Mode", new ShooterVision(m_pitcher, m_shooter, null),
-      "Transport Note To Shoot", new TransportToShoot(m_pitcher, m_shooter, m_transport, null),
-      "Change To Intake Mode", ChangeMode.IntakeMode(),
-      "Change To Shooter Mode", ChangeMode.ShooterMode()
+      "Shoot Note", new SequentialCommandGroup(new InitializeShooterMode(m_pitcher, m_shooter, false),new Shoot(m_dis2Commands, false)),
+      "Intake Note", new SequentialCommandGroup(m_dis2Commands.intake(0.6),m_dis2Commands.transportIntake(0, 0))
     );
 
     NamedCommands.registerCommands(m_commands);
     
-    m_dis2Commands = new Dis2FunctionalCommands(m_shooter, m_transport, m_intake);
 
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
@@ -87,7 +83,7 @@ public class RobotContainer {
     // m_driverController.y().whileFalse(new RunCommand(() -> m_transport.setBeltsSpeed(0), m_transport));
 
     m_mechanismController.x().onTrue(new InitializeShooterMode(m_pitcher, m_shooter, false));
-    m_mechanismController.y().onTrue(new InitializeShooterMode(m_pitcher, m_shooter, true));
+    m_mechanismController.y().onTrue(m_dis2Commands.transportIntake(0.05, 0.5));
     m_mechanismController.start().onTrue(new InitializeIntakeMode(m_pitcher, m_shooter));
 
     m_mechanismController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-1), m_intake));
