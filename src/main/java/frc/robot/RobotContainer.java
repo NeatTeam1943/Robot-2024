@@ -101,7 +101,7 @@ public class RobotContainer {
     // m_transport.setBeltsSpeed(0), m_transport));
 
     m_mechanismController.x().onTrue(new InitializeShooterMode(m_pitcher, m_shooter, false));
-    m_mechanismController.y().onTrue(new InitializeShooterMode(m_pitcher, m_shooter, true));
+    m_mechanismController.y().onTrue(m_dis2Commands.transportIntake(0.05, -0.7));
     m_mechanismController.start().onTrue(new InitializeIntakeMode(m_pitcher, m_shooter));
 
     m_mechanismController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-1), m_intake));
@@ -117,6 +117,7 @@ public class RobotContainer {
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
 
     m_driverController.back().onTrue(new InvertDrive(m_drive));
+    m_mechanismController.start().onTrue(m_dis2Commands.intake(1)); // Outtake
 
     m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
