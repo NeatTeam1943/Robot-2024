@@ -5,6 +5,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -30,6 +31,8 @@ public class DriveTrain extends SubsystemBase {
   private MotorControllerGroup m_left;
   private MotorControllerGroup m_right;
 
+  private SlewRateLimiter m_limiter;
+
   private RobotHeadingUtils m_currentHeading;
 
   private AnalogInput m_ultraSonic;
@@ -48,6 +51,7 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
+
     m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
@@ -58,6 +62,8 @@ public class DriveTrain extends SubsystemBase {
     setMotorInversions();
 
     m_drive = new DifferentialDrive(m_left, m_right);
+
+    m_limiter = new SlewRateLimiter(0.05);
 
     m_odometry = new Odometry(this, RobotOdometry.getInstance());
 
@@ -94,7 +100,7 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
-    m_drive.arcadeDrive(movement, m_currentHeading.isIntakeMode() ? -rotation : rotation);
+    m_drive.arcadeDrive(m_limiter.calculate(movement), m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
   }
 
   /**

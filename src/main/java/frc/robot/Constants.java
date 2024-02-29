@@ -148,11 +148,11 @@ public final class Constants {
   }
 
   public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = 36;
+    public static final int kDefaultPitcherAngle = 37;
   }
 
   public static class ShooterModeConstants {
-    public static final int kAmpAngle = 60;
-    public static final int kSpeakerAngle = 55;
+    public static final int kAmpAngle = 36;
+    public static final int kSpeakerAngle = 52;
   }
 }

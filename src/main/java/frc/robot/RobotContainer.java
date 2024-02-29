@@ -25,11 +25,15 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
+import frc.robot.commands.driveTrainCommands.PassLine;
+import frc.robot.commands.pitcherCommands.ReachPitch;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
@@ -95,13 +99,20 @@ public class RobotContainer {
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
     
-    m_driverController.back().onTrue(new InvertDrive(m_drive));    
+    m_driverController.x().onTrue(new InvertDrive(m_drive));    
 
     m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
+
+    // m_shooter.setDefaultCommand(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0),m_shooter));
   }
 
   public Command getAutonomousCommand() {
-    return m_autoChooser.getSelected();
+    // return m_autoChooser.getSelected();sx bdh
+    return new SequentialCommandGroup(new Shoot(m_dis2Commands, false),new InstantCommand(()->m_shooter.setShooterMotorsSpeed(0),m_shooter), new ReachPitch(m_pitcher, 45), new ParallelCommandGroup(new InitializeIntakeMode(m_pitcher, m_shooter)));//, new PassLine(m_drive),m_dis2Commands.intake(-1)), m_dis2Commands.intake(0));
+    // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), new InitializeIntakeMode(m_pitcher, m_shooter));
+    // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), m_dis2Commands.intake(-1), new InitializeIntakeMode(m_pitcher, m_shooter), new PassLine(m_drive), m_dis2Commands.intake(0));
+    // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), m_dis2Commands.intake(1), new PassLine(m_drive), new InitializeShooterMode(m_pitcher, m_shooter, false));
+    // return new PassLine(m_drive);
   }
 }
