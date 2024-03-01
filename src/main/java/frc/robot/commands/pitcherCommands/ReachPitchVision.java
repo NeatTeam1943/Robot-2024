@@ -1,25 +1,22 @@
 package frc.robot.commands.pitcherCommands;
 
 import java.util.function.Supplier;
-
-import frc.robot.subsystems.NetworkTables;
 import frc.robot.subsystems.Pitcher;
 
 /**
  * Sets the pitch of the shooting mechanism to the resulting vision requests.
  */
 public class ReachPitchVision extends ReachPitchBase {
-  private final NetworkTables m_nt;
+  private Pitcher m_pitcher;
 
-  public ReachPitchVision(Pitcher pitcher, NetworkTables nt) {
+  public ReachPitchVision(Pitcher pitcher) {
     super(pitcher);
 
-    m_nt = nt;
+    m_pitcher = pitcher;
   }
 
   @Override
   public Supplier<Double> getSetpoint() {
-    return () -> m_nt.getDesiredAngle(); // NOTE: We will get the targeted pitch from NT later this impl is just a
-                                            // placeholder.
+    return () -> m_pitcher.getDesiredAngle();
   }
 }
