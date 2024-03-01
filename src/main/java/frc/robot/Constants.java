@@ -13,6 +13,8 @@ public final class Constants {
     public static final double kMeterToInches = 39.37007874;
     public static final double kDegToRad = Math.PI / 180.0;
     public static final double kDegreesPerSecToRadsPerSec = 0.017453;
+    
+    public static final double kG = 9.8;
   }
 
   public static class VisionConstants {
@@ -67,7 +69,10 @@ public final class Constants {
     public static final int kRightShooterMotor = 9;
     public static final int kAngularVelocityToRPM = 60;
 
+    public static final double kShootingWheelRadiusMeters = 0.1016;  
+
     public static final int kDefaultRPM = -0;
+    public static final int kMaxRPS = 103;
 
     public static final double kLeftP = 0.001676;
     public static final double kLeftI = 0;
