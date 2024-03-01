@@ -108,7 +108,7 @@ public class Pitcher extends SubsystemBase {
     return m_speakerPitchCalculator.solve(
         getCurrentAngleDegrees(),
         PitcherConstants.kPitcherCalculatorStepSize,
-        PitcherConstants.kPitcherCalculatorMaxIterations);
+        PitcherConstants.kPitcherCalculatorMaxIterations).orElse(-1.0);
   }
 
   @Override
@@ -117,6 +117,6 @@ public class Pitcher extends SubsystemBase {
 
     SmartDashboard.putNumber("ToF Distance", getTofDistanceCM());
     SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
-    SmartDashboard.putNumber("Desired Angle", m_speakerPitchCalculator.getCurrentbestTheta().orElseGet(() -> -1.0));
+    SmartDashboard.putNumber("Desired Angle", m_speakerPitchCalculator.getCurrentbestTheta().orElse(-1.0));
   }
 }
