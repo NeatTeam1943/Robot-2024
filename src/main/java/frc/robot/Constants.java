@@ -101,6 +101,9 @@ public final class Constants {
     public static final double kMinAngle = 36; // TODO: Add angle
     public static final double kMaxAngle = 70; // TODO: Add angle
 
+    public static final int kPitcherCalculatorMaxIterations = 3000;
+    public static final double kPitcherCalculatorStepSize = 0.05;
+
     /**
      * kTofToBase - The distance between the TOF sensor to the base of the robot
      * (CM).
