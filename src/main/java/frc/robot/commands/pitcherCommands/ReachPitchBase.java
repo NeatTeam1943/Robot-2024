@@ -37,7 +37,7 @@ public abstract class ReachPitchBase extends Command {
    */
   @Override
   public void execute() {
-    m_currentPitch = m_pitcher.getAngleDegrees();
+    m_currentPitch = m_pitcher.getCurrentAngleDegrees();
 
     double setpoint = getSetpoint().get();
 
