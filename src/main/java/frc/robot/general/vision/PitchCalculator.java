@@ -1,5 +1,7 @@
 package frc.robot.general.vision;
 
+import java.util.Optional;
+
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.ShooterConstants;
 
@@ -16,6 +18,7 @@ public class PitchCalculator {
     private double m_deltaX;
     private double m_deltaY;
 
+    private double m_currentbestTheta;
 
     /**
      * Constructs a PitchCalculator.
@@ -87,6 +90,8 @@ public class PitchCalculator {
             currentTheta = bestTheta;
         }
 
+        m_currentbestTheta = bestTheta;
+
         return bestTheta;
     }
 
@@ -131,6 +136,15 @@ public class PitchCalculator {
     private double getFlightHeight(double theta, double time) {
         return Math.sin(Math.toRadians(theta)) * time * getInitialVelocity(ShooterConstants.kMaxRPS)
                 - 0.5 * MeasurementConstants.kG * (time * time);
+    }
+
+    /**
+     * The function returns that last calculated angle from the solve() function. 
+     * @apiNote It is suggested to call the solve function before executing this function.
+     * @return The current desired angle of the shooter.
+     */
+    public Optional<Double> getCurrentbestTheta(){
+        return Optional.ofNullable(m_currentbestTheta);
     }
 
     /**
