@@ -63,7 +63,8 @@ public class PitchCalculator {
      * @param initialGuess  The initial guess for the shooting angle in degrees.
      * @param stepSize      The step size for each iteration in degrees.
      * @param maxIterations The maximum number of iterations to perform.
-     * @return The optimal shooting angle in degrees.
+     * 
+     * @return The optimal shooting angle in degrees or null.
      */
     public Optional<Double> solve(double initialGuess, double stepSize, int maxIterations) {
         double currentTheta = initialGuess;
@@ -141,7 +142,8 @@ public class PitchCalculator {
     /**
      * The function returns that last calculated angle from the solve() function. 
      * @apiNote It is suggested to call the solve function before executing this function.
-     * @return The current desired angle of the shooter.
+     * 
+     * @return The current desired angle of the shooter or null.
      */
     public Optional<Double> getCurrentbestTheta(){
         return Optional.ofNullable(m_currentbestTheta);
