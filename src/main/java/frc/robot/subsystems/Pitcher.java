@@ -9,8 +9,12 @@ import com.revrobotics.Rev2mDistanceSensor.Unit;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Limelight;
+import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.PitcherConstants;
+import frc.robot.Limelight.Target;
+import frc.robot.general.vision.PitchCalculator;
 
 /**
  * The Pitcher subsystem controls the shooter's pitch angle.
@@ -18,6 +22,8 @@ import frc.robot.Constants.PitcherConstants;
 public class Pitcher extends SubsystemBase {
   private VictorSPX m_leftAngleMotor;
   private VictorSPX m_rightAngleMotor;
+
+  private PitchCalculator m_speakerPitchCalculator;
 
   private Rev2mDistanceSensor m_tof;
 
@@ -27,6 +33,7 @@ public class Pitcher extends SubsystemBase {
   public Pitcher() {
     m_leftAngleMotor = new VictorSPX(PitcherConstants.kLeftAngleMotor);
     m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
+    m_speakerPitchCalculator = new PitchCalculator(FieldConstants.kSpeakerATHeightMeters);
 
     m_tof = new Rev2mDistanceSensor(Port.kOnboard);
 
@@ -96,9 +103,16 @@ public class Pitcher extends SubsystemBase {
     return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
   }
 
+  public double getDesiredAngle() {
+    return m_speakerPitchCalculator.solve(
+        getCurrentAngleDegrees(),
+        PitcherConstants.kPitcherCalculatorStepSize,
+        PitcherConstants.kPitcherCalculatorMaxIterations);
+  }
+
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("TOF DISTANCE", getTofDistanceCM());
-    SmartDashboard.putNumber("ANGLE", getAngleDegrees());
+    m_speakerPitchCalculator.update(Limelight.getDistanceFrom(Target.SPEAKER));
+
   }
 }
