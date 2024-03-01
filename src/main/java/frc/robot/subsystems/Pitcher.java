@@ -33,6 +33,7 @@ public class Pitcher extends SubsystemBase {
   public Pitcher() {
     m_leftAngleMotor = new VictorSPX(PitcherConstants.kLeftAngleMotor);
     m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
+
     m_speakerPitchCalculator = new PitchCalculator(FieldConstants.kSpeakerATHeightMeters);
 
     m_tof = new Rev2mDistanceSensor(Port.kOnboard);
@@ -79,7 +80,7 @@ public class Pitcher extends SubsystemBase {
   /**
    * @return The pitch angle of the mechanism.
    */
-  public double getAngleDegrees() {
+  public double getCurrentAngleDegrees() {
     double tofDistanceCM = getTofDistanceCM();
 
     final double LINEAR_TO_ENDPOINT = PitcherConstants.kEndpointToTrueller + tofDistanceCM
@@ -91,7 +92,7 @@ public class Pitcher extends SubsystemBase {
 
     double denominator = -2 * PitcherConstants.kHingeToEndpoint * PitcherConstants.kLinearToHinge;
 
-    return Math.toDegrees(Math.acos(numerator / denominator)); 
+    return Math.toDegrees(Math.acos(numerator / denominator));
   }
 
   /**
@@ -114,5 +115,8 @@ public class Pitcher extends SubsystemBase {
   public void periodic() {
     m_speakerPitchCalculator.update(Limelight.getDistanceFrom(Target.SPEAKER));
 
+    SmartDashboard.putNumber("ToF Distance", getTofDistanceCM());
+    SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
+    SmartDashboard.putNumber("Desired Angle", m_speakerPitchCalculator.getCurrentbestTheta().orElseGet(() -> -1.0));
   }
 }
