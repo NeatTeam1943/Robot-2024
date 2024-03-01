@@ -9,8 +9,8 @@ import frc.robot.Constants.ShooterConstants;
  * for a projectile given the desired target location and shooting constants.
  * 
  * @Equations
- *            Δx = v0 * cos(θ) * t
- *            Δy = v0 * sin(θ) * t - 0.5 * g * t^2 .
+ *   Δx = v0 * cos(θ) * t <pre>
+ *   Δy = v0 * sin(θ) * t - 0.5 * g * t^2
  */
 public class PitchCalculator {
     private double m_deltaX;
