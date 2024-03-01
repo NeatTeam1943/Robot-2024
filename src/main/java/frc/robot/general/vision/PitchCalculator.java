@@ -65,7 +65,7 @@ public class PitchCalculator {
      * @param maxIterations The maximum number of iterations to perform.
      * @return The optimal shooting angle in degrees.
      */
-    public double solve(double initialGuess, double stepSize, int maxIterations) {
+    public Optional<Double> solve(double initialGuess, double stepSize, int maxIterations) {
         double currentTheta = initialGuess;
         double bestTheta = currentTheta;
         double bestDifference = calculateDifference(currentTheta);
@@ -92,7 +92,7 @@ public class PitchCalculator {
 
         m_currentbestTheta = bestTheta;
 
-        return bestTheta;
+        return Optional.ofNullable(bestTheta);
     }
 
     /**
