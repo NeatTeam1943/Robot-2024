@@ -102,97 +102,88 @@ public class NetworkTables extends SubsystemBase {
   }
 
   /**
-   * @return A NetworkTable table for subscribing , or publishing.
-   *         This method just returns the NetworkTable table
+   * @return A NetworkTable table for subscribing , or publishing. This method just returns the
+   *     NetworkTable table
    */
   public NetworkTable getTable() {
     return m_table;
   }
 
   /**
-   * @param pitch - The pitch value the IMU we use provides
-   *              Sets the NetworkTable value that represents the IMU's pitch
-   *              value as the pitch we provide
+   * @param pitch - The pitch value the IMU we use provides Sets the NetworkTable value that
+   *     represents the IMU's pitch value as the pitch we provide
    */
   public void setImuPitch(double pitch) {
     m_imuPitchPublisher.set(pitch);
   }
 
   /**
-   * @param roll - The roll value the IMU we use provides
-   *             Sets the NetworkTable value that represents the IMU's roll value
-   *             as the pitch we provide
+   * @param roll - The roll value the IMU we use provides Sets the NetworkTable value that
+   *     represents the IMU's roll value as the pitch we provide
    */
   public void setImuRoll(double roll) {
     m_imuRollPublisher.set(roll);
   }
 
   /**
-   * @param yaw - The yaw value the IMU we use provides
-   *            Sets the NetworkTable value that represents the IMU's yaw value as
-   *            the pitch we provide
+   * @param yaw - The yaw value the IMU we use provides Sets the NetworkTable value that represents
+   *     the IMU's yaw value as the pitch we provide
    */
   public void setImuYaw(double yaw) {
     m_imuYawPublisher.set(yaw);
   }
 
   /**
-   * @param velocity - The optimal velocity of the shooter
-   *                 Sets the NetworkTable value that represents the optimal
-   *                 velocity of the shooter
+   * @param velocity - The optimal velocity of the shooter Sets the NetworkTable value that
+   *     represents the optimal velocity of the shooter
    */
   public void setOptimalShooterVelocity(double velocity) {
     m_optimalShooterVelocitPublisher.set(velocity);
   }
 
   /**
-   * @param angle - The optimal angle of the shooter
-   *              Sets the NetworkTable value that represents the optimal angle of
-   *              the shooter
+   * @param angle - The optimal angle of the shooter Sets the NetworkTable value that represents the
+   *     optimal angle of the shooter
    */
   public void setOptimalShooterAngle(double angle) {
     m_optimalShooterAnglePublisher.set(angle);
   }
 
   /**
-   * @param deltaX - The delta X value of the target
-   *               Sets the NetworkTable value that represents the delta Y value
-   *               of the target
+   * @param deltaX - The delta X value of the target Sets the NetworkTable value that represents the
+   *     delta Y value of the target
    */
   public void setDeltaX(double deltaX) {
     m_deltaXPublisher.set(deltaX);
   }
 
   /**
-   * @return A position along the X axis of a screen(the unit is pixels)
-   *         Provides the latest position of the target in the camera's
-   *         screen(along the X axis)
+   * @return A position along the X axis of a screen(the unit is pixels) Provides the latest
+   *     position of the target in the camera's screen(along the X axis)
    */
   public double getScreenX() {
     return m_screenXSubscriber.get();
   }
 
   /**
-   * @return A position along the Y axis of a screen(the unit is pixels)
-   *         Provides the latest position of the target in the camera's
-   *         screen(along the Y axis)
+   * @return A position along the Y axis of a screen(the unit is pixels) Provides the latest
+   *     position of the target in the camera's screen(along the Y axis)
    */
   public double getScreenY() {
     return m_screenYSubscriber.get();
   }
 
   /**
-   * @return The target's pitch from the camera
-   *         Provides the latest pitch value from the target from the camera's
-   *         view
+   * @return The target's pitch from the camera Provides the latest pitch value from the target from
+   *     the camera's view
    */
   public double getTargetPitch() {
     return m_targetPitchSubscriber.get();
   }
 
   /**
-   * @return The target's roll from the camera
-   *         Provides the latest roll value from the target from the camera's view
+   * @return The target's roll from the camera Provides the latest roll value from the target from
+   *     the camera's view
    */
   public double getTargetRoll() {
     return m_targetRollSubscriber.get();
@@ -207,52 +198,48 @@ public class NetworkTables extends SubsystemBase {
   }
 
   /**
-   * @return The IMU pitch value that's registered in the NetworkTables
-   *         Provides the latest IMU pitch value that's in the NetworkTable
+   * @return The IMU pitch value that's registered in the NetworkTables Provides the latest IMU
+   *     pitch value that's in the NetworkTable
    */
   public double getImuPitch() {
     return m_targetPitchSubscriber.get();
   }
 
   /**
-   * @return The IMU roll value that's registered in the NetworkTables
-   *         Provides the latest IMU roll value that's in the NetworkTable
+   * @return The IMU roll value that's registered in the NetworkTables Provides the latest IMU roll
+   *     value that's in the NetworkTable
    */
   public double getImuRoll() {
     return m_imuRollSubscriber.get();
   }
 
   /**
-   * @return The IMU yaw value that's registered in the NetworkTables
-   *         Provides the latest IMU yaw value that's in the NetworkTable
+   * @return The IMU yaw value that's registered in the NetworkTables Provides the latest IMU yaw
+   *     value that's in the NetworkTable
    */
   public double getImuYaw() {
     return m_imuYawSubscriber.get();
   }
 
   /**
-   * @return The optimal velocity of the shooter that's registered in the
-   *         NetworkTables
-   *         Provides the latest optimal velocity of the shooter that's in the
-   *         NetworkTable
+   * @return The optimal velocity of the shooter that's registered in the NetworkTables Provides the
+   *     latest optimal velocity of the shooter that's in the NetworkTable
    */
   public double getOptimalShooterVelocity() {
     return m_optimalShooterVelocitySubscriber.get();
   }
 
   /**
-   * @return The optimal angle of the shooter that's registered in the
-   *         NetworkTables
-   *         Provides the latest optimal angle of the shooter that's in the
-   *         NetworkTable
+   * @return The optimal angle of the shooter that's registered in the NetworkTables Provides the
+   *     latest optimal angle of the shooter that's in the NetworkTable
    */
   public double getOptimalShooterAngle() {
     return m_optimalShooterAngleSubscriber.get();
   }
 
   /**
-   * @return The delta X value of the target that's registered in the NetworkTables
-   * Provides the latest delta Y value of the target that's in the NetworkTable
+   * @return The delta X value of the target that's registered in the NetworkTables Provides the
+   *     latest delta Y value of the target that's in the NetworkTable
    */
   public double getDeltaXAMP() {
     return Limelight.getDistanceFrom(Target.AMP);
@@ -265,7 +252,6 @@ public class NetworkTables extends SubsystemBase {
   public double getDesiredRPM() {
     return 0;
   }
-
 
   @Override
   public void periodic() {

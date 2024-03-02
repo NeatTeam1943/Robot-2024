@@ -9,9 +9,6 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterVision extends ParallelCommandGroup {
   public ShooterVision(Pitcher pitcher, Shooter shooter, NetworkTables nt) {
-    addCommands(
-      new ReachPitchVision(pitcher, nt),
-      new SetVisionShooterRPM(shooter, nt)
-    );
+    addCommands(new ReachPitchVision(pitcher, nt), new SetVisionShooterRPM(shooter, nt));
   }
 }

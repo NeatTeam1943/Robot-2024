@@ -8,13 +8,16 @@ import frc.robot.subsystems.Pitcher;
 import frc.robot.subsystems.Shooter;
 
 /**
- * - Sets the shooter's pitch to a default value.
- * - Sets the shooter velocity to a default value until april tag is visible.
+ * - Sets the shooter's pitch to a default value. - Sets the shooter velocity to a default value
+ * until april tag is visible.
  */
 public class InitializeShooterMode extends ParallelDeadlineGroup {
   public InitializeShooterMode(Pitcher pitcher, Shooter shooter, boolean isApm) {
     super(new SetShooterToDefaultRPM(shooter));
 
-    addCommands(new ReachPitch(pitcher, (isApm) ? ShooterModeConstants.kAmpAngle : ShooterModeConstants.kSpeakerAngle));
+    addCommands(
+        new ReachPitch(
+            pitcher,
+            (isApm) ? ShooterModeConstants.kAmpAngle : ShooterModeConstants.kSpeakerAngle));
   }
 }

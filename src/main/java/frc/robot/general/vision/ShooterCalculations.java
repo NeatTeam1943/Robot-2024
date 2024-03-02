@@ -23,7 +23,8 @@
 //         printResults(v0, theta);
 //     }
 
-//     private static double calculateError(double[] point, double deltaX, double deltaY, double g) {
+//     private static double calculateError(double[] point, double deltaX, double deltaY, double g)
+// {
 //         double v0 = point[0];
 //         double theta = point[1];
 

@@ -1,24 +1,19 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
+import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.TransportConstants;
 
-/**
- * The Transport subsystem controls the robot's note transport mechanism.
- */
+/** The Transport subsystem controls the robot's note transport mechanism. */
 public class Transport extends SubsystemBase {
   private CANSparkMax m_motor;
 
   private DigitalInput m_photoSwitch;
 
-  /**
-   * Constructs the Transport subsystem.
-   */
+  /** Constructs the Transport subsystem. */
   public Transport() {
     m_motor = new CANSparkMax(TransportConstants.kMotor, MotorType.kBrushless);
 
@@ -27,7 +22,7 @@ public class Transport extends SubsystemBase {
 
   /**
    * Sets the motor's speed.
-   * 
+   *
    * @param speed - Sets the speed of the motor.
    */
   public void setBeltsSpeed(double speed) {

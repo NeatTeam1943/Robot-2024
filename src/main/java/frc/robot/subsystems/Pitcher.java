@@ -6,24 +6,19 @@ import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.Rev2mDistanceSensor.Port;
 import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
 import com.revrobotics.Rev2mDistanceSensor.Unit;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.PitcherConstants;
 
-/**
- * The Pitcher subsystem controls the shooter's pitch angle.
- */
+/** The Pitcher subsystem controls the shooter's pitch angle. */
 public class Pitcher extends SubsystemBase {
   private VictorSPX m_leftAngleMotor;
   private VictorSPX m_rightAngleMotor;
 
   private Rev2mDistanceSensor m_tof;
 
-  /**
-   * Constructs the Pitcher subsystem.
-   */
+  /** Constructs the Pitcher subsystem. */
   public Pitcher() {
     m_leftAngleMotor = new VictorSPX(PitcherConstants.kLeftAngleMotor);
     m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
@@ -33,9 +28,7 @@ public class Pitcher extends SubsystemBase {
     setupTof();
   }
 
-  /**
-   * Setups the TOF sensor.
-   */
+  /** Setups the TOF sensor. */
   private void setupTof() {
     m_tof.setRangeProfile(RangeProfile.kHighAccuracy);
     m_tof.setAutomaticMode(true);
@@ -61,7 +54,7 @@ public class Pitcher extends SubsystemBase {
 
   /**
    * Sets the speed at which the pitch motors will move.
-   * 
+   *
    * @param speed - The speed at which the pitch motors move.
    */
   public void setAngleMotorsSpeed(double speed) {
@@ -75,21 +68,21 @@ public class Pitcher extends SubsystemBase {
   public double getAngleDegrees() {
     double tofDistanceCM = getTofDistanceCM();
 
-    final double LINEAR_TO_ENDPOINT = PitcherConstants.kEndpointToTrueller + tofDistanceCM
-        + PitcherConstants.kTofToBase;
+    final double LINEAR_TO_ENDPOINT =
+        PitcherConstants.kEndpointToTrueller + tofDistanceCM + PitcherConstants.kTofToBase;
 
-    double numerator = (LINEAR_TO_ENDPOINT * LINEAR_TO_ENDPOINT)
-        - (PitcherConstants.kHingeToEndpoint * PitcherConstants.kHingeToEndpoint)
-        - (PitcherConstants.kLinearToHinge * PitcherConstants.kLinearToHinge);
+    double numerator =
+        (LINEAR_TO_ENDPOINT * LINEAR_TO_ENDPOINT)
+            - (PitcherConstants.kHingeToEndpoint * PitcherConstants.kHingeToEndpoint)
+            - (PitcherConstants.kLinearToHinge * PitcherConstants.kLinearToHinge);
 
     double denominator = -2 * PitcherConstants.kHingeToEndpoint * PitcherConstants.kLinearToHinge;
 
-    return Math.toDegrees(Math.acos(numerator / denominator)); 
+    return Math.toDegrees(Math.acos(numerator / denominator));
   }
 
   /**
    * @param angle - The angle that we want to check.
-   * 
    * @return If angle is in the robot's range.
    */
   public boolean isInRange(double angle) {

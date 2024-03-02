@@ -4,7 +4,6 @@ import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
-
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -13,17 +12,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
 import frc.robot.general.Odometry;
-import frc.robot.general.RobotHeading;
 import frc.robot.general.RobotHeadingUtils;
 
-/**
- * The DriveTrain subsystem controls the robot's drive system.
- */
+/** The DriveTrain subsystem controls the robot's drive system. */
 public class DriveTrain extends SubsystemBase {
-  /**
-   * Masters are rear motors and Followers are front motors.
-   */
+  /** Masters are rear motors and Followers are front motors. */
   private TalonFX m_leftFollower;
+
   private TalonFX m_leftMaster;
   private TalonFX m_rightFollower;
   private TalonFX m_rightMaster;
@@ -41,16 +36,12 @@ public class DriveTrain extends SubsystemBase {
 
   private DifferentialDrive m_drive;
 
-  /**
-   * Constructs the DriveTrain subsystem with motor controllers and sets up
-   * follower behavior.
-   */
+  /** Constructs the DriveTrain subsystem with motor controllers and sets up follower behavior. */
   public DriveTrain() {
     m_leftMaster = new TalonFX(DriveTrainConstants.kLeftRear);
     m_rightMaster = new TalonFX(DriveTrainConstants.kRightRear);
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
-
 
     m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
@@ -71,7 +62,8 @@ public class DriveTrain extends SubsystemBase {
         m_odometry::getCurrentPosMeters,
         m_odometry::resetPP,
         m_odometry::getCurrentChassisSpeeds,
-        chassisSpeeds -> driveArcade(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond),
+        chassisSpeeds ->
+            driveArcade(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond),
         new ReplanningConfig(),
         m_odometry::isRedAlliance,
         this);
@@ -85,9 +77,7 @@ public class DriveTrain extends SubsystemBase {
     m_odometry.updateRobotPoseOnField();
   }
 
-  /**
-   * Sets the motor inversions based on the current robot heading.
-   */
+  /** Sets the motor inversions based on the current robot heading. */
   public void setMotorInversions() {
     m_left.setInverted(m_currentHeading.isIntakeMode());
     m_right.setInverted(!m_currentHeading.isIntakeMode());
@@ -100,7 +90,9 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
-    m_drive.arcadeDrive(m_limiter.calculate(movement), m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
+    m_drive.arcadeDrive(
+        m_limiter.calculate(movement),
+        m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
   }
 
   /**
@@ -117,14 +109,14 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), x);
   }
 
-  public double getUltraSonic(){
+  public double getUltraSonic() {
     return m_ultraSonic.getVoltage() * 9.77;
   }
 
   /**
    * Drives the robot using tank drive control.
    *
-   * @param left  - The speed for the left side of the robot.
+   * @param left - The speed for the left side of the robot.
    * @param right - The speed for the right side of the robot.
    */
   public void driveTank(double left, double right) {
@@ -236,9 +228,7 @@ public class DriveTrain extends SubsystemBase {
     return (getLeftMasterVelocity() + getRightMasterVelocity()) / 2;
   }
 
-  /**
-   * Resets the encoders of all motors to zero.
-   */
+  /** Resets the encoders of all motors to zero. */
   public void resetEncoders() {
     m_leftMaster.setPosition(0);
     m_rightMaster.setPosition(0);
@@ -246,7 +236,7 @@ public class DriveTrain extends SubsystemBase {
     m_rightFollower.setPosition(0);
   }
 
- /**
+  /**
    * Rotates the robot using arcade drive control.
    *
    * @param rotationSpeed - The speed of the rotation.

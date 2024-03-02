@@ -5,108 +5,105 @@ import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.Constants.MeasurementConstants;
 
-/**
- * The Limelight class provides methods to interact with the Limelight vision
- * system.
- */
+/** The Limelight class provides methods to interact with the Limelight vision system. */
 public class Limelight {
 
-    /**
-     * Enum representing different vision targets.
-     */
-    public static enum Target {
-        AMP(FieldConstants.kAmpATHeightMeters, new double[] { FieldConstants.kAmpATId }),
-        SPEAKER(FieldConstants.kSpeakerATHeightMeters, new double[] { FieldConstants.kSpeakerATFirstId, FieldConstants.kSpeakerATSecondId }),
-        HUMAN_PLAYER(FieldConstants.kHumanPlayerATHeightMeters, new double[] { FieldConstants.kHumanATPlayerId });
+  /** Enum representing different vision targets. */
+  public static enum Target {
+    AMP(FieldConstants.kAmpATHeightMeters, new double[] {FieldConstants.kAmpATId}),
+    SPEAKER(
+        FieldConstants.kSpeakerATHeightMeters,
+        new double[] {FieldConstants.kSpeakerATFirstId, FieldConstants.kSpeakerATSecondId}),
+    HUMAN_PLAYER(
+        FieldConstants.kHumanPlayerATHeightMeters, new double[] {FieldConstants.kHumanATPlayerId});
 
-        private double m_goalHeight;
-        private double[] m_aprilTagIds;
+    private double m_goalHeight;
+    private double[] m_aprilTagIds;
 
-        private Target(double goalHeight, double[] aprilTagIds) {
-            m_goalHeight = goalHeight;
-            m_aprilTagIds = aprilTagIds;
-        }
-
-        /**
-         * Gets the goal height associated with the target.
-         * 
-         * @return The goal height in meters.
-         */
-        public double getGoalHeight() {
-            return m_goalHeight;
-        }
-
-        /**
-         * Gets the array of AprilTag IDs associated with the target.
-         * 
-         * @return The array of AprilTag IDs.
-         */
-        public double[] getAprilTagIds() {
-            return m_aprilTagIds;
-        }
+    private Target(double goalHeight, double[] aprilTagIds) {
+      m_goalHeight = goalHeight;
+      m_aprilTagIds = aprilTagIds;
     }
 
     /**
-     * Displays the Limelight axes values on the SmartDashboard.
+     * Gets the goal height associated with the target.
+     *
+     * @return The goal height in meters.
      */
-    public static void showAxes() {
-        double yaw = LimelightHelpers.getTX("limelight-nt");
-        double pitch = LimelightHelpers.getTY("limelight-nt");
-        double roll = LimelightHelpers.getTA("limelight-nt");
-
-        SmartDashboard.putNumber("YAW", yaw);
-        SmartDashboard.putNumber("PITCH", pitch);
-        SmartDashboard.putNumber("ROLL", roll);
+    public double getGoalHeight() {
+      return m_goalHeight;
     }
 
     /**
-     * Gets the target yaw angle from the Limelight.
-     * 
-     * @return The target yaw angle in degrees.
+     * Gets the array of AprilTag IDs associated with the target.
+     *
+     * @return The array of AprilTag IDs.
      */
-    public static double getTargetYaw() {
-        return LimelightHelpers.getTX("limelight-nt");
+    public double[] getAprilTagIds() {
+      return m_aprilTagIds;
     }
+  }
 
-    /**
-     * Checks if the Limelight has a target in view.
-     * 
-     * @return True if a target is present, false otherwise.
-     */
-    public static boolean hasTarget() {
-        return LimelightHelpers.getTV("limelight-nt");
-    }
+  /** Displays the Limelight axes values on the SmartDashboard. */
+  public static void showAxes() {
+    double yaw = LimelightHelpers.getTX("limelight-nt");
+    double pitch = LimelightHelpers.getTY("limelight-nt");
+    double roll = LimelightHelpers.getTA("limelight-nt");
 
-    /**
-     * Gets the area of the target from the Limelight.
-     * 
-     * @return The target area.
-     */
-    public static double getTargetArea() {
-        return LimelightHelpers.getTA("limelight-nt");
-    }
+    SmartDashboard.putNumber("YAW", yaw);
+    SmartDashboard.putNumber("PITCH", pitch);
+    SmartDashboard.putNumber("ROLL", roll);
+  }
 
-    /**
-     * Calculates the distance from the Limelight to a specified target.
-     * 
-     * @param target The target for which the distance is calculated.
-     * @return The distance from the Limelight to the target in meters.
-     */
-    public static double getDistanceFrom(Target target) {
-        double targetOffsetAngle_Vertical = LimelightHelpers.getTY(LimeLightConstants.kLimelightName);
+  /**
+   * Gets the target yaw angle from the Limelight.
+   *
+   * @return The target yaw angle in degrees.
+   */
+  public static double getTargetYaw() {
+    return LimelightHelpers.getTX("limelight-nt");
+  }
 
-        double limelightMountAngleDegrees = LimeLightConstants.kLimelightPitch;
+  /**
+   * Checks if the Limelight has a target in view.
+   *
+   * @return True if a target is present, false otherwise.
+   */
+  public static boolean hasTarget() {
+    return LimelightHelpers.getTV("limelight-nt");
+  }
 
-        double limelightLensHeightInches = FieldConstants.kCameraHeightMeters * MeasurementConstants.kMeterToInches;
+  /**
+   * Gets the area of the target from the Limelight.
+   *
+   * @return The target area.
+   */
+  public static double getTargetArea() {
+    return LimelightHelpers.getTA("limelight-nt");
+  }
 
-        double goalHeightInches = target.getGoalHeight() * MeasurementConstants.kMeterToInches;
+  /**
+   * Calculates the distance from the Limelight to a specified target.
+   *
+   * @param target The target for which the distance is calculated.
+   * @return The distance from the Limelight to the target in meters.
+   */
+  public static double getDistanceFrom(Target target) {
+    double targetOffsetAngle_Vertical = LimelightHelpers.getTY(LimeLightConstants.kLimelightName);
 
-        double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
-        double angleToGoalRadians = angleToGoalDegrees * (MeasurementConstants.kDegToRad);
+    double limelightMountAngleDegrees = LimeLightConstants.kLimelightPitch;
 
-        double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)
-                / Math.tan(angleToGoalRadians);
+    double limelightLensHeightInches =
+        FieldConstants.kCameraHeightMeters * MeasurementConstants.kMeterToInches;
 
-        return distanceFromLimelightToGoalInches * MeasurementConstants.kInchesToMeters;
-    }
+    double goalHeightInches = target.getGoalHeight() * MeasurementConstants.kMeterToInches;
+
+    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+    double angleToGoalRadians = angleToGoalDegrees * (MeasurementConstants.kDegToRad);
+
+    double distanceFromLimelightToGoalInches =
+        (goalHeightInches - limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+
+    return distanceFromLimelightToGoalInches * MeasurementConstants.kInchesToMeters;
+  }
 }

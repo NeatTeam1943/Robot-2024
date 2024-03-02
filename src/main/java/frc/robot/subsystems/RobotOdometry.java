@@ -1,12 +1,11 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.RobotDataConstants;
-
-import com.ctre.phoenix6.hardware.Pigeon2;
 
 /*
  * RobotOdometry contains data from spatial sensors.
@@ -28,7 +27,6 @@ public class RobotOdometry {
   public void setPosition2D(Pose2d position) {
     // Implement logic to set position
   }
-
 
   public boolean isSpeakerVisible() {
     // Implement logic to check speaker visibility
@@ -52,7 +50,7 @@ public class RobotOdometry {
    * Sets position of robot in a 3d field.
    */
   public void setPosition3D(Pose3d position) {
-    // Implement logic to set   
+    // Implement logic to set
   }
 
   /*
@@ -149,6 +147,7 @@ public class RobotOdometry {
 
   /**
    * Gets the single instance of RobotData.
+   *
    * @return the instance of RobotData
    */
   public static RobotOdometry getInstance() {
@@ -158,7 +157,7 @@ public class RobotOdometry {
     return instance;
   }
 
-  public double getAngularVelocityRads(){
+  public double getAngularVelocityRads() {
     return m_imu.getRate() * MeasurementConstants.kDegreesPerSecToRadsPerSec;
   }
 }

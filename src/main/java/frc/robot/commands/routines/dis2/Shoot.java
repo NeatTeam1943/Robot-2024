@@ -16,7 +16,6 @@ public class Shoot extends SequentialCommandGroup {
         m_commands.transportIntake(0.05, -0.7),
         new WaitCommand(0.5),
         m_commands.shoot(0),
-        m_commands.transportIntake(0, 0)
-    );
+        m_commands.transportIntake(0, 0));
   }
 }

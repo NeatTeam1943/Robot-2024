@@ -39,8 +39,11 @@ public abstract class TurnToAngleBase extends Command {
 
   @Override
   public void execute() {
-    double pidSpeed = MathUtil.clamp(m_controller.calculate(m_odometry.getHeading()),
-        DriveTrainConstants.kRotationClampLow, DriveTrainConstants.kRotationClampHigh);
+    double pidSpeed =
+        MathUtil.clamp(
+            m_controller.calculate(m_odometry.getHeading()),
+            DriveTrainConstants.kRotationClampLow,
+            DriveTrainConstants.kRotationClampHigh);
 
     m_drive.rotateRobot(pidSpeed);
 
@@ -66,12 +69,12 @@ public abstract class TurnToAngleBase extends Command {
 
     if (positionError != 0) {
       String errorType = (positionError > 0) ? "PositionError" : "NegativeError";
-      SmartDashboard.putString("TurnToAngle",
-          String.format("%s: %s, Target: %s", errorType, positionError, target));
+      SmartDashboard.putString(
+          "TurnToAngle", String.format("%s: %s, Target: %s", errorType, positionError, target));
 
       SmartDashboard.putNumber("IMU HEADING", m_odometry.getHeading());
       SmartDashboard.putNumber("ERROR", positionError);
-          
+
       double heading = m_odometry.getHeading();
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 
@@ -90,13 +93,15 @@ public abstract class TurnToAngleBase extends Command {
 
   /**
    * @param targetAngle - The PID's desired angle setpoint.
-   * @return A PID controller with the correct P, I, and D values. The P, I, and D
-   *         values are multiplied by the constant from getN()
+   * @return A PID controller with the correct P, I, and D values. The P, I, and D values are
+   *     multiplied by the constant from getN()
    */
   private PIDController getPID(double targetAngle) {
     final double N = getMultConstant(targetAngle);
 
-    return new PIDController(DriveTrainConstants.kRotationP * N, DriveTrainConstants.kRotationI * N,
+    return new PIDController(
+        DriveTrainConstants.kRotationP * N,
+        DriveTrainConstants.kRotationI * N,
         DriveTrainConstants.kRotationD * N);
   }
 

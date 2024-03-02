@@ -1,14 +1,11 @@
 package frc.robot.commands.pitcherCommands;
 
-import java.util.function.Supplier;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Pitcher;
+import java.util.function.Supplier;
 
-/**
- * Abstract base command for controlling the pitch of the shooting mechanism.
- */
+/** Abstract base command for controlling the pitch of the shooting mechanism. */
 public abstract class ReachPitchBase extends Command {
   private Pitcher m_pitcher;
 
@@ -29,12 +26,9 @@ public abstract class ReachPitchBase extends Command {
   }
 
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
-  /**
-   * Sets the motor speed based on the current pitch and the desired setpoint.
-   */
+  /** Sets the motor speed based on the current pitch and the desired setpoint. */
   @Override
   public void execute() {
     m_currentPitch = m_pitcher.getAngleDegrees();
@@ -56,9 +50,7 @@ public abstract class ReachPitchBase extends Command {
     m_pitcher.setAngleMotorsSpeed(0);
   }
 
-  /**
-   * Checks if the desired pitch has been reached or if it's out of range.
-   */
+  /** Checks if the desired pitch has been reached or if it's out of range. */
   @Override
   public boolean isFinished() {
     boolean shouldFinish = Math.abs(m_error) <= 0.2;
