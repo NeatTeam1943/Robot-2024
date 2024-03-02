@@ -7,9 +7,7 @@ import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Transport;
 
-/**
- * Intakes the note into the robot.
- */
+/** Intakes the note into the robot. */
 public class IntakeNote extends Command {
   private Intake m_intake;
 
@@ -19,8 +17,8 @@ public class IntakeNote extends Command {
 
   /**
    * Creates a new IntakeNote Command.
-   * 
-   * @param intake    - An Intake subsystem instant.
+   *
+   * @param intake - An Intake subsystem instant.
    * @param transport - A transport subsystem instant.
    */
   public IntakeNote(Intake intake, Transport transport) {

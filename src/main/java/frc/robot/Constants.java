@@ -37,7 +37,8 @@ public final class Constants {
     public static final double kGearRatio = 10.71 / 1;
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
-    public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+    public static final double kEncoderSensorRotationsToMeters =
+        Math.PI * kWheelDiameterMeters / kGearRatio;
 
     public static final double kRotationP = 0.013095;
     public static final double kRotationI = 0.000005;
@@ -96,29 +97,24 @@ public final class Constants {
     public static final double kMinAngle = 36; // TODO: Add angle
     public static final double kMaxAngle = 70; // TODO: Add angle
 
-    /**
-     * kTofToBase - The distance between the TOF sensor to the base of the robot
-     * (CM).
-     */
+    /** kTofToBase - The distance between the TOF sensor to the base of the robot (CM). */
     public static final double kTofToBase = 27;
 
     /**
-     * kLinearToHinge - The distance between the hinge of the shooter to the bottom
-     * of the linear
+     * kLinearToHinge - The distance between the hinge of the shooter to the bottom of the linear
      * motor (CM).
      */
     public static final double kLinearToHinge = 40;
 
     /**
-     * kHingeToEndpoint - The distance between the hinge of the shooter to the tip
-     * of the linear motor (CM).
+     * kHingeToEndpoint - The distance between the hinge of the shooter to the tip of the linear
+     * motor (CM).
      */
     public static final double kHingeToEndpoint = 53;
 
     /**
-     * kEndpointToTrueller - The distance between the palestinian build that marks
-     * the
-     * endpoint of the TOF sensor range to the endpoint of the robot.
+     * kEndpointToTrueller - The distance between the palestinian build that marks the endpoint of
+     * the TOF sensor range to the endpoint of the robot.
      */
     public static final double kEndpointToTrueller = 1;
   }

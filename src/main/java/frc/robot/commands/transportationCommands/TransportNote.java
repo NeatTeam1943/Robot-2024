@@ -4,16 +4,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.TransportConstants;
 import frc.robot.subsystems.Transport;
 
-/**
- * Transports the note to the shooter.
- */
+/** Transports the note to the shooter. */
 public class TransportNote extends Command {
   private Transport m_transport;
   private boolean m_frontOfTheNotePassedTheSwitch, m_backOfTheNotePassedTheSwitch;
 
   /**
    * Creates a new TransportNote command.
-   * 
+   *
    * @param transport - A Transport subsystem instant.
    */
   public TransportNote(Transport transport) {

@@ -2,9 +2,7 @@ package frc.robot.commands.shooterCommands;
 
 import frc.robot.subsystems.Shooter;
 
-/**
- * Sets desired RPM for the shooter
- */
+/** Sets desired RPM for the shooter */
 public class SetShooterRPM extends SetShooterRPMBase {
   private double m_setpoint;
 

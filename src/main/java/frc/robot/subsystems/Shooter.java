@@ -1,21 +1,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
-/**
- * The Shooter subsystem controls the robot's shooting-mechanism.
- */
+/** The Shooter subsystem controls the robot's shooting-mechanism. */
 public class Shooter extends SubsystemBase {
   private TalonFX m_leftShooterMotor;
   private TalonFX m_rightShooterMotor;
 
-  /**
-   * Constructs the Shooter subsystem with motor controllers and sensors.
-   */
+  /** Constructs the Shooter subsystem with motor controllers and sensors. */
   public Shooter() {
     m_leftShooterMotor = new TalonFX(ShooterConstants.kLeftShooterMotor);
     m_rightShooterMotor = new TalonFX(ShooterConstants.kRightShooterMotor);
@@ -26,7 +20,7 @@ public class Shooter extends SubsystemBase {
 
   /**
    * Sets the speed of the motors for initiating the mechanism.
-   * 
+   *
    * @param speed - The speed at which the shooter motors will rotate.
    */
   public void setShooterMotorsSpeed(double speed) {

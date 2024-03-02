@@ -12,9 +12,7 @@ import frc.robot.subsystems.Transport;
 public class TransportToShoot extends ParallelDeadlineGroup {
   public TransportToShoot(Pitcher pitcher, Shooter shooter, Transport transport, NetworkTables nt) {
     super(new IsInMode(RobotHeading.SHOOTER));
-    
-    addCommands(
-        new ShooterVision(pitcher, shooter, nt),
-        new TransportNote(transport));
+
+    addCommands(new ShooterVision(pitcher, shooter, nt), new TransportNote(transport));
   }
 }
