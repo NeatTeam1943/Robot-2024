@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.LimeLightConstants;
 import frc.robot.Constants.MeasurementConstants;
+import frc.robot.Constants.VisionConstants;
 
 /**
  * The Limelight class provides methods to interact with the Limelight vision
@@ -107,6 +108,6 @@ public class Limelight {
         double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)
                 / Math.tan(angleToGoalRadians);
 
-        return distanceFromLimelightToGoalInches * MeasurementConstants.kInchesToMeters;
+        return distanceFromLimelightToGoalInches * MeasurementConstants.kInchesToMeters - VisionConstants.kLimelightToBamperMeters;
     }
 }
