@@ -164,7 +164,7 @@ public class PitchCalculator {
         double stepSize = 0.05; // degrees
         int maxIterations = 3000;
 
-        double solution = solver.solve(initialGuess, stepSize, maxIterations);
-        System.out.println("Test Case: Optimal angle (degrees): " + solution);
+        Optional<Double> solution = solver.solve(initialGuess, stepSize, maxIterations);
+        System.out.println("Test Case: Optimal angle (degrees): " + solution.orElse(solver.getCurrentbestTheta().get()));
     }
 }
