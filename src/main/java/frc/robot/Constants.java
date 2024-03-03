@@ -137,4 +137,18 @@ public final class Constants {
   public static class ShooterModeConstants {
     public static final int kDefaultPitcherAngle = -0;
   }
+
+  public static class BlinkinConstants {
+    public static final int kBlinkinPort = 0;
+
+    public static final double kOrange = 0.63;
+    public static final double kBlue = 0.87;
+    public static final double kGreen = 0.71;
+    public static final double kRainBow = -0.93;
+    public static final double kLime = -0.73;
+    public static final double kRed = 0.61;
+    public static final double kWhite = -0.05;
+    public static final double kViolet = 0.91;
+    public static final double kDarkGreen = 0.75;
+  }
 }
