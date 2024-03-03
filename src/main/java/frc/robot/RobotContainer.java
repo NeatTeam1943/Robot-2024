@@ -40,6 +40,8 @@ public class RobotContainer {
   private final SendableChooser<Command> m_autoChooser;
   private final Map<String, Command> m_commands;
 
+  LedDriver m_blinkin = new LedDriver();
+  
   public RobotContainer() {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     m_odometry = RobotOdometry.getInstance();
