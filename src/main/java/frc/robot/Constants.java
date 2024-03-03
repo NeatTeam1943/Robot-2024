@@ -20,6 +20,7 @@ public final class Constants {
   public static class VisionConstants {
     public static final double kLimelightPitch = 8.16;
     public static final double kLimelightHeightMeters = 0.76;
+    public static final double kLimelightToBamperMeters = 0.15;
 
     public static final String kLimelightName = "limelight-nt";
   }
@@ -108,7 +109,7 @@ public final class Constants {
      * kTofToBase - The distance between the TOF sensor to the base of the robot
      * (CM).
      */
-    public static final double kTofToBase = 27;
+    public static final double kTofToBase = 29;
 
     /**
      * kLinearToHinge - The distance between the hinge of the shooter to the bottom
@@ -128,26 +129,27 @@ public final class Constants {
      * the
      * endpoint of the TOF sensor range to the endpoint of the robot.
      */
-    public static final double kEndpointToTrueller = 1;
+    public static final double kEndpointToTrueller = 1 / 2;
   }
 
   public static class FieldConstants {
     public static final int kAmpATId = 5;
-    public static final int kSpeakerATFirstId = 6;
+    public static final int kSpeakerATFirstId = 8;
     public static final int kSpeakerATSecondId = 7;
     public static final int kHumanATPlayerId = 7;
     public static final int kTrapATId = 7;
 
-    public static final double kCameraHeightMeters = 0.395;
+    public static final double kCameraHeightMeters = 0.295;
 
     public static final double kAmpATHeightMeters = 1.37;
-    public static final double kSpeakerATHeightMeters = -0;
+    public static final double kSpeakerATHeightMeters = 1.45;
+    public static final double kMiddleSpeakerHeightMeters = 2.045;
     public static final double kTrapATHeightMeters = -0;
     public static final double kHumanPlayerATHeightMeters = -0;
   }
 
   public static class LimeLightConstants {
-    public static final double kLimelightPitch = 1.631;
+    public static final double kLimelightPitch = 48.02;
     public static final String kLimelightName = "limelight-nt";
   }
 
@@ -156,11 +158,11 @@ public final class Constants {
   }
 
   public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = 37;
+    public static final int kDefaultPitcherAngle = 39;
   }
 
   public static class ShooterModeConstants {
-    public static final int kAmpAngle = 36;
-    public static final int kSpeakerAngle = 52;
+    public static final int kAmpAngle = 39;
+    public static final int kSpeakerAngle = 54;
   }
 }
