@@ -25,8 +25,8 @@ public class LedDriver extends SubsystemBase {
     m_chooser.addOption("White", Color.WHITE);
     m_chooser.addOption("Violet", Color.VIOLET);
     m_chooser.addOption("Dark Green", Color.DARK_GREEN);
+    m_chooser.addOption("Hot Pink", Color.HOT_PINK);
 
-    SmartDashboard.putData("Led Driver", this);
     SmartDashboard.putData("Color", m_chooser);
   }
   
@@ -39,7 +39,8 @@ public class LedDriver extends SubsystemBase {
     RED(BlinkinConstants.kRed),
     WHITE(BlinkinConstants.kWhite),
     VIOLET(BlinkinConstants.kViolet),
-    DARK_GREEN(BlinkinConstants.kDarkGreen);
+    DARK_GREEN(BlinkinConstants.kDarkGreen),
+    HOT_PINK(BlinkinConstants.kHotPink);
 
     private double m_color;
 
@@ -61,9 +62,7 @@ public class LedDriver extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {  
-    System.out.println(m_chooser.getSelected() + " " + m_chooser.getSelected().getColor());
-    setColor(m_chooser.getSelected().getColor());
-    // setColor(-0.59);
+  public void periodic() {
+    setColor(m_chooser.getSelected());
   }
 }
