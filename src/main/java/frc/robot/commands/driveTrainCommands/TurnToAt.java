@@ -10,6 +10,6 @@ public class TurnToAt extends TurnToAngleBase {
 
   @Override
   protected double getTargetAngle() {
-    return -(Limelight.getTargetYaw() / 2);
+    return -(Limelight.getTargetYaw());
   }
 }

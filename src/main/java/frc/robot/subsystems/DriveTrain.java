@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 
@@ -51,10 +52,11 @@ public class DriveTrain extends SubsystemBase {
     m_leftFollower = new TalonFX(DriveTrainConstants.kLeftFront);
     m_rightFollower = new TalonFX(DriveTrainConstants.kRightFront);
 
-
     m_left = new MotorControllerGroup(m_leftMaster, m_leftFollower);
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
+    setMotorMode(NeutralModeValue.Coast);
+    
     m_currentHeading = RobotHeadingUtils.getInstance();
 
     m_ultraSonic = new AnalogInput(0);
@@ -101,6 +103,13 @@ public class DriveTrain extends SubsystemBase {
    */
   public void driveArcade(double movement, double rotation) {
     m_drive.arcadeDrive(m_limiter.calculate(movement), m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
+  }
+
+  public void setMotorMode(NeutralModeValue value){
+      m_rightMaster.setNeutralMode(value);
+      m_rightFollower.setNeutralMode(value);
+      m_leftMaster.setNeutralMode(value);
+      m_leftFollower.setNeutralMode(value);
   }
 
   /**

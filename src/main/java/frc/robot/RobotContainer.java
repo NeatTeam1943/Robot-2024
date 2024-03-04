@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.RobotDataConstants;
 import frc.robot.commands.HeadingCommands.ChangeMode;
 import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
@@ -33,6 +34,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
 import frc.robot.commands.driveTrainCommands.PassLine;
+import frc.robot.commands.driveTrainCommands.TurnToAngle;
+import frc.robot.commands.driveTrainCommands.TurnToAt;
 import frc.robot.commands.pitcherCommands.ReachPitch;
 
 public class RobotContainer {
@@ -99,7 +102,13 @@ public class RobotContainer {
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
     
-    m_driverController.x().onTrue(new InvertDrive(m_drive));    
+    m_driverController.x().onTrue(new InvertDrive(m_drive));  
+
+    m_driverController.a().onTrue(new TurnToAngle(m_drive, -45));
+
+    m_driverController.start().onTrue(new TurnToAt(m_drive));
+
+    m_driverController.y().onTrue(new InstantCommand(() -> RobotOdometry.getInstance().setHeading(0)));
 
     m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));

@@ -39,9 +39,9 @@ public final class Constants {
 
     public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
 
-    public static final double kRotationP = 0.013095;
+    public static final double kRotationP = 0.012595;
     public static final double kRotationI = 0.000005;
-    public static final double kRotationD = 0.000322;
+    public static final double kRotationD = 0.000382;
 
     public static final double kRotationClampHigh = 0.75;
     public static final double kRotationClampLow = -0.75;
@@ -58,7 +58,7 @@ public final class Constants {
   public static class TransportConstants {
     public static final int kMotor = 6;
 
-    public static final int kPhotoSwitch = 1;
+    public static final int kPhotoSwitch = 9;
     public static final double kBeltsSpeed = 0.5;
   }
 

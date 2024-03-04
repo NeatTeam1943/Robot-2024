@@ -66,7 +66,7 @@ public class Pitcher extends SubsystemBase {
    */
   public void setAngleMotorsSpeed(double speed) {
     m_leftAngleMotor.set(VictorSPXControlMode.PercentOutput, speed);
-    m_rightAngleMotor.set(VictorSPXControlMode.PercentOutput, speed);
+    m_rightAngleMotor.set(VictorSPXControlMode.PercentOutput, speed < 0 ? speed + 0.04 : speed - 0.04);
   }
 
   /**

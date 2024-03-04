@@ -17,6 +17,7 @@ public class InvertDrive extends InstantCommand {
 
   @Override
   public void initialize() {
+    System.out.println(String.format("HEADING %s", m_heading.getRobotHeading()));
     m_heading.toggleHeading();
     m_drive.setMotorInversions();
   }
