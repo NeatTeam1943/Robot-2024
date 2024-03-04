@@ -111,7 +111,8 @@ public class RobotContainer {
 
     m_driverController.y().onTrue(new InstantCommand(() -> RobotOdometry.getInstance().setHeading(0)));
 
-    m_pitcher.setDefaultCommand(new ReachPitchVision(m_pitcher));
+    // m_pitcher.setDefaultCommand(new ReachPitchVision(m_pitcher));
+    m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
 
     // m_shooter.setDefaultCommand(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0),m_shooter));
