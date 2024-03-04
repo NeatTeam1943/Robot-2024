@@ -93,8 +93,8 @@ public abstract class TurnToAngleBase extends Command {
     double positionError = m_controller.getPositionError();
     double target = getRobotTargetAngle();
 
-    final double NEGETIVE_TOLERENCE = 2.5;
-    final double POSITIVE_TOLERENCE = -2.5;
+    final double NEGETIVE_TOLERENCE = 8;
+    final double POSITIVE_TOLERENCE = -8;
 
     if (positionError != 0) {
       String errorType = (positionError > 0) ? "PositionError" : "NegativeError";

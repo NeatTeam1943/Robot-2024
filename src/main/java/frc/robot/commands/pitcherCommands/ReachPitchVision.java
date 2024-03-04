@@ -22,9 +22,9 @@ public class ReachPitchVision extends ReachPitchBase {
     return () -> m_pitcher.getDesiredAngle();
   }
 
-  @Override
-  public boolean isFinished(){
-    // return !Limelight.hasTarget();
-    return false;
-  }
+  // @Override
+  // public boolean isFinished(){
+  //   // return !Limelight.hasTarget();
+  //   return false;
+  // }
 }

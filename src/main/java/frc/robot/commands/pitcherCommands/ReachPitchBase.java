@@ -43,10 +43,11 @@ public abstract class ReachPitchBase extends Command {
 
     m_error = m_currentPitch - setpoint;
 
-    double speed = m_error < 0 ? -.9 : .9;
+    double speed = m_error < 0 ? -0.5 : 0.5;
 
+    SmartDashboard.putNumber("error but abs", Math.abs(m_error));
     SmartDashboard.putNumber("Current power", speed);
-    SmartDashboard.putNumber("ERROR", m_error);
+    SmartDashboard.putNumber("ERROR TOF!!!!11!!1!11!", m_error);
 
     m_pitcher.setAngleMotorsSpeed(speed);
   }
@@ -61,7 +62,7 @@ public abstract class ReachPitchBase extends Command {
    */
   @Override
   public boolean isFinished() {
-    boolean shouldFinish = Math.abs(m_error) <= 0.2;
+    boolean shouldFinish = Math.abs(m_error) <= 0.01;
     SmartDashboard.putBoolean("FINISH?", shouldFinish);
 
     return shouldFinish;

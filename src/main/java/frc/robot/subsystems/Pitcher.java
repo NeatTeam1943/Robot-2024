@@ -93,7 +93,7 @@ public class Pitcher extends SubsystemBase {
     double denominator = -2 * PitcherConstants.kHingeToEndpoint * PitcherConstants.kLinearToHinge;
 
     // return Math.toDegrees(Math.acos(numerator / denominator));
-    return tofDistanceCM * 100;
+    return tofDistanceCM / 100;
   }
 
   /**
@@ -129,5 +129,6 @@ public class Pitcher extends SubsystemBase {
     SmartDashboard.putNumber("ToF Distance", getTofDistanceCM());
     SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
     SmartDashboard.putNumber("Desired Angle", getDesiredAngle());
+    SmartDashboard.putBoolean("has target", Limelight.hasTarget());
   }
 }
