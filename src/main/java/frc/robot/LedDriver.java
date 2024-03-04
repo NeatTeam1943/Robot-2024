@@ -28,8 +28,6 @@ public class LedDriver extends SubsystemBase {
 
     SmartDashboard.putData("Led Driver", this);
     SmartDashboard.putData("Color", m_chooser);
-
-    setColor(-0.51);
   }
   
   public enum Color {
@@ -65,7 +63,7 @@ public class LedDriver extends SubsystemBase {
   @Override
   public void periodic() {  
     System.out.println(m_chooser.getSelected() + " " + m_chooser.getSelected().getColor());
-    // setColor(m_chooser.getSelected().getColor());
+    setColor(m_chooser.getSelected().getColor());
     // setColor(-0.59);
   }
 }
