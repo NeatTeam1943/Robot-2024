@@ -20,6 +20,8 @@ import java.util.Map;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.wpilibj.event.BooleanEvent;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,19 +37,23 @@ public class RobotContainer {
   private final Pitcher m_pitcher;
   private final Shooter m_shooter;
   private final Intake m_intake;
-  private final Transport m_transport; 
+  private final Transport m_transport;
 
   private final SendableChooser<Command> m_autoChooser;
   private final Map<String, Command> m_commands;
 
-  LedDriver m_blinkin = new LedDriver();
-  
+  private final EventLoop m_ledLoop = new EventLoop();
+
+  private final BooleanEvent m_driveModeEvent;
+
+  private LedDriver m_blinkin = new LedDriver();
+
   public RobotContainer() {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     m_odometry = RobotOdometry.getInstance();
     m_drive = new DriveTrain();
 
-    m_pitcher = new Pitcher(); 
+    m_pitcher = new Pitcher();
     m_shooter = new Shooter();
     m_intake = new Intake();
     m_transport = new Transport();
@@ -55,31 +61,36 @@ public class RobotContainer {
     m_autoChooser = AutoBuilder.buildAutoChooser();
 
     m_commands = Map.of(
-      "Intake Note", new IntakeNote(m_intake, m_transport),
-      "Transport Note", new TransportNote(m_transport),
-      "Init Shooter Mode", new InitializeShooterMode(m_pitcher, m_shooter),
-      "Init Intake Mode", new InitializeIntakeMode(m_pitcher, m_shooter),
-      "Shooter Vision Mode", new ShooterVision(m_pitcher, m_shooter, null),
-      "Transport Note To Shoot", new TransportToShoot(m_pitcher, m_shooter, m_transport, null),
-      "Change To Intake Mode", ChangeMode.IntakeMode(),
-      "Change To Shooter Mode", ChangeMode.ShooterMode()
-    );
+        "Intake Note", new IntakeNote(m_intake, m_transport),
+        "Transport Note", new TransportNote(m_transport),
+        "Init Shooter Mode", new InitializeShooterMode(m_pitcher, m_shooter),
+        "Init Intake Mode", new InitializeIntakeMode(m_pitcher, m_shooter),
+        "Shooter Vision Mode", new ShooterVision(m_pitcher, m_shooter, null),
+        "Transport Note To Shoot", new TransportToShoot(m_pitcher, m_shooter, m_transport, null),
+        "Change To Intake Mode", ChangeMode.IntakeMode(),
+        "Change To Shooter Mode", ChangeMode.ShooterMode());
 
     NamedCommands.registerCommands(m_commands);
-    
+
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
+    m_driveModeEvent = new BooleanEvent(m_ledLoop, () -> false);
+    
     configureBindings();
   }
 
   private void configureBindings() {
-    
     m_driverController.a().onTrue(new TurnToAngle(m_drive, 90));
     m_driverController.b().whileTrue(new RunCommand(() -> m_odometry.setHeading(0)));
+
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
   }
 
   public Command getAutonomousCommand() {
     return m_autoChooser.getSelected();
+  }
+
+  public EventLoop getLedLoop() {
+    return m_ledLoop;
   }
 }
