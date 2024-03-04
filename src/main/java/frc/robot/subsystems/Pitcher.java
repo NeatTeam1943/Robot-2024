@@ -23,7 +23,7 @@ public class Pitcher extends SubsystemBase {
   private VictorSPX m_leftAngleMotor;
   private VictorSPX m_rightAngleMotor;
 
-  private PitchCalculator m_speakerPitchCalculator;
+  //private PitchCalculator m_speakerPitchCalculator;
 
   private Rev2mDistanceSensor m_tof;
 
@@ -34,7 +34,7 @@ public class Pitcher extends SubsystemBase {
     m_leftAngleMotor = new VictorSPX(PitcherConstants.kLeftAngleMotor);
     m_rightAngleMotor = new VictorSPX(PitcherConstants.kRightAngleMotor);
 
-    m_speakerPitchCalculator = new PitchCalculator(FieldConstants.kSpeakerATHeightMeters);
+    //m_speakerPitchCalculator = new PitchCalculator(FieldConstants.kSpeakerATHeightMeters);
 
     m_tof = new Rev2mDistanceSensor(Port.kOnboard);
 
@@ -92,7 +92,8 @@ public class Pitcher extends SubsystemBase {
 
     double denominator = -2 * PitcherConstants.kHingeToEndpoint * PitcherConstants.kLinearToHinge;
 
-    return Math.toDegrees(Math.acos(numerator / denominator));
+    // return Math.toDegrees(Math.acos(numerator / denominator));
+    return tofDistanceCM * 100;
   }
 
   /**
@@ -105,18 +106,28 @@ public class Pitcher extends SubsystemBase {
   }
 
   public double getDesiredAngle() {
-    return m_speakerPitchCalculator.solve(
-        getCurrentAngleDegrees(),
-        PitcherConstants.kPitcherCalculatorStepSize,
-        PitcherConstants.kPitcherCalculatorMaxIterations).orElse(-1.0);
+    // return m_speakerPitchCalculator.solve(
+    //     getCurrentAngleDegrees(),
+    //     PitcherConstants.kPitcherCalculatorStepSize,
+    //     PitcherConstants.kPitcherCalculatorMaxIterations).orElse(-1.0);
+
+    // double m = -2.25;
+    // double x = Limelight.getDistanceFrom(Target.SPEAKER);
+    // double b = 10.15;
+
+    double m = -0.0232;
+    double x = Limelight.getDistanceFrom(Target.SPEAKER);
+    double b = 0.1012;
+
+    return m*x+b;
   }
 
   @Override
   public void periodic() {
-    m_speakerPitchCalculator.update(Limelight.getDistanceFrom(Target.SPEAKER));
+    // m_speakerPitchCalculator.update(Limelight.getDistanceFrom(Target.SPEAKER));
 
     SmartDashboard.putNumber("ToF Distance", getTofDistanceCM());
     SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
-    SmartDashboard.putNumber("Desired Angle", m_speakerPitchCalculator.getCurrentbestTheta().orElse(-1.0));
+    SmartDashboard.putNumber("Desired Angle", getDesiredAngle());
   }
 }

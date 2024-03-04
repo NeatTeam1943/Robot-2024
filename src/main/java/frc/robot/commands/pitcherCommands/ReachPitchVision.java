@@ -1,6 +1,8 @@
 package frc.robot.commands.pitcherCommands;
 
 import java.util.function.Supplier;
+
+import frc.robot.Limelight;
 import frc.robot.subsystems.Pitcher;
 
 /**
@@ -18,5 +20,11 @@ public class ReachPitchVision extends ReachPitchBase {
   @Override
   public Supplier<Double> getSetpoint() {
     return () -> m_pitcher.getDesiredAngle();
+  }
+
+  @Override
+  public boolean isFinished(){
+    // return !Limelight.hasTarget();
+    return false;
   }
 }

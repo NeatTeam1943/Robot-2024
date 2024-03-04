@@ -98,7 +98,8 @@ public class RobotContainer {
     m_mechanismController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
 
     m_mechanismController.leftBumper().onTrue(new Shoot(m_dis2Commands, true));
-    m_mechanismController.rightBumper().onTrue(new Shoot(m_dis2Commands, false));
+    // m_mechanismController.rightBumper().onTrue(new Shoot(m_dis2Commands, false));
+    m_mechanismController.rightBumper().onTrue(new SequentialCommandGroup(new TurnToAt(m_drive), new ReachPitchVision(m_pitcher) , new Shoot(m_dis2Commands, false)));
 
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
@@ -112,7 +113,7 @@ public class RobotContainer {
     m_driverController.y().onTrue(new InstantCommand(() -> RobotOdometry.getInstance().setHeading(0)));
 
     // m_pitcher.setDefaultCommand(new ReachPitchVision(m_pitcher));
-    m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
+    // m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
 
     // m_shooter.setDefaultCommand(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0),m_shooter));
