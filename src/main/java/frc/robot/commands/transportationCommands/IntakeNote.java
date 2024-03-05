@@ -1,6 +1,5 @@
 package frc.robot.commands.transportationCommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.Constants.TransportConstants;
@@ -14,8 +13,6 @@ public class IntakeNote extends Command {
   private Intake m_intake;
 
   private Transport m_transport;
-
-  private Timer m_timer;
 
   /**
    * Creates a new IntakeNote Command.
@@ -32,9 +29,6 @@ public class IntakeNote extends Command {
 
   @Override
   public void initialize() {
-    m_timer = new Timer();
-
-    m_timer.start();
   }
 
   @Override
@@ -51,7 +45,6 @@ public class IntakeNote extends Command {
 
   @Override
   public boolean isFinished() {
-    // return m_transport.isNoteVisible();
-    return m_timer.hasElapsed(3);
+    return m_transport.isNoteVisible();
   }
 }

@@ -37,12 +37,14 @@ public final class Constants {
     public static final boolean kShooterHeadingLeftInverted = true;
     public static final boolean kShooterHeadingRightInverted = false;
 
-    public static final double kGearRatio = 10.71 / 1;
+    public static final double kMotorToWheelRatio = 4;
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
-    public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+    public static final double kEncoderSensorRotationsToMeters = (Math.PI * kWheelDiameterMeters) / kMotorToWheelRatio;
+    public static final double kWheelCircumference = 47.879;
+    public static final double kEncoderResolution = 2048;
 
-    public static final double kRotationP = 0.012595;
+    public static final double kRotationP = 0.010595;
     public static final double kRotationI = 0.000005;
     public static final double kRotationD = 0.000382;
 
@@ -55,7 +57,7 @@ public final class Constants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
 
-    public static final double kIntakeMotorSpeed = -0.8;
+    public static final double kIntakeMotorSpeed = -1;
   }
 
   public static class TransportConstants {
@@ -133,11 +135,28 @@ public final class Constants {
   }
 
   public static class FieldConstants {
-    public static final int kAmpATId = 5;
-    public static final int kSpeakerATFirstId = 8;
-    public static final int kSpeakerATSecondId = 7;
-    public static final int kHumanATPlayerId = 7;
-    public static final int kTrapATId = 7;
+    public static final int kRedAmpATId = 5;
+    public static final int kBlueAmpATId = 6;
+
+    public static final int kBlueSpeakerATFirstId = 8;
+    public static final int kBlueSpeakerATSecondId = 7;
+
+    public static final int kRedSpeakerATFirstId = 4;
+    public static final int kRedSpeakerATSecondId = 3;
+
+    public static final int kBlueHumanATPlayerFirstId = 1;
+    public static final int kBlueHumanATPlayerSecondId = 2;
+
+    public static final int kRedHumanATPlayerFirstId = 9;
+    public static final int kRedHumanATPlayerSecondId = 10;
+
+    public static final int kBlueTrapATFirstId = 14;
+    public static final int kBlueTrapATSecondId = 15;
+    public static final int kBlueTrapATThridId = 16;
+
+    public static final int kRedTrapATFirstId = 11;
+    public static final int kRedTrapATSecondId = 12;
+    public static final int kRedTrapATThridId = 13;
 
     public static final double kCameraHeightMeters = 0.295;
 

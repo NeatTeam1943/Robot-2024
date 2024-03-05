@@ -14,6 +14,7 @@ import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.MeasurementConstants;
 import frc.robot.Constants.PitcherConstants;
 import frc.robot.Limelight.Target;
+import frc.robot.general.RobotHeadingUtils;
 import frc.robot.general.vision.PitchCalculator;
 
 /**
@@ -105,7 +106,7 @@ public class Pitcher extends SubsystemBase {
     return PitcherConstants.kMinAngle < angle && angle < PitcherConstants.kMaxAngle;
   }
 
-  public double getDesiredAngle() {
+  public double getDesiredTofDistanceMeters() {
     // return m_speakerPitchCalculator.solve(
     //     getCurrentAngleDegrees(),
     //     PitcherConstants.kPitcherCalculatorStepSize,
@@ -115,20 +116,28 @@ public class Pitcher extends SubsystemBase {
     // double x = Limelight.getDistanceFrom(Target.SPEAKER);
     // double b = 10.15;
 
-    double m = -0.0232;
+    double m = -0.0788;
     double x = Limelight.getDistanceFrom(Target.SPEAKER);
-    double b = 0.1012;
+    double b = 0.175;
+    
+    if (!Limelight.hasTarget()){
+      return 0.0;
+    }
 
-    return m*x+b;
+    if (RobotHeadingUtils.getInstance().isIntakeMode()){
+      return 0.0;
+    }
+
+    return m * x + b;
   }
 
   @Override
   public void periodic() {
     // m_speakerPitchCalculator.update(Limelight.getDistanceFrom(Target.SPEAKER));
 
-    SmartDashboard.putNumber("ToF Distance", getTofDistanceCM());
-    SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
-    SmartDashboard.putNumber("Desired Angle", getDesiredAngle());
-    SmartDashboard.putBoolean("has target", Limelight.hasTarget());
+    SmartDashboard.putNumber("ToF Distance Meters", getTofDistanceCM() / 100);
+    // SmartDashboard.putNumber("Current ANGLE", getCurrentAngleDegrees());
+    SmartDashboard.putNumber("Desired Tof Distance Meters", getDesiredTofDistanceMeters());
+    SmartDashboard.putBoolean("Has Target", Limelight.hasTarget());
   }
 }

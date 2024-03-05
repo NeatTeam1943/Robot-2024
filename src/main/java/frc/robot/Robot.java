@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -88,6 +90,9 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
       RobotHeadingUtils.getInstance().setRobotHeading(RobotHeading.INTAKE);
     }
+
+    m_robotContainer.getDrive().setMotorMode(NeutralModeValue.Coast);
+    m_robotContainer.getDrive().resetEncoders();
   }
 
   /** This function is called periodically during operator control. */

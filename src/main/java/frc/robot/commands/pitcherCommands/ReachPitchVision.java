@@ -3,6 +3,7 @@ package frc.robot.commands.pitcherCommands;
 import java.util.function.Supplier;
 
 import frc.robot.Limelight;
+import frc.robot.general.RobotHeadingUtils;
 import frc.robot.subsystems.Pitcher;
 
 /**
@@ -19,12 +20,11 @@ public class ReachPitchVision extends ReachPitchBase {
 
   @Override
   public Supplier<Double> getSetpoint() {
-    return () -> m_pitcher.getDesiredAngle();
+    return () -> m_pitcher.getDesiredTofDistanceMeters();
   }
 
-  // @Override
-  // public boolean isFinished(){
-  //   // return !Limelight.hasTarget();
-  //   return false;
-  // }
+  @Override
+  public boolean isFinished(){
+    return RobotHeadingUtils.getInstance().isIntakeMode() || m_shouldFinish;
+  }
 }

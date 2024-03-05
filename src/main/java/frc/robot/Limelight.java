@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.FieldConstants;
 import frc.robot.Constants.LimeLightConstants;
@@ -16,9 +18,9 @@ public class Limelight {
      * Enum representing different vision targets.
      */
     public static enum Target {
-        AMP(FieldConstants.kAmpATHeightMeters, new double[] { FieldConstants.kAmpATId }),
-        SPEAKER(FieldConstants.kSpeakerATHeightMeters, new double[] { FieldConstants.kSpeakerATFirstId, FieldConstants.kSpeakerATSecondId }),
-        HUMAN_PLAYER(FieldConstants.kHumanPlayerATHeightMeters, new double[] { FieldConstants.kHumanATPlayerId });
+        AMP(FieldConstants.kAmpATHeightMeters, new double[] { FieldConstants.kRedAmpATId, FieldConstants.kBlueAmpATId }),
+        SPEAKER(FieldConstants.kSpeakerATHeightMeters, new double[] { FieldConstants.kBlueSpeakerATFirstId, FieldConstants.kBlueSpeakerATSecondId, FieldConstants.kRedSpeakerATFirstId, FieldConstants.kRedSpeakerATSecondId }),
+        HUMAN_PLAYER(FieldConstants.kHumanPlayerATHeightMeters, new double[] { FieldConstants.kBlueHumanATPlayerFirstId, FieldConstants.kBlueHumanATPlayerSecondId, FieldConstants.kRedHumanATPlayerFirstId, FieldConstants.kRedHumanATPlayerSecondId });
 
         private double m_goalHeight;
         private double[] m_aprilTagIds;
@@ -69,7 +71,7 @@ public class Limelight {
         return LimelightHelpers.getTX("limelight-nt");
     }
 
-    /**
+    /**[]\
      * Checks if the Limelight has a target in view.
      * 
      * @return True if a target is present, false otherwise.
@@ -77,6 +79,12 @@ public class Limelight {
     public static boolean hasTarget() {
         return LimelightHelpers.getTV("limelight-nt");
     }
+
+    // public static boolean seeSpeaker() {
+    //     for (int i = (DriverStation.) 0; i < Target.SPEAKER.getAprilTagIds().length; i++){
+    //         return false;
+    //     }
+    // }
 
     /**
      * Gets the area of the target from the Limelight.
