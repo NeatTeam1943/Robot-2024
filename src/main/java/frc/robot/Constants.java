@@ -151,5 +151,7 @@ public final class Constants {
     public static final double kViolet = 0.91;
     public static final double kDarkGreen = 0.75;
     public static final double kHotPink = 0.57;
+    public static final double kAqua = 0.81;
+    public static final double kYellow = 0.69;
   }
 }
