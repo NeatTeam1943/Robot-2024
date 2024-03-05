@@ -9,11 +9,19 @@ import frc.robot.Constants.BlinkinConstants;
 public class LedDriver extends SubsystemBase {
   private Spark m_blinkin;
 
+  private Timer m_timer;
+  private Timer m_normalRoutineTimer;
+
   private SendableChooser<Color> m_chooser;
 
   public LedDriver() {
     m_blinkin = new Spark(BlinkinConstants.kBlinkinPort);
 
+    m_timer = new Timer();
+    m_normalRoutineTimer = new Timer();
+
+    m_normalRoutineTimer.start();
+    
     m_chooser = new SendableChooser<>();
 
     m_chooser.setDefaultOption("Orange", Color.ORANGE);
@@ -59,10 +67,15 @@ public class LedDriver extends SubsystemBase {
 
   public void setColor(double color){
     m_blinkin.set(color);
+
+  public void normalRoutine() {
+    if (m_timer.get() > 2) {
+      m_blinkin.set(((int) m_normalRoutineTimer.get() % 2 == 0 ? Color.ORANGE.getColor() : Color.BLUE.getColor()));
+    }
   }
 
   @Override
   public void periodic() {
-    setColor(m_chooser.getSelected());
+    // setColor(m_chooser.getSelected());
   }
 }
