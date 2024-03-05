@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,7 +49,9 @@ public class LedDriver extends SubsystemBase {
     WHITE(BlinkinConstants.kWhite),
     VIOLET(BlinkinConstants.kViolet),
     DARK_GREEN(BlinkinConstants.kDarkGreen),
-    HOT_PINK(BlinkinConstants.kHotPink);
+    HOT_PINK(BlinkinConstants.kHotPink),
+    AQUA(BlinkinConstants.kAqua),
+    YELLOW(BlinkinConstants.kYellow);
 
     private double m_color;
 
@@ -63,10 +66,13 @@ public class LedDriver extends SubsystemBase {
 
   public void setColor(Color color){
     m_blinkin.set(color.getColor());
+    m_timer.restart();
   }
 
   public void setColor(double color){
     m_blinkin.set(color);
+    m_timer.restart();
+  }
 
   public void normalRoutine() {
     if (m_timer.get() > 2) {
