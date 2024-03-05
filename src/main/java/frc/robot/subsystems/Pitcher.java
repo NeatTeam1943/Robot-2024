@@ -20,6 +20,8 @@ public class Pitcher extends SubsystemBase {
 
   private Rev2mDistanceSensor m_tof;
 
+  private boolean m_reachedPitch;
+
   /**
    * Constructs the Pitcher subsystem.
    */
@@ -29,8 +31,18 @@ public class Pitcher extends SubsystemBase {
 
     m_tof = new Rev2mDistanceSensor(Port.kOnboard);
 
+    m_reachedPitch = false;
+
     setupTof();
   }
+
+  public boolean hasReachedPitch() {
+    return m_reachedPitch;
+  }
+
+  public void setReachedPitch(boolean reachedPitch) {
+    m_reachedPitch = reachedPitch;
+  } 
 
   /**
    * Setups the TOF sensor.
