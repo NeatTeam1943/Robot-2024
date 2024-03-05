@@ -10,11 +10,23 @@ import frc.robot.subsystems.Pitcher;
  */
 public class ReachPitchVision extends ReachPitchBase {
   private final NetworkTables m_nt;
+  private final Pitcher m_pitcher;
 
   public ReachPitchVision(Pitcher pitcher, NetworkTables nt) {
     super(pitcher);
 
+    m_pitcher = pitcher;
     m_nt = nt;
+  }
+
+  @Override
+  public void initialize() {
+    m_pitcher.setReachedPitch(false);
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    m_pitcher.setReachedPitch(true);    
   }
 
   @Override
