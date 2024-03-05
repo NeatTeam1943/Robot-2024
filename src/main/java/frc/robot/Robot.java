@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Limelight.Target;
 import frc.robot.general.RobotHeading;
 import frc.robot.general.RobotHeadingUtils;
 import frc.robot.subsystems.RobotOdometry;
@@ -50,6 +53,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putNumber("IMU HEADING", RobotOdometry.getInstance().getHeading());
     // SmartDashboard.putNumber("HEADING", Robot);
+    SmartDashboard.putNumber("distance from amp", Limelight.getDistanceFrom(Target.AMP));
+    SmartDashboard.putNumber("distance from speaker", Limelight.getDistanceFrom(Target.SPEAKER));
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -85,6 +90,9 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
       RobotHeadingUtils.getInstance().setRobotHeading(RobotHeading.INTAKE);
     }
+
+    m_robotContainer.getDrive().setMotorMode(NeutralModeValue.Coast);
+    m_robotContainer.getDrive().resetEncoders();
   }
 
   /** This function is called periodically during operator control. */

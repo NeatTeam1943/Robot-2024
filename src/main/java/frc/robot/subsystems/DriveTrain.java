@@ -10,6 +10,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.DriveTrainConstants;
@@ -56,7 +57,7 @@ public class DriveTrain extends SubsystemBase {
     m_right = new MotorControllerGroup(m_rightMaster, m_rightFollower);
 
     setMotorMode(NeutralModeValue.Coast);
-    
+
     m_currentHeading = RobotHeadingUtils.getInstance();
 
     m_ultraSonic = new AnalogInput(0);
@@ -82,9 +83,13 @@ public class DriveTrain extends SubsystemBase {
   @Override
   public void periodic() {
     m_odometry.update();
-    // System.out.println(String.format("HEADING: %s", m_currentHeading.getRobotHeading()));
+    // System.out.println(String.format("HEADING: %s",
+    // m_currentHeading.getRobotHeading()));
 
     m_odometry.updateRobotPoseOnField();
+
+    SmartDashboard.putNumber("DISTANCE", getAverageDistance());
+    SmartDashboard.putNumber("Rotor pos", m_rightMaster.getRotorPosition().getValueAsDouble());
   }
 
   /**
@@ -102,14 +107,15 @@ public class DriveTrain extends SubsystemBase {
    * @param rotation - The rotational speed.
    */
   public void driveArcade(double movement, double rotation) {
-    m_drive.arcadeDrive(m_limiter.calculate(movement), m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
+    m_drive.arcadeDrive(m_limiter.calculate(movement),
+        m_limiter.calculate(m_currentHeading.isIntakeMode() ? -rotation : rotation));
   }
 
-  public void setMotorMode(NeutralModeValue value){
-      m_rightMaster.setNeutralMode(value);
-      m_rightFollower.setNeutralMode(value);
-      m_leftMaster.setNeutralMode(value);
-      m_leftFollower.setNeutralMode(value);
+  public void setMotorMode(NeutralModeValue value) {
+    m_rightMaster.setNeutralMode(value);
+    m_rightFollower.setNeutralMode(value);
+    m_leftMaster.setNeutralMode(value);
+    m_leftFollower.setNeutralMode(value);
   }
 
   /**
@@ -126,7 +132,7 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(joystick.getRightTriggerAxis() - joystick.getLeftTriggerAxis(), x);
   }
 
-  public double getUltraSonic(){
+  public double getUltraSonic() {
     return m_ultraSonic.getVoltage() * 9.77;
   }
 
@@ -155,10 +161,11 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left front motor in meters.
    */
   public double getLeftFrontMotorTraveledDistance() {
-    StatusSignal<Double> leftFrontRotorSignal = m_leftFollower.getRotorPosition();
+    StatusSignal<Double> leftFrontRotorSignal = m_leftFollower.getPosition();
     leftFrontRotorSignal.refresh();
 
-    return leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    // return leftFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return leftFrontRotorSignal.getValue();
   }
 
   /**
@@ -167,10 +174,11 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right front motor in meters.
    */
   public double getRightFrontMotorTraveledDistance() {
-    StatusSignal<Double> rightFrontRotorSignal = m_rightFollower.getRotorPosition();
+    StatusSignal<Double> rightFrontRotorSignal = m_rightFollower.getPosition();
     rightFrontRotorSignal.refresh();
 
-    return rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    // return rightFrontRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return rightFrontRotorSignal.getValue();
   }
 
   /**
@@ -179,10 +187,11 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the left rear motor in meters.
    */
   public double getLeftRearMotorTraveledDistance() {
-    StatusSignal<Double> leftRearRotorSignal = m_leftMaster.getRotorPosition();
+    StatusSignal<Double> leftRearRotorSignal = m_leftMaster.getPosition();
     leftRearRotorSignal.refresh();
 
-    return leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    // return leftRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return leftRearRotorSignal.getValue();
   }
 
   /**
@@ -191,10 +200,33 @@ public class DriveTrain extends SubsystemBase {
    * @return The distance traveled by the right rear motor in meters.
    */
   public double getRightRearMotorTraveledDistance() {
-    StatusSignal<Double> rightRearRotorSignal = m_rightMaster.getRotorPosition();
+    StatusSignal<Double> rightRearRotorSignal = m_rightMaster.getPosition();
     rightRearRotorSignal.refresh();
 
-    return rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    // return rightRearRotorSignal.getValue() * DriveTrainConstants.kEncoderSensorRotationsToMeters;
+    return rightRearRotorSignal.getValue();
+  }
+
+  public double getLeftAverageDistance() {
+    return 0.5 * (getLeftRearMotorTraveledDistance() + getLeftFrontMotorTraveledDistance());
+  }
+
+  public double getRightAverageDistance() {
+    return 0.5 * (getRightRearMotorTraveledDistance() + getRightFrontMotorTraveledDistance());
+  }
+
+  public double getAverageDistance() {
+    // return ((0.25 * (getLeftAverageDistance() + getRightAverageDistance())) / 2048 / DriveTrainConstants.kGearRatio) / (Math.PI * DriveTrainConstants.kWheelDiameterMeters);
+
+    double leftAvgPos =
+    (getLeftFrontMotorTraveledDistance() + getLeftRearMotorTraveledDistance()) / 2;
+double rightAvgPos =
+    (getRightFrontMotorTraveledDistance() + getRightRearMotorTraveledDistance()) / 2;
+double centralAvg = (leftAvgPos + rightAvgPos) / 4;
+// double centralMotorAvg = centralAvg / DriveTrainConstants.kEncoderResolution;
+double centralWheelAvg = centralAvg / DriveTrainConstants.kMotorToWheelRatio;
+
+return (-centralWheelAvg * DriveTrainConstants.kWheelCircumference) / 100;
   }
 
   /**
@@ -255,7 +287,7 @@ public class DriveTrain extends SubsystemBase {
     m_rightFollower.setPosition(0);
   }
 
- /**
+  /**
    * Rotates the robot using arcade drive control.
    *
    * @param rotationSpeed - The speed of the rotation.

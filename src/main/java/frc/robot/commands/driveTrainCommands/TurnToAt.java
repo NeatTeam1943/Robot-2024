@@ -12,4 +12,9 @@ public class TurnToAt extends TurnToAngleBase {
   protected double getTargetAngle() {
     return -(Limelight.getTargetYaw());
   }
+
+  @Override
+  public boolean isFinished() {
+    return shouldStop() || Math.abs(getTargetAngle()) < 6;
+  }
 }

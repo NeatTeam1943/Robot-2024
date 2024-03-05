@@ -3,7 +3,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kMechanismController = 1;
+    public static final int kMechanismController = 0;
   }
 
   public static class MeasurementConstants {
@@ -13,11 +13,14 @@ public final class Constants {
     public static final double kMeterToInches = 39.37007874;
     public static final double kDegToRad = Math.PI / 180.0;
     public static final double kDegreesPerSecToRadsPerSec = 0.017453;
+    
+    public static final double kG = 9.8;
   }
 
   public static class VisionConstants {
     public static final double kLimelightPitch = 8.16;
     public static final double kLimelightHeightMeters = 0.76;
+    public static final double kLimelightToBamperMeters = 0.15;
 
     public static final String kLimelightName = "limelight-nt";
   }
@@ -34,12 +37,14 @@ public final class Constants {
     public static final boolean kShooterHeadingLeftInverted = true;
     public static final boolean kShooterHeadingRightInverted = false;
 
-    public static final double kGearRatio = 10.71 / 1;
+    public static final double kMotorToWheelRatio = 4;
     public static final double kWheelDiameterMeters = MeasurementConstants.kInchesToMeters * 6;
 
-    public static final double kEncoderSensorRotationsToMeters = Math.PI * kWheelDiameterMeters / kGearRatio;
+    public static final double kEncoderSensorRotationsToMeters = (Math.PI * kWheelDiameterMeters) / kMotorToWheelRatio;
+    public static final double kWheelCircumference = 47.879;
+    public static final double kEncoderResolution = 2048;
 
-    public static final double kRotationP = 0.012595;
+    public static final double kRotationP = 0.010595;
     public static final double kRotationI = 0.000005;
     public static final double kRotationD = 0.000382;
 
@@ -52,7 +57,7 @@ public final class Constants {
     public static final int kMotor = 5;
     public static final int kIntakeSwitch = 0;
 
-    public static final double kIntakeMotorSpeed = -0.8;
+    public static final double kIntakeMotorSpeed = -1;
   }
 
   public static class TransportConstants {
@@ -67,7 +72,10 @@ public final class Constants {
     public static final int kRightShooterMotor = 9;
     public static final int kAngularVelocityToRPM = 60;
 
+    public static final double kShootingWheelRadiusMeters = 0.1016;  
+
     public static final int kDefaultRPM = -0;
+    public static final int kMaxRPS = 103;
 
     public static final double kLeftP = 0.001676;
     public static final double kLeftI = 0;
@@ -96,11 +104,14 @@ public final class Constants {
     public static final double kMinAngle = 36; // TODO: Add angle
     public static final double kMaxAngle = 70; // TODO: Add angle
 
+    public static final int kPitcherCalculatorMaxIterations = 3000;
+    public static final double kPitcherCalculatorStepSize = 0.05;
+
     /**
      * kTofToBase - The distance between the TOF sensor to the base of the robot
      * (CM).
      */
-    public static final double kTofToBase = 27;
+    public static final double kTofToBase = 29;
 
     /**
      * kLinearToHinge - The distance between the hinge of the shooter to the bottom
@@ -120,26 +131,44 @@ public final class Constants {
      * the
      * endpoint of the TOF sensor range to the endpoint of the robot.
      */
-    public static final double kEndpointToTrueller = 1;
+    public static final double kEndpointToTrueller = 1 / 2;
   }
 
   public static class FieldConstants {
-    public static final int kAmpATId = 5;
-    public static final int kSpeakerATFirstId = 6;
-    public static final int kSpeakerATSecondId = 7;
-    public static final int kHumanATPlayerId = 7;
-    public static final int kTrapATId = 7;
+    public static final int kRedAmpATId = 5;
+    public static final int kBlueAmpATId = 6;
 
-    public static final double kCameraHeightMeters = 0.395;
+    public static final int kBlueSpeakerATFirstId = 8;
+    public static final int kBlueSpeakerATSecondId = 7;
+
+    public static final int kRedSpeakerATFirstId = 4;
+    public static final int kRedSpeakerATSecondId = 3;
+
+    public static final int kBlueHumanATPlayerFirstId = 1;
+    public static final int kBlueHumanATPlayerSecondId = 2;
+
+    public static final int kRedHumanATPlayerFirstId = 9;
+    public static final int kRedHumanATPlayerSecondId = 10;
+
+    public static final int kBlueTrapATFirstId = 14;
+    public static final int kBlueTrapATSecondId = 15;
+    public static final int kBlueTrapATThridId = 16;
+
+    public static final int kRedTrapATFirstId = 11;
+    public static final int kRedTrapATSecondId = 12;
+    public static final int kRedTrapATThridId = 13;
+
+    public static final double kCameraHeightMeters = 0.295;
 
     public static final double kAmpATHeightMeters = 1.37;
-    public static final double kSpeakerATHeightMeters = -0;
+    public static final double kSpeakerATHeightMeters = 1.45;
+    public static final double kMiddleSpeakerHeightMeters = 2.045;
     public static final double kTrapATHeightMeters = -0;
     public static final double kHumanPlayerATHeightMeters = -0;
   }
 
   public static class LimeLightConstants {
-    public static final double kLimelightPitch = 1.631;
+    public static final double kLimelightPitch = 48.02;
     public static final String kLimelightName = "limelight-nt";
   }
 
@@ -148,11 +177,11 @@ public final class Constants {
   }
 
   public static class IntakeModeConstants {
-    public static final int kDefaultPitcherAngle = 37;
+    public static final int kDefaultPitcherAngle = 39;
   }
 
   public static class ShooterModeConstants {
-    public static final int kAmpAngle = 36;
-    public static final int kSpeakerAngle = 52;
+    public static final int kAmpAngle = 39;
+    public static final int kSpeakerAngle = 54;
   }
 }

@@ -33,10 +33,11 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
-import frc.robot.commands.driveTrainCommands.PassLine;
+import frc.robot.commands.driveTrainCommands.DriveDistance;
 import frc.robot.commands.driveTrainCommands.TurnToAngle;
 import frc.robot.commands.driveTrainCommands.TurnToAt;
 import frc.robot.commands.pitcherCommands.ReachPitch;
+import frc.robot.commands.pitcherCommands.ReachPitchVision;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
@@ -91,37 +92,45 @@ public class RobotContainer {
 
     m_mechanismController.x().onTrue(new InitializeShooterMode(m_pitcher, m_shooter, false));
     m_mechanismController.y().onTrue(m_dis2Commands.transportIntake(0.05, 0.5));
-    m_mechanismController.start().onTrue(new InitializeIntakeMode(m_pitcher, m_shooter));
+    // m_mechanismController.start().onTrue(new InitializeIntakeMode(m_pitcher, m_shooter));
 
-    m_mechanismController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-1), m_intake));
-    m_mechanismController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
-
+    // m_mechanismController.a().whileTrue(new RunCommand(() -> m_intake.setMotorSpeed(-1), m_intake));
+    // m_mechanismController.a().whileFalse(new RunCommand(() -> m_intake.setMotorSpeed(0), m_intake));
+    m_mechanismController.a().whileTrue(new IntakeNote(m_intake, m_transport));
+    
     m_mechanismController.leftBumper().onTrue(new Shoot(m_dis2Commands, true));
-    m_mechanismController.rightBumper().onTrue(new Shoot(m_dis2Commands, false));
+    // m_mechanismController.rightBumper().onTrue(new Shoot(m_dis2Commands, false));
+  m_mechanismController.rightBumper().onTrue(new SequentialCommandGroup(new TurnToAt(m_drive).withTimeout(4), new Shoot(m_dis2Commands, false)));
 
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
     
-    m_driverController.x().onTrue(new InvertDrive(m_drive));  
+    m_driverController.b().onTrue(new InvertDrive(m_drive));  
 
-    m_driverController.a().onTrue(new TurnToAngle(m_drive, -45));
+    // m_driverController.a().onTrue(new TurnToAngle(m_drive, -45));
 
-    m_driverController.start().onTrue(new TurnToAt(m_drive));
+    m_driverController.start().onTrue(new TurnToAt(m_drive).withTimeout(4));
 
     m_driverController.y().onTrue(new InstantCommand(() -> RobotOdometry.getInstance().setHeading(0)));
 
-    m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
+    m_pitcher.setDefaultCommand(new ReachPitchVision(m_pitcher));
+    // m_pitcher.setDefaultCommand(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(0), m_pitcher));
     m_drive.setDefaultCommand(new RunCommand(() -> m_drive.driveArcade(m_driverController), m_drive));
 
     // m_shooter.setDefaultCommand(new RunCommand(() -> m_shooter.setShooterMotorsSpeed(0),m_shooter));
   }
 
+  public DriveTrain getDrive() {
+    return m_drive;
+  }
+
   public Command getAutonomousCommand() {
     // return m_autoChooser.getSelected();sx bdh
-    return new SequentialCommandGroup(new Shoot(m_dis2Commands, false),new InstantCommand(()->m_shooter.setShooterMotorsSpeed(0),m_shooter), new ReachPitch(m_pitcher, 45), new ParallelCommandGroup(new InitializeIntakeMode(m_pitcher, m_shooter)));//, new PassLine(m_drive),m_dis2Commands.intake(-1)), m_dis2Commands.intake(0));
+    // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), new InstantCommand(()->m_shooter.setShooterMotorsSpeed(0),m_shooter), new ReachPitch(m_pitcher, 45), new ParallelCommandGroup(new InitializeIntakeMode(m_pitcher, m_shooter)));//, new PassLine(m_drive),m_dis2Commands.intake(-1)), m_dis2Commands.intake(0));
     // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), new InitializeIntakeMode(m_pitcher, m_shooter));
     // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), m_dis2Commands.intake(-1), new InitializeIntakeMode(m_pitcher, m_shooter), new PassLine(m_drive), m_dis2Commands.intake(0));
     // return new SequentialCommandGroup(new Shoot(m_dis2Commands, false), m_dis2Commands.intake(1), new PassLine(m_drive), new InitializeShooterMode(m_pitcher, m_shooter, false));
     // return new PassLine(m_drive);
+    return new DriveDistance(m_drive, 1, 0.5);
   }
 }

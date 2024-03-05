@@ -12,7 +12,8 @@ import frc.robot.general.RobotHeadingUtils;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.RobotOdometry;
 
-public abstract class TurnToAngleBase extends Command {
+public abstract class 
+TurnToAngleBase extends Command {
   private double m_initialHeading;
 
   protected DriveTrain m_drive;
@@ -81,6 +82,7 @@ public abstract class TurnToAngleBase extends Command {
   public void end(boolean interrupted) {
     m_drive.rotateRobot(0);
 
+    System.out.println("FINISHEDDDDDDDDD");
     m_drive.setMotorMode(NeutralModeValue.Coast);
   }
 
@@ -89,12 +91,12 @@ public abstract class TurnToAngleBase extends Command {
     return shouldStop();
   }
 
-  private boolean shouldStop() {
+  protected boolean shouldStop() {
     double positionError = m_controller.getPositionError();
     double target = getRobotTargetAngle();
 
-    final double NEGETIVE_TOLERENCE = 2.5;
-    final double POSITIVE_TOLERENCE = -2.5;
+    final double NEGETIVE_TOLERENCE = -1.5;
+    final double POSITIVE_TOLERENCE = 1.5;
 
     if (positionError != 0) {
       String errorType = (positionError > 0) ? "PositionError" : "NegativeError";
@@ -108,7 +110,7 @@ public abstract class TurnToAngleBase extends Command {
       double tolerance = (positionError > 0) ? POSITIVE_TOLERENCE : NEGETIVE_TOLERENCE;
 
       if (positionError > 0) {
-        return target < heading + tolerance;
+        return target < heading + tolerance; // 12 2 + 25
       }
 
       return target > heading + tolerance;
