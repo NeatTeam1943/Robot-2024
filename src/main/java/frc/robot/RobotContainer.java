@@ -1,6 +1,9 @@
 package frc.robot;
 
+import frc.robot.Constants.BlinkinConstants;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.LedDriver.Color;
+import frc.robot.Limelight.Target;
 import frc.robot.commands.HeadingCommands.ChangeMode;
 import frc.robot.commands.routines.ShooterVision;
 import frc.robot.commands.routines.TransportToShoot;
@@ -8,6 +11,8 @@ import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
 import frc.robot.commands.transportationCommands.IntakeNote;
 import frc.robot.commands.transportationCommands.TransportNote;
+import frc.robot.general.RobotHeading;
+import frc.robot.general.RobotHeadingUtils;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pitcher;
@@ -20,6 +25,7 @@ import java.util.Map;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.event.BooleanEvent;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -44,7 +50,15 @@ public class RobotContainer {
 
   private final EventLoop m_ledLoop = new EventLoop();
 
-  private final BooleanEvent m_driveModeEvent;
+  private final BooleanEvent m_driveIntakeModeEvent;
+  private final BooleanEvent m_driveShooterModeEvent;
+
+  private final BooleanEvent m_validShootingDistanceEvent;
+  private final BooleanEvent m_goodPitcherAngle;
+
+  private final BooleanEvent m_noteVisibleEvent;
+
+  private final BooleanEvent m_lowBatteryEvent;
 
   private LedDriver m_blinkin = new LedDriver();
 
@@ -74,8 +88,26 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
-    m_driveModeEvent = new BooleanEvent(m_ledLoop, () -> false);
+    m_driveIntakeModeEvent = new BooleanEvent(m_ledLoop, () -> RobotHeadingUtils.getInstance().getRobotHeading() == RobotHeading.INTAKE).debounce(0.02);
+    m_driveShooterModeEvent = new BooleanEvent(m_ledLoop, () -> RobotHeadingUtils.getInstance().getRobotHeading() == RobotHeading.SHOOTER).debounce(0.02);
+
+    m_validShootingDistanceEvent = new BooleanEvent(m_ledLoop, () -> Limelight.getDistanceFrom(Target.SPEAKER) < 2.3).debounce(0.02);
+    m_goodPitcherAngle = new BooleanEvent(m_ledLoop, () -> m_pitcher.hasReachedPitch()).debounce(0.02);
+
+    m_noteVisibleEvent = new BooleanEvent(m_ledLoop, () -> m_transport.isNoteVisible()).debounce(0.02);
+
+    m_lowBatteryEvent = new BooleanEvent(m_ledLoop, () -> RobotController.getBatteryVoltage() < 12).debounce(0.02);
+
+    m_driveIntakeModeEvent.ifHigh(() -> m_blinkin.setColor(Color.AQUA));
+    m_driveShooterModeEvent.ifHigh(() -> m_blinkin.setColor(Color.HOT_PINK));
     
+    m_validShootingDistanceEvent.ifHigh(() -> m_blinkin.setColor(Color.GREEN));
+    m_goodPitcherAngle.ifHigh(() -> m_blinkin.setColor(Color.YELLOW));
+  
+    m_noteVisibleEvent.ifHigh(() -> m_blinkin.setColor(Color.LIME));
+
+    m_lowBatteryEvent.ifHigh(() -> m_blinkin.setColor(Color.WHITE));
+
     configureBindings();
   }
 
@@ -92,5 +124,9 @@ public class RobotContainer {
 
   public EventLoop getLedLoop() {
     return m_ledLoop;
+  }
+
+  public LedDriver getBlinkin() {
+    return m_blinkin;
   }
 }
