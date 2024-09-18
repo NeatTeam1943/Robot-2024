@@ -23,8 +23,8 @@ public final class Constants {
   }
 
   public static class DriveTrainConstants {
-    public static final int kLeftFront = 1;
-    public static final int kLeftRear = 2;
+    public static final int kLeftFront = 2;
+    public static final int kLeftRear = 1;
     public static final int kRightFront = 3;
     public static final int kRightRear = 4;
 
