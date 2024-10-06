@@ -102,11 +102,7 @@ public class RobotContainer {
     m_mechanismController.povDown().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(1), m_pitcher));
     m_mechanismController.povUp().whileTrue(new RunCommand(() -> m_pitcher.setAngleMotorsSpeed(-1), m_pitcher));
     
-    m_driverController.x().onTrue(new InvertDrive(m_drive));  
-
-    m_driverController.a().onTrue(new TurnToAngle(m_drive, -45));
-
-    m_driverController.start().onTrue(new TurnToAt(m_drive));
+    m_driverController.x().onTrue(new InvertDrive(m_drive));
 
     m_driverController.y().onTrue(new InstantCommand(() -> RobotOdometry.getInstance().setHeading(0)));
 
