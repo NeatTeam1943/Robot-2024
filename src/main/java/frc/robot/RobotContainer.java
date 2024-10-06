@@ -32,8 +32,6 @@ public class RobotContainer {
   private final CommandXboxController m_driverController;
   private final CommandXboxController m_mechanismController;
 
-  private final RobotOdometry m_odometry;
-
   private final DriveTrain m_drive;
   private final Pitcher m_pitcher;
   private final Shooter m_shooter;
@@ -49,7 +47,6 @@ public class RobotContainer {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     m_mechanismController = new CommandXboxController(OperatorConstants.kMechanismController);
 
-    m_odometry = RobotOdometry.getInstance();
     m_drive = new DriveTrain();
 
     m_pitcher = new Pitcher(); 
