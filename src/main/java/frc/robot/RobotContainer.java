@@ -1,15 +1,9 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.Constants.RobotDataConstants;
-import frc.robot.commands.HeadingCommands.ChangeMode;
-import frc.robot.commands.routines.ShooterVision;
-import frc.robot.commands.routines.TransportToShoot;
 import frc.robot.commands.routines.automatic.InitializeIntakeMode;
 import frc.robot.commands.routines.automatic.InitializeShooterMode;
 import frc.robot.commands.routines.dis2.Shoot;
-import frc.robot.commands.transportationCommands.IntakeNote;
-import frc.robot.commands.transportationCommands.TransportNote;
 import frc.robot.general.Dis2FunctionalCommands;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -26,16 +20,12 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
-import frc.robot.commands.driveTrainCommands.PassLine;
-import frc.robot.commands.driveTrainCommands.TurnToAngle;
-import frc.robot.commands.driveTrainCommands.TurnToAt;
 import frc.robot.commands.pitcherCommands.ReachPitch;
 
 public class RobotContainer {

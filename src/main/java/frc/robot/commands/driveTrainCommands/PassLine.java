@@ -39,6 +39,7 @@ public class PassLine extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_drive.getLeftFrontMotorTraveledDistance() >= 0.75;
+    // return m_drive.getLeftFrontMotorTraveledDistance() >= 0.75;
+    return true;
   }
 }
