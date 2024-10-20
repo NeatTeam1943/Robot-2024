@@ -32,14 +32,14 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.driveTrainCommands.InvertDrive;
-import frc.robot.commands.driveTrainCommands.PassLine;
+// import frc.robot.commands.driveTrainCommands.PassLine;
 import frc.robot.commands.pitcherCommands.ReachPitch;
 
 public class RobotContainer {
   private final CommandXboxController m_driverController;
   private final CommandXboxController m_mechanismController;
 
-  private final RobotOdometry m_odometry;
+  // private final RobotOdometry m_odometry;
 
   private final DriveTrain m_drive;
   private final Pitcher m_pitcher;
@@ -47,7 +47,7 @@ public class RobotContainer {
   private final Intake m_intake;
   private final Transport m_transport; 
 
-  private final SendableChooser<Command> m_autoChooser;
+  // private final SendableChooser<Command> m_autoChooser;
   private final Map<String, Command> m_commands;
 
   private final Dis2FunctionalCommands m_dis2Commands;
@@ -56,7 +56,7 @@ public class RobotContainer {
     m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
     m_mechanismController = new CommandXboxController(OperatorConstants.kMechanismController);
 
-    m_odometry = RobotOdometry.getInstance();
+    // m_odometry = RobotOdometry.getInstance();
     m_drive = new DriveTrain();
 
     m_pitcher = new Pitcher(); 
@@ -64,7 +64,7 @@ public class RobotContainer {
     m_intake = new Intake();
     m_transport = new Transport();
 
-    m_autoChooser = AutoBuilder.buildAutoChooser("Auto Chooser");
+    // m_autoChooser = AutoBuilder.buildAutoChooser("Auto Chooser");
 
     m_dis2Commands = new Dis2FunctionalCommands(m_shooter, m_transport, m_intake);
     
@@ -76,7 +76,7 @@ public class RobotContainer {
     NamedCommands.registerCommands(m_commands);
     
 
-    SmartDashboard.putData("Auto Chooser", m_autoChooser);
+    // SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
     configureBindings();
   }

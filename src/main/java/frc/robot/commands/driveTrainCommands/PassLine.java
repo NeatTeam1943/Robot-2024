@@ -11,34 +11,34 @@ import frc.robot.subsystems.DriveTrain;
 
 public class PassLine extends Command {
 
-  private DriveTrain m_drive;
+  // private DriveTrain m_drive;
 
-  public PassLine(DriveTrain drive) {
-    m_drive = drive;
-    addRequirements(m_drive);
-  }
+  // public PassLine(DriveTrain drive) {
+  //   m_drive = drive;
+  //   addRequirements(m_drive);
+  // }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    RobotHeadingUtils.getInstance().setRobotHeading(RobotHeading.INTAKE);
-  }
+  // // Called when the command is initially scheduled.
+  // @Override
+  // public void initialize() {
+  //   RobotHeadingUtils.getInstance().setRobotHeading(RobotHeading.INTAKE);
+  // }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    m_drive.driveTank(0.5, 0.5);
-  }
+  // // Called every time the scheduler runs while the command is scheduled.
+  // @Override
+  // public void execute() {
+  //   m_drive.driveTank(0.5, 0.5);
+  // }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_drive.driveArcade(0,0);
-  }
+  // // Called once the command ends or is interrupted.
+  // @Override
+  // public void end(boolean interrupted) {
+  //   m_drive.driveArcade(0,0);
+  // }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return m_drive.getLeftFrontMotorTraveledDistance() >= 0.75;
-  }
+  // // Returns true when the command should end.
+  // @Override
+  // public boolean isFinished() {
+  //   return m_drive.getLeftFrontMotorTraveledDistance() >= 0.75;
+  // }
 }
